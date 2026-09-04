@@ -252,7 +252,7 @@ button{
   height:auto;
   object-fit:contain;
   cursor:pointer;
-  touch-action:manipulation;
+  touch-action:none;
   user-select:none;
   -webkit-user-select:none;
   position:relative;
@@ -1121,8 +1121,6 @@ button{
   justify-content:center;
 }
 
-/* 중요:
-   감자사전은 픽셀이 아니라 원본 이미지 사용 */
 .collection-card img{
   width:115px;
   height:115px;
@@ -1176,6 +1174,10 @@ button{
     drop-shadow(0 4px 0 rgba(80,45,20,.3))
     brightness(1.08);
   transform:scale(1.12);
+}
+
+.play-potato.leader{
+  z-index:42;
 }
 
 .play-potato-name{
@@ -1419,9 +1421,7 @@ button{
 <body>
 
 
-<!-- ==================================================
-     시작
-================================================== -->
+<!-- 시작 -->
 
 <section id="startScreen" class="screen">
 
@@ -1446,9 +1446,7 @@ button{
 </section>
 
 
-<!-- ==================================================
-     성장
-================================================== -->
+<!-- 성장 -->
 
 <section
   id="beforeScreen"
@@ -1540,9 +1538,7 @@ button{
 </section>
 
 
-<!-- ==================================================
-     키우기 / 메인 게임
-================================================== -->
+<!-- 키우기 -->
 
 <section
   id="gameScreen"
@@ -1570,7 +1566,7 @@ button{
         id="potatoImage"
         src=""
         alt="감자"
-        onclick="potatoTouch">
+        onclick="potatoTouch()">
 
     </div>
 
@@ -1728,9 +1724,7 @@ button{
 </section>
 
 
-<!-- ==================================================
-     감자사전 + 생활공간
-================================================== -->
+<!-- 감자사전 + 생활공간 -->
 
 <section
   id="collectionScreen"
@@ -1757,10 +1751,6 @@ button{
     🥔 키우기로 돌아가기
   </button>
 
-
-  <!-- ==================================================
-       생활 공간
-  ================================================== -->
 
   <div
     id="roomTitle"
@@ -1849,10 +1839,6 @@ button{
   </div>
 
 
-  <!-- ==================================================
-       감자 도감
-  ================================================== -->
-
   <div class="collection-section-title">
     📖 감자 도감
   </div>
@@ -1875,9 +1861,7 @@ button{
 </section>
 
 
-<!-- ==================================================
-     모달
-================================================== -->
+<!-- 모달 -->
 
 <div
   id="modal"
@@ -3563,7 +3547,6 @@ function sleepPotato(){
 
 /* ==================================================
    픽셀 캔버스
-   방에서만 사용
 ================================================== */
 
 function createPixelPotato(
@@ -4103,16 +4086,6 @@ function changeRoom(room){
     .classList.add("active");
 
 
-  /*
-    거실 = 놀이터.
-    놀이터는 createPlayPotato에서만 감자를 만든다.
-
-    주방 / 침실 / 화장실 =
-    renderRoomPotatoes에서만 픽셀 감자를 만든다.
-
-    따라서 한 방에서 두 종류의 감자가 동시에 생성되지 않는다.
-  */
-
   if(room === "living"){
 
     startPlayground();
@@ -4517,7 +4490,6 @@ function renderRoomItems(){
 
 /* ==================================================
    감자 도감
-   중요: 여기서는 원본 이미지 사용
 ================================================== */
 
 function renderCollection(){
@@ -4562,11 +4534,6 @@ function renderCollection(){
 
 
       if(isFound){
-
-        /*
-          감자사전은 canvas가 아니라
-          원본 PNG 이미지를 직접 사용한다.
-        */
 
         const image =
           document.createElement(
@@ -4819,11 +4786,6 @@ function createPlayPotato(
     );
 
 
-  /*
-    놀이터 역시 canvas 픽셀 감자만 사용.
-    원본 PNG img를 직접 넣지 않는다.
-  */
-
   const img =
     document.createElement(
       "canvas"
@@ -4832,6 +4794,17 @@ function createPlayPotato(
 
   img.className =
     "play-potato";
+
+
+  if(
+    potato.style === "leader"
+  ){
+
+    img.classList.add(
+      "leader"
+    );
+
+  }
 
 
   img.width =
@@ -4866,7 +4839,9 @@ function createPlayPotato(
 
 
   img.style.zIndex =
-    "35";
+    potato.style === "leader"
+      ? "42"
+      : "35";
 
 
   const name =
@@ -4888,7 +4863,9 @@ function createPlayPotato(
 
 
   name.style.zIndex =
-    "40";
+    potato.style === "leader"
+      ? "45"
+      : "40";
 
 
   name.style.transform =
@@ -4999,7 +4976,19 @@ function createPlayPotato(
 
     suppressClick:false,
 
-    isLeader:false
+    isLeader:false,
+
+    pointerId:null,
+
+    dragStartX:0,
+
+    dragStartY:0,
+
+    movedDuringPress:false,
+
+    dragOffsetX:29,
+
+    dragOffsetY:29
 
   };
 
@@ -5053,7 +5042,9 @@ function createPlayPotato(
   );
 
 
-  /* 짧게 터치 */
+  /* ==================================================
+     짧게 터치
+  ================================================== */
 
   img.addEventListener(
     "click",
@@ -5084,7 +5075,9 @@ function createPlayPotato(
   );
 
 
-  /* 길게 누르기 */
+  /* ==================================================
+     꾹 누르기 시작
+  ================================================== */
 
   img.addEventListener(
     "pointerdown",
@@ -5107,6 +5100,34 @@ function createPlayPotato(
       actor.pressing =
         true;
 
+      actor.pointerId =
+        e.pointerId;
+
+      actor.dragStartX =
+        e.clientX;
+
+      actor.dragStartY =
+        e.clientY;
+
+      actor.movedDuringPress =
+        false;
+
+
+      const rect =
+        playground.getBoundingClientRect();
+
+
+      actor.dragOffsetX =
+        e.clientX -
+        rect.left -
+        actor.x;
+
+
+      actor.dragOffsetY =
+        e.clientY -
+        rect.top -
+        actor.y;
+
 
       actor.longPressTimer =
         setTimeout(
@@ -5121,27 +5142,76 @@ function createPlayPotato(
             }
 
 
+            /*
+              대장감자는
+              꾹 누르는 순간
+              직접 이동할 수 있게 한다.
+
+              동시에 따라오기 모드를 켠다.
+            */
+
             if(
               actor.isLeader
             ){
 
+              leaderFollowing =
+                true;
+
+              followTarget =
+                actor;
+
+
+              actor.dragging =
+                true;
+
               actor.suppressClick =
                 true;
 
-              toggleLeaderFollow(
-                actor
+              img.classList.add(
+                "dragging"
               );
 
-              actor.pressing =
-                false;
+
+              try{
+
+                img.setPointerCapture(
+                  e.pointerId
+                );
+
+              }
+              catch(error){}
+
+
+              showFollowIndicator(
+                "대장감자를 움직여보세요!"
+              );
+
+
+              playActorAnimation(
+                actor,
+                "jump"
+              );
+
+
+              createPlayEffect(
+                actor,
+                "♥"
+              );
+
 
               actor.longPressTimer =
                 null;
+
 
               return;
 
             }
 
+
+            /*
+              일반 감자는 기존처럼
+              꾹 누르면 직접 드래그 가능.
+            */
 
             actor.dragging =
               true;
@@ -5173,11 +5243,47 @@ function createPlayPotato(
   );
 
 
-  /* 드래그 */
+  /* ==================================================
+     드래그 이동
+  ================================================== */
 
   img.addEventListener(
     "pointermove",
     function(e){
+
+      if(
+        !actor.pressing
+      ){
+
+        return;
+
+      }
+
+
+      const moveDistance =
+        Math.sqrt(
+          Math.pow(
+            e.clientX -
+            actor.dragStartX,
+            2
+          ) +
+          Math.pow(
+            e.clientY -
+            actor.dragStartY,
+            2
+          )
+        );
+
+
+      if(
+        moveDistance > 8
+      ){
+
+        actor.movedDuringPress =
+          true;
+
+      }
+
 
       if(
         !actor.dragging
@@ -5200,13 +5306,13 @@ function createPlayPotato(
       actor.x =
         e.clientX -
         rect.left -
-        29;
+        actor.dragOffsetX;
 
 
       actor.y =
         e.clientY -
         rect.top -
-        29;
+        actor.dragOffsetY;
 
 
       keepInside(
@@ -5218,9 +5324,31 @@ function createPlayPotato(
         actor
       );
 
+
+      /*
+        대장감자를 움직이는 동안
+        즉시 다른 감자들도 반응하도록
+        따라오기 위치를 갱신한다.
+      */
+
+      if(
+        actor.isLeader &&
+        leaderFollowing
+      ){
+
+        updateFollowersImmediately(
+          actor
+        );
+
+      }
+
     }
   );
 
+
+  /* ==================================================
+     손 떼기
+  ================================================== */
 
   function releasePotato(e){
 
@@ -5257,17 +5385,44 @@ function createPlayPotato(
 
       try{
 
-        img.releasePointerCapture(
-          e.pointerId
-        );
+        if(
+          actor.pointerId !== null
+        ){
+
+          img.releasePointerCapture(
+            actor.pointerId
+          );
+
+        }
 
       }
       catch(error){}
 
 
+      actor.pointerId =
+        null;
+
+
       updateActorPosition(
         actor
       );
+
+
+      /*
+        대장감자는 손을 떼도
+        따라오기 상태를 유지한다.
+      */
+
+      if(
+        actor.isLeader &&
+        leaderFollowing
+      ){
+
+        showFollowIndicator(
+          "감자들이 대장감자를 따라가요!"
+        );
+
+      }
 
     }
 
@@ -5286,6 +5441,27 @@ function createPlayPotato(
   );
 
 
+  img.addEventListener(
+    "lostpointercapture",
+    function(){
+
+      if(
+        actor.dragging
+      ){
+
+        actor.dragging =
+          false;
+
+        img.classList.remove(
+          "dragging"
+        );
+
+      }
+
+    }
+  );
+
+
   playgroundPotatoes.push(
     actor
   );
@@ -5299,7 +5475,89 @@ function createPlayPotato(
 
 
 /* ==================================================
-   대장감자
+   대장감자 따라오기
+================================================== */
+
+function updateFollowersImmediately(
+  leader
+){
+
+  if(
+    !leader ||
+    !leaderFollowing
+  ){
+
+    return;
+
+  }
+
+
+  playgroundPotatoes.forEach(
+    actor => {
+
+      if(
+        actor === leader ||
+        actor.stunned ||
+        actor.dragging
+      ){
+
+        return;
+
+      }
+
+
+      const leaderIndex =
+        playgroundPotatoes.indexOf(
+          actor
+        );
+
+
+      const angle =
+        leaderIndex * 2.1;
+
+
+      const followDistance =
+        58 +
+        leaderIndex * 10;
+
+
+      const targetX =
+        leader.x +
+        Math.cos(angle) *
+        followDistance;
+
+
+      const targetY =
+        leader.y +
+        Math.sin(angle) *
+        followDistance;
+
+
+      moveToward(
+        actor,
+        targetX,
+        targetY,
+        2.8
+      );
+
+
+      keepInside(
+        actor
+      );
+
+
+      updateActorPosition(
+        actor
+      );
+
+    }
+  );
+
+}
+
+
+/* ==================================================
+   기존 토글 기능
 ================================================== */
 
 function toggleLeaderFollow(
