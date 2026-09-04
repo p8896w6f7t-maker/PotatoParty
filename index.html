@@ -791,6 +791,12 @@ button{
   margin-bottom:12px;
 }
 
+
+/* ==================================================
+   놀이터
+   흑백 타마고치 픽셀 느낌
+================================================== */
+
 .playground{
 
   width:calc(100% - 32px);
@@ -803,16 +809,25 @@ button{
 
   overflow:hidden;
 
-  border-radius:22px;
+  border-radius:9px;
 
-  border:3px solid #d9c19e;
+  border:3px solid #444;
 
-  background:#cfe8f3;
+  background:#d8d8d8;
+
+  image-rendering:pixelated;
+
+  user-select:none;
+  -webkit-user-select:none;
+  -webkit-touch-callout:none;
+  -webkit-tap-highlight-color:transparent;
+
+  touch-action:manipulation;
 
 }
 
 
-/* 물 */
+/* 땅 */
 
 .playground::before{
 
@@ -828,7 +843,7 @@ button{
 
   bottom:0;
 
-  background:#b5d58f;
+  background:#b8b8b8;
 
   border-radius:45% 45% 0 0;
 
@@ -853,13 +868,13 @@ button{
 
   top:20px;
 
-  background:#a9d8ed;
+  background:#c2c2c2;
 
   border-radius:50%;
 
   box-shadow:
-    -45px 35px 0 #a9d8ed,
-    -80px 65px 0 #a9d8ed;
+    -45px 35px 0 #c2c2c2,
+    -80px 65px 0 #c2c2c2;
 
   z-index:1;
 
@@ -884,6 +899,10 @@ button{
 
   -webkit-user-select:none;
 
+  filter:grayscale(1);
+
+  image-rendering:pixelated;
+
 }
 
 
@@ -907,7 +926,7 @@ button{
 
   padding:30px;
 
-  color:#806b58;
+  color:#555;
 
   font-size:13px;
 
@@ -916,6 +935,11 @@ button{
   line-height:1.7;
 
   z-index:10;
+
+  user-select:none;
+
+  -webkit-user-select:none;
+
 }
 
 
@@ -927,8 +951,8 @@ button{
 
   position:absolute;
 
-  width:62px;
-  height:62px;
+  width:48px;
+  height:48px;
 
   object-fit:contain;
 
@@ -938,17 +962,28 @@ button{
 
   -webkit-user-select:none;
 
+  -webkit-touch-callout:none;
+
   pointer-events:auto;
 
   cursor:pointer;
 
   touch-action:manipulation;
 
+  image-rendering:pixelated;
+
+  filter:
+    grayscale(1)
+    contrast(1.15);
+
   transition:
     left .35s linear,
     top .35s linear;
 
 }
+
+
+/* 감자 이름 */
 
 .play-potato-name{
 
@@ -960,9 +995,15 @@ button{
 
   padding:3px 6px;
 
-  border-radius:8px;
+  border-radius:3px;
 
-  background:rgba(255,255,255,.85);
+  background:rgba(235,235,235,.9);
+
+  border:1px solid #666;
+
+  color:#333;
+
+  font-family:monospace;
 
   font-size:8px;
 
@@ -971,6 +1012,10 @@ button{
   white-space:nowrap;
 
   pointer-events:none;
+
+  user-select:none;
+
+  -webkit-user-select:none;
 
 }
 
@@ -1059,8 +1104,6 @@ button{
 
   animation:playStun 1.4s ease;
 
-  filter:grayscale(.15);
-
 }
 
 @keyframes playStun{
@@ -1140,6 +1183,10 @@ button{
   transform:translate(-50%,-50%);
 
   animation:playEffect .8s ease forwards;
+
+  user-select:none;
+
+  -webkit-user-select:none;
 
 }
 
@@ -1268,7 +1315,6 @@ button{
   color:#806b58;
 
   line-height:1.4;
-
 }
 
 
@@ -3452,6 +3498,35 @@ function startPlayground(){
 
 
   /* -----------------------------------------
+     놀이터 터치/복사 방지
+  ----------------------------------------- */
+
+  playground.onselectstart = () => false;
+
+  playground.oncopy = () => false;
+
+  playground.oncut = () => false;
+
+  playground.oncontextmenu = () => false;
+
+
+  playground.addEventListener(
+    "touchstart",
+    function(e){
+      if(
+        e.target === playground ||
+        e.target.closest(".play-potato")
+      ){
+        e.stopPropagation();
+      }
+    },
+    {
+      passive:true
+    }
+  );
+
+
+  /* -----------------------------------------
      놀이터 장식
   ----------------------------------------- */
 
@@ -3533,6 +3608,10 @@ function startPlayground(){
 }
 
 
+/* ==================================================
+   놀이터 정지
+================================================== */
+
 function stopPlayground(){
 
   if(playgroundTimer){
@@ -3610,22 +3689,6 @@ function createPlayPotato(
     potato.name;
 
 
-  /*
-    놀이터에서 감자를 직접 터치할 수 있게 함
-  */
-
-  img.addEventListener(
-    "click",
-    () => {
-
-      playPotatoTouch(
-        actor
-      );
-
-    }
-  );
-
-
   const name =
     document.createElement(
       "div"
@@ -3667,19 +3730,19 @@ function createPlayPotato(
     label:name,
 
     x:
-      30 +
+      20 +
       Math.random() *
       Math.max(
         50,
-        width - 90
+        width - 85
       ),
 
     y:
-      60 +
+      55 +
       Math.random() *
       Math.max(
         80,
-        height - 150
+        height - 135
       ),
 
     vx:
@@ -3703,8 +3766,7 @@ function createPlayPotato(
 
 
   /*
-    클릭 이벤트가 actor를 사용할 수 있도록
-    생성 후 연결
+    감자 클릭
   */
 
   img.onclick = () => {
@@ -3916,11 +3978,11 @@ function updateActorPosition(
 
 
   const maxX =
-    playground.clientWidth - 65;
+    playground.clientWidth - 53;
 
 
   const maxY =
-    playground.clientHeight - 90;
+    playground.clientHeight - 76;
 
 
   actor.x =
@@ -3952,11 +4014,11 @@ function updateActorPosition(
 
 
   actor.label.style.left =
-    `${actor.x + 31}px`;
+    `${actor.x + 24}px`;
 
 
   actor.label.style.top =
-    `${actor.y + 60}px`;
+    `${actor.y + 48}px`;
 
 }
 
@@ -3983,10 +4045,6 @@ function playgroundTick(){
     return;
 
   }
-
-
-  const now =
-    Date.now();
 
 
   playgroundPotatoes.forEach(
@@ -4058,12 +4116,6 @@ function playgroundTick(){
         style === "leader"
       ){
 
-        const playground =
-          document.getElementById(
-            "playground"
-          );
-
-
         const centerX =
           playground.clientWidth / 2;
 
@@ -4074,8 +4126,8 @@ function playgroundTick(){
 
         moveToward(
           actor,
-          centerX - 30,
-          centerY - 30,
+          centerX - 24,
+          centerY - 24,
           .45
         );
 
@@ -4094,27 +4146,28 @@ function playgroundTick(){
 
       /* -----------------------------------------
          독감자
-         다른 감자를 쫓아감
+         다른 감자를 쫓지 않고
+         혼자 랜덤하게 이동
       ----------------------------------------- */
 
       else if(
         style === "poison"
       ){
 
-        const target =
-          getNearestOther(
-            actor
-          );
+        actor.x += actor.vx;
+
+        actor.y += actor.vy;
 
 
-        if(target){
+        if(
+          Math.random() < .035
+        ){
 
-          moveToward(
-            actor,
-            target.x,
-            target.y,
-            1.5
-          );
+          actor.vx =
+            (Math.random() * 2 - 1) * 1.5;
+
+          actor.vy =
+            (Math.random() * 2 - 1) * 1.5;
 
         }
 
@@ -4360,11 +4413,11 @@ function keepInside(
 
 
   const maxX =
-    playground.clientWidth - 68;
+    playground.clientWidth - 53;
 
 
   const maxY =
-    playground.clientHeight - 95;
+    playground.clientHeight - 76;
 
 
   if(
@@ -4582,8 +4635,13 @@ function checkPlaygroundCollisions(){
         );
 
 
+      /*
+        48px 감자끼리 실제로
+        거의 닿았을 때 충돌
+      */
+
       if(
-        distance < 55
+        distance < 43
       ){
 
         if(
@@ -4616,22 +4674,22 @@ function checkPlaygroundCollisions(){
 
         a.x -=
           Math.cos(angle) *
-          12;
+          10;
 
 
         a.y -=
           Math.sin(angle) *
-          12;
+          10;
 
 
         b.x +=
           Math.cos(angle) *
-          12;
+          10;
 
 
         b.y +=
           Math.sin(angle) *
-          12;
+          10;
 
 
         createCollisionEffect(
@@ -4641,10 +4699,15 @@ function checkPlaygroundCollisions(){
 
 
         /*
-          독감자가 충돌한 경우
+          독감자 충돌
 
-          기존 100% 기절에서
-          30% 확률로 변경
+          독감자 → 다른 감자
+          30% 확률 기절
+
+          70% 확률 일반 반응
+
+          독감자 ↔ 독감자
+          기절 없음
         */
 
         if(
@@ -4883,11 +4946,11 @@ function createCollisionEffect(
 
 
   effect.style.left =
-    `${x + 31}px`;
+    `${x + 24}px`;
 
 
   effect.style.top =
-    `${y + 30}px`;
+    `${y + 24}px`;
 
 
   playground.appendChild(
@@ -4942,11 +5005,11 @@ function createPlayEffect(
 
 
   effect.style.left =
-    `${actor.x + 31}px`;
+    `${actor.x + 24}px`;
 
 
   effect.style.top =
-    `${actor.y + 20}px`;
+    `${actor.y + 16}px`;
 
 
   playground.appendChild(
