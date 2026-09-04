@@ -673,23 +673,27 @@ button{
 @keyframes walking{
 
   0%{
-    transform:translateX(0);
+    transform:translateX(0) rotate(0) scale(1);
   }
 
-  25%{
-    transform:translateX(-40px) rotate(-5deg);
+  20%{
+    transform:translateX(-55px) rotate(-6deg) scale(1.04);
   }
 
-  50%{
-    transform:translateX(40px) rotate(5deg);
+  40%{
+    transform:translateX(0) rotate(3deg) scale(.97);
   }
 
-  75%{
-    transform:translateX(-20px) rotate(-3deg);
+  60%{
+    transform:translateX(55px) rotate(6deg) scale(1.04);
+  }
+
+  80%{
+    transform:translateX(20px) rotate(-3deg) scale(.98);
   }
 
   100%{
-    transform:translateX(0);
+    transform:translateX(0) rotate(0) scale(1);
   }
 
 }
@@ -710,12 +714,17 @@ button{
 
   0%{
     opacity:1;
-    transform:translateY(0);
+    transform:translateY(0) scale(.8);
+  }
+
+  50%{
+    opacity:1;
+    transform:translateY(-15px) scale(1);
   }
 
   100%{
     opacity:0;
-    transform:translateY(-35px);
+    transform:translateY(-35px) scale(.7);
   }
 
 }
@@ -783,6 +792,7 @@ button{
 }
 
 .playground{
+
   width:calc(100% - 32px);
 
   height:330px;
@@ -797,42 +807,92 @@ button{
 
   border:3px solid #d9c19e;
 
-  background:
+  background:#cfe8f3;
 
-    radial-gradient(
-      circle at 20% 25%,
-      rgba(255,255,255,.7) 0 2px,
-      transparent 3px
-    ),
-
-    radial-gradient(
-      circle at 80% 65%,
-      rgba(255,255,255,.6) 0 2px,
-      transparent 3px
-    ),
-
-    #dcecc8;
 }
 
+
+/* 물 */
+
 .playground::before{
+
   content:"";
 
   position:absolute;
 
   width:100%;
-  height:50px;
 
-  bottom:0;
+  height:190px;
+
   left:0;
 
-  background:#a9cb82;
+  bottom:0;
 
-  border-radius:50% 50% 0 0;
+  background:#b5d58f;
 
-  opacity:.7;
+  border-radius:45% 45% 0 0;
+
+  z-index:1;
+
 }
 
+
+/* 물결 */
+
+.playground::after{
+
+  content:"";
+
+  position:absolute;
+
+  width:120px;
+
+  height:55px;
+
+  right:-15px;
+
+  top:20px;
+
+  background:#a9d8ed;
+
+  border-radius:50%;
+
+  box-shadow:
+    -45px 35px 0 #a9d8ed,
+    -80px 65px 0 #a9d8ed;
+
+  z-index:1;
+
+}
+
+
+/* ==================================================
+   놀이터 장식
+================================================== */
+
+.playground-decoration{
+
+  position:absolute;
+
+  z-index:2;
+
+  font-size:24px;
+
+  pointer-events:none;
+
+  user-select:none;
+
+  -webkit-user-select:none;
+
+}
+
+
+/* ==================================================
+   놀이터 빈 화면
+================================================== */
+
 .playground-empty{
+
   position:absolute;
 
   inset:0;
@@ -855,7 +915,7 @@ button{
 
   line-height:1.7;
 
-  z-index:2;
+  z-index:10;
 }
 
 
@@ -864,6 +924,7 @@ button{
 ================================================== */
 
 .play-potato{
+
   position:absolute;
 
   width:62px;
@@ -877,14 +938,20 @@ button{
 
   -webkit-user-select:none;
 
-  pointer-events:none;
+  pointer-events:auto;
+
+  cursor:pointer;
+
+  touch-action:manipulation;
 
   transition:
     left .35s linear,
     top .35s linear;
+
 }
 
 .play-potato-name{
+
   position:absolute;
 
   z-index:8;
@@ -904,6 +971,7 @@ button{
   white-space:nowrap;
 
   pointer-events:none;
+
 }
 
 
@@ -988,9 +1056,11 @@ button{
 }
 
 .play-stun{
+
   animation:playStun 1.4s ease;
 
   filter:grayscale(.15);
+
 }
 
 @keyframes playStun{
@@ -1023,10 +1093,42 @@ button{
 
 
 /* ==================================================
+   놀이터 터치
+================================================== */
+
+.play-touch{
+
+  animation:playTouch .55s ease;
+
+}
+
+@keyframes playTouch{
+
+  0%,100%{
+    transform:scale(1) rotate(0);
+  }
+
+  25%{
+    transform:scale(1.15) rotate(-7deg);
+  }
+
+  50%{
+    transform:scale(1.08) rotate(7deg);
+  }
+
+  75%{
+    transform:scale(1.12) rotate(-4deg);
+  }
+
+}
+
+
+/* ==================================================
    놀이터 효과
 ================================================== */
 
 .play-effect{
+
   position:absolute;
 
   z-index:30;
@@ -1038,6 +1140,7 @@ button{
   transform:translate(-50%,-50%);
 
   animation:playEffect .8s ease forwards;
+
 }
 
 @keyframes playEffect{
@@ -1065,6 +1168,7 @@ button{
 ================================================== */
 
 .collection-count{
+
   text-align:center;
 
   margin:0 16px 18px;
@@ -1078,6 +1182,7 @@ button{
   font-size:14px;
 
   font-weight:900;
+
 }
 
 
@@ -1086,6 +1191,7 @@ button{
 ================================================== */
 
 .collection-grid{
+
   display:grid;
 
   grid-template-columns:1fr 1fr;
@@ -1093,9 +1199,11 @@ button{
   gap:14px;
 
   padding:0 16px 30px;
+
 }
 
 .collection-card{
+
   min-height:210px;
 
   background:#fff;
@@ -1115,16 +1223,20 @@ button{
   align-items:center;
 
   justify-content:center;
+
 }
 
 .collection-card img{
+
   width:115px;
   height:115px;
 
   object-fit:contain;
+
 }
 
 .collection-question{
+
   font-size:65px;
 
   height:115px;
@@ -1134,17 +1246,21 @@ button{
   justify-content:center;
 
   align-items:center;
+
 }
 
 .collection-name{
+
   font-size:15px;
 
   font-weight:1000;
 
   margin-top:6px;
+
 }
 
 .collection-status{
+
   margin-top:5px;
 
   font-size:11px;
@@ -1152,6 +1268,7 @@ button{
   color:#806b58;
 
   line-height:1.4;
+
 }
 
 
@@ -1160,6 +1277,7 @@ button{
 ================================================== */
 
 .modal{
+
   position:fixed;
 
   inset:0;
@@ -1175,9 +1293,11 @@ button{
   padding:20px;
 
   z-index:100;
+
 }
 
 .modal-box{
+
   width:100%;
 
   max-width:360px;
@@ -1192,17 +1312,21 @@ button{
 
   box-shadow:
     0 10px 30px rgba(0,0,0,.2);
+
 }
 
 .modal-title{
+
   font-size:21px;
 
   font-weight:1000;
 
   margin-bottom:12px;
+
 }
 
 .modal-text{
+
   font-size:14px;
 
   line-height:1.7;
@@ -1210,9 +1334,11 @@ button{
   color:#806b58;
 
   margin-bottom:20px;
+
 }
 
 .modal-button{
+
   width:100%;
 
   padding:14px;
@@ -1226,6 +1352,7 @@ button{
   font-size:14px;
 
   font-weight:900;
+
 }
 
 </style>
@@ -1815,7 +1942,6 @@ let state = {
 let playgroundTimer = null;
 
 let playgroundPotatoes = [];
-
 
 
 /* ==================================================
@@ -2467,6 +2593,9 @@ function walk(){
   );
 
 
+  createWalkEffect();
+
+
   setTimeout(
     () => {
 
@@ -2477,9 +2606,6 @@ function walk(){
     },
     1000
   );
-
-
-  createWalkEffect();
 
 }
 
@@ -2492,41 +2618,68 @@ function createWalkEffect(){
     );
 
 
-  const effect =
-    document.createElement(
-      "div"
+  const effects = [
+    "🐾",
+    "🐾",
+    "💨"
+  ];
+
+
+  for(
+    let i = 0;
+    i < 3;
+    i++
+  ){
+
+    const effect =
+      document.createElement(
+        "div"
+      );
+
+
+    effect.className =
+      "walk-effect";
+
+
+    effect.innerText =
+      effects[i];
+
+
+    effect.style.left =
+      (
+        30 +
+        i * 20
+      ) + "%";
+
+
+    effect.style.top =
+      (
+        55 +
+        Math.random() * 10
+      ) + "%";
+
+
+    effect.style.animationDelay =
+      (
+        i * 0.12
+      ) + "s";
+
+
+    wrap.appendChild(
+      effect
     );
 
 
-  effect.className =
-    "walk-effect";
+    setTimeout(
+      () => {
 
+        effect.remove();
 
-  effect.innerText =
-    "🏃";
+      },
+      1200
+    );
 
-
-  effect.style.left =
-    "50%";
-
-
-  effect.style.top =
-    "55%";
-
-
-  wrap.appendChild(
-    effect
-  );
-
-
-  setTimeout(
-    () => {
-
-      effect.remove();
-
-    },
-    1000
-  );
+  }
 
 }
 
@@ -3252,6 +3405,7 @@ function renderCollection(){
 
   startPlayground();
 
+
 }
 
 
@@ -3294,6 +3448,53 @@ function startPlayground(){
 
   empty.classList.add(
     "hidden"
+  );
+
+
+  /* -----------------------------------------
+     놀이터 장식
+  ----------------------------------------- */
+
+  const decorations = [
+    ["🌱",10,72],
+    ["🌼",28,63],
+    ["🪨",48,78],
+    ["🍀",70,70],
+    ["🌿",88,58],
+    ["💧",76,18]
+  ];
+
+
+  decorations.forEach(
+    decoration => {
+
+      const el =
+        document.createElement(
+          "div"
+        );
+
+
+      el.className =
+        "playground-decoration";
+
+
+      el.innerText =
+        decoration[0];
+
+
+      el.style.left =
+        decoration[1] + "%";
+
+
+      el.style.top =
+        decoration[2] + "%";
+
+
+      playground.appendChild(
+        el
+      );
+
+    }
   );
 
 
@@ -3347,6 +3548,7 @@ function stopPlayground(){
 
   playgroundPotatoes = [];
 
+
   const playground =
     document.getElementById(
       "playground"
@@ -3357,7 +3559,12 @@ function stopPlayground(){
 
     const actors =
       playground.querySelectorAll(
-        ".play-potato, .play-potato-name, .play-effect"
+
+        ".play-potato, " +
+        ".play-potato-name, " +
+        ".play-effect, " +
+        ".playground-decoration"
+
       );
 
 
@@ -3401,6 +3608,22 @@ function createPlayPotato(
 
   img.alt =
     potato.name;
+
+
+  /*
+    놀이터에서 감자를 직접 터치할 수 있게 함
+  */
+
+  img.addEventListener(
+    "click",
+    () => {
+
+      playPotatoTouch(
+        actor
+      );
+
+    }
+  );
 
 
   const name =
@@ -3479,6 +3702,20 @@ function createPlayPotato(
   };
 
 
+  /*
+    클릭 이벤트가 actor를 사용할 수 있도록
+    생성 후 연결
+  */
+
+  img.onclick = () => {
+
+    playPotatoTouch(
+      actor
+    );
+
+  };
+
+
   playgroundPotatoes.push(
     actor
   );
@@ -3487,6 +3724,174 @@ function createPlayPotato(
   updateActorPosition(
     actor
   );
+
+}
+
+
+/* ==================================================
+   놀이터 감자 터치 반응
+================================================== */
+
+function playPotatoTouch(
+  actor
+){
+
+  if(
+    !actor ||
+    actor.stunned
+  ){
+
+    return;
+
+  }
+
+
+  actor.lastCollision =
+    Date.now();
+
+
+  actor.img.classList.remove(
+    "play-touch",
+    "play-jump",
+    "play-shy",
+    "play-spin",
+    "play-angry"
+  );
+
+
+  void actor.img.offsetWidth;
+
+
+  actor.img.classList.add(
+    "play-touch"
+  );
+
+
+  const style =
+    actor.data.style;
+
+
+  let actions = [];
+
+
+  if(
+    style === "social"
+  ){
+
+    actions = [
+      "💕",
+      "❤️",
+      "😊"
+    ];
+
+  }
+  else if(
+    style === "leader"
+  ){
+
+    actions = [
+      "👑",
+      "✨",
+      "😎"
+    ];
+
+  }
+  else if(
+    style === "poison"
+  ){
+
+    actions = [
+      "😈",
+      "💢",
+      "☠️"
+    ];
+
+  }
+  else if(
+    style === "violent"
+  ){
+
+    actions = [
+      "💢",
+      "😡",
+      "💥"
+    ];
+
+  }
+  else{
+
+    actions = [
+      "❓",
+      "😵",
+      "✨"
+    ];
+
+  }
+
+
+  const emoji =
+    actions[
+      Math.floor(
+        Math.random() *
+        actions.length
+      )
+    ];
+
+
+  createPlayEffect(
+    actor,
+    emoji
+  );
+
+
+  if(
+    style === "social"
+  ){
+
+    playActorAnimation(
+      actor,
+      "heart"
+    );
+
+  }
+  else if(
+    style === "leader"
+  ){
+
+    playActorAnimation(
+      actor,
+      "spin"
+    );
+
+  }
+  else if(
+    style === "poison"
+  ){
+
+    playActorAnimation(
+      actor,
+      "angry"
+    );
+
+  }
+  else if(
+    style === "violent"
+  ){
+
+    playActorAnimation(
+      actor,
+      "angry"
+    );
+
+  }
+  else{
+
+    playActorAnimation(
+      actor,
+      "jump"
+    );
+
+  }
 
 }
 
@@ -3630,6 +4035,7 @@ function playgroundTick(){
           );
 
         }
+
 
         randomAction(
           actor,
@@ -4236,6 +4642,9 @@ function checkPlaygroundCollisions(){
 
         /*
           독감자가 충돌한 경우
+
+          기존 100% 기절에서
+          30% 확률로 변경
         */
 
         if(
@@ -4243,10 +4652,29 @@ function checkPlaygroundCollisions(){
           b.data.style !== "poison"
         ){
 
-          stunPotato(
-            b,
-            a
-          );
+          if(
+            Math.random() < 0.3
+          ){
+
+            stunPotato(
+              b,
+              a
+            );
+
+          }
+          else{
+
+            playActorAnimation(
+              a,
+              "angry"
+            );
+
+            playActorAnimation(
+              b,
+              "shy"
+            );
+
+          }
 
         }
         else if(
@@ -4254,10 +4682,29 @@ function checkPlaygroundCollisions(){
           a.data.style !== "poison"
         ){
 
-          stunPotato(
-            a,
-            b
-          );
+          if(
+            Math.random() < 0.3
+          ){
+
+            stunPotato(
+              a,
+              b
+            );
+
+          }
+          else{
+
+            playActorAnimation(
+              b,
+              "angry"
+            );
+
+            playActorAnimation(
+              a,
+              "shy"
+            );
+
+          }
 
         }
         else if(
