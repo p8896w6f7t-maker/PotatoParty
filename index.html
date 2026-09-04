@@ -51,14 +51,11 @@ button{
 
 #startScreen{
   min-height:100vh;
-
   display:flex;
   flex-direction:column;
   justify-content:center;
   align-items:center;
-
   text-align:center;
-
   padding:30px;
 }
 
@@ -82,15 +79,11 @@ button{
 .start-button{
   width:240px;
   padding:16px;
-
   border-radius:17px;
-
   background:#d79b55;
   color:white;
-
   font-size:17px;
   font-weight:900;
-
   box-shadow:0 4px 0 #b87838;
 }
 
@@ -116,11 +109,8 @@ button{
 .sticky-top{
   position:sticky;
   top:0;
-
   z-index:50;
-
   background:#fffaf2;
-
   box-shadow:
     0 3px 12px rgba(80,50,20,.08);
 }
@@ -137,9 +127,7 @@ button{
 
 .header-subtitle{
   margin-top:4px;
-
   color:#806b58;
-
   font-size:11px;
 }
 
@@ -151,30 +139,22 @@ button{
 #potatoWrap{
   width:100%;
   height:190px;
-
   display:flex;
   justify-content:center;
   align-items:center;
-
   position:relative;
-
   overflow:visible;
 }
 
 #potatoImage{
   width:150px;
   max-width:55%;
-
   height:auto;
-
   object-fit:contain;
-
   cursor:pointer;
-
   touch-action:manipulation;
   user-select:none;
   -webkit-user-select:none;
-
   position:relative;
   z-index:3;
 }
@@ -186,33 +166,19 @@ button{
 
 .message{
   width:calc(100% - 32px);
-
   margin:0 16px 12px;
-
   padding:11px 14px;
-
   min-height:52px;
-
   border-radius:15px;
-
   background:#fff0c9;
-
   border:2px solid #ead7ae;
-
   color:#4b3525;
-
   text-align:center;
-
   font-size:13px;
-
   font-weight:800;
-
   line-height:1.6;
-
   position:relative;
-
   z-index:10;
-
   box-shadow:
     0 2px 5px rgba(0,0,0,.05);
 }
@@ -378,13 +344,9 @@ button{
 
 .touch-heart{
   position:absolute;
-
   font-size:28px;
-
   pointer-events:none;
-
   animation:heartFloat 1s ease forwards;
-
   z-index:20;
 }
 
@@ -409,13 +371,9 @@ button{
 
 .touch-sparkle{
   position:absolute;
-
   pointer-events:none;
-
   font-size:24px;
-
   animation:sparkleFloat .8s ease forwards;
-
   z-index:20;
 }
 
@@ -444,23 +402,16 @@ button{
 
 .potato-name{
   text-align:center;
-
   font-size:24px;
-
   font-weight:1000;
-
   margin:4px 0 5px;
 }
 
 .personality{
   text-align:center;
-
   color:#806b58;
-
   font-size:12px;
-
   font-weight:800;
-
   margin-bottom:16px;
 }
 
@@ -470,37 +421,25 @@ button{
 
 .stat-line{
   display:flex;
-
   justify-content:space-between;
-
   align-items:center;
-
   margin-bottom:5px;
-
   font-size:12px;
-
   font-weight:800;
 }
 
 .stat-bar{
   width:100%;
-
   height:12px;
-
   background:#eadcc6;
-
   border-radius:20px;
-
   overflow:hidden;
 }
 
 .stat-fill{
   height:100%;
-
   width:0%;
-
   border-radius:20px;
-
   transition:width .3s ease;
 }
 
@@ -511,47 +450,33 @@ button{
 
 .action-buttons{
   display:grid;
-
   grid-template-columns:1fr 1fr;
-
   gap:12px;
-
   padding:20px 16px 24px;
 }
 
 .action-button{
   min-height:56px;
-
   padding:12px 8px;
-
   border-radius:15px;
-
   background:#eadcc6;
-
   color:#4b3525;
-
   font-size:14px;
-
   font-weight:900;
-
   line-height:1.3;
-
   box-shadow:
     0 3px 0 #d1bea3;
 }
 
 .action-button:active{
   transform:translateY(2px);
-
   box-shadow:
     0 1px 0 #d1bea3;
 }
 
 .action-button.harvest{
   background:#d79b55;
-
   color:white;
-
   box-shadow:
     0 3px 0 #b87838;
 }
@@ -563,43 +488,28 @@ button{
 
 .egg-scene{
   width:100%;
-
   height:270px;
-
   display:flex;
-
   justify-content:center;
-
   align-items:flex-end;
-
   padding-bottom:20px;
-
   position:relative;
 }
 
 .soil{
   position:absolute;
-
   width:250px;
-
   height:55px;
-
   background:#9a704e;
-
   border-radius:50%;
-
   bottom:20px;
 }
 
 .growth-emoji{
   position:relative;
-
   z-index:2;
-
   font-size:80px;
-
   line-height:1;
-
   animation:sproutBounce 2s ease-in-out infinite;
 }
 
@@ -617,48 +527,35 @@ button{
 
 .growth-info{
   text-align:center;
-
   padding:0 20px;
 }
 
 .growth-title{
   font-size:21px;
-
   font-weight:1000;
-
   margin-bottom:8px;
 }
 
 .growth-percent{
   font-size:14px;
-
   color:#806b58;
-
   margin-bottom:10px;
 }
 
 .progress{
   width:100%;
-
   height:18px;
-
   background:#eadcc6;
-
   border-radius:20px;
-
   overflow:hidden;
 }
 
 .progress-bar{
   width:0%;
-
   height:100%;
-
   background:#d79b55;
-
   border-radius:20px;
-
-  transition:width .3s ease;
+  transition:width .3s;
 }
 
 
@@ -700,13 +597,9 @@ button{
 
 .walk-effect{
   position:absolute;
-
   font-size:28px;
-
   animation:walkEffect 1s ease forwards;
-
   pointer-events:none;
-
   z-index:10;
 }
 
@@ -736,98 +629,94 @@ button{
 
 .collection-header{
   padding:20px 16px;
-
   display:flex;
-
   align-items:center;
-
   justify-content:space-between;
 }
 
 .back-button{
   background:#eadcc6;
-
   color:#4b3525;
-
   padding:10px 14px;
-
   border-radius:12px;
-
   font-size:13px;
-
   font-weight:900;
 }
 
 .collection-title{
   font-size:23px;
-
   font-weight:1000;
 }
 
 
 /* ==================================================
-   감자 놀이터
+   감자 놀이터 제목
 ================================================== */
 
 .playground-title{
   text-align:center;
-
   font-size:18px;
-
   font-weight:1000;
-
   margin:0 0 7px;
 }
 
 .playground-subtitle{
   text-align:center;
-
   color:#806b58;
-
   font-size:11px;
-
   font-weight:700;
-
   margin-bottom:12px;
 }
 
 
 /* ==================================================
-   놀이터
-   흑백 타마고치 픽셀 느낌
+   감자 놀이터
+   타마고치 픽셀 LCD 스타일
 ================================================== */
 
 .playground{
 
-  width:calc(100% - 32px);
+  width:calc(100% - 24px);
 
   height:330px;
 
-  margin:0 16px 18px;
+  margin:0 12px 18px;
 
   position:relative;
 
   overflow:hidden;
 
-  border-radius:9px;
+  background:#c9d39a;
 
-  border:3px solid #444;
+  border:7px solid #514b36;
 
-  background:#d8d8d8;
+  border-radius:17px;
+
+  box-shadow:
+
+    inset 0 0 0 3px #777253,
+
+    inset 0 0 0 6px #a8aa78,
+
+    0 5px 0 #3c382b;
 
   image-rendering:pixelated;
 
   user-select:none;
   -webkit-user-select:none;
   -webkit-touch-callout:none;
+  -webkit-user-drag:none;
+
   -webkit-tap-highlight-color:transparent;
 
-  touch-action:manipulation;
+  touch-action:none;
 
 }
 
 
-/* 땅 */
+/* ==================================================
+   LCD 화면 내부 픽셀 패턴
+================================================== */
 
 .playground::before{
 
@@ -835,24 +724,38 @@ button{
 
   position:absolute;
 
-  width:100%;
+  inset:8px;
 
-  height:190px;
+  border:3px solid rgba(62,68,42,.55);
 
-  left:0;
-
-  bottom:0;
-
-  background:#b8b8b8;
-
-  border-radius:45% 45% 0 0;
+  pointer-events:none;
 
   z-index:1;
+
+  background:
+
+    repeating-linear-gradient(
+      0deg,
+      rgba(55,65,35,.07) 0px,
+      rgba(55,65,35,.07) 2px,
+      transparent 2px,
+      transparent 5px
+    ),
+
+    repeating-linear-gradient(
+      90deg,
+      rgba(55,65,35,.025) 0px,
+      rgba(55,65,35,.025) 1px,
+      transparent 1px,
+      transparent 4px
+    );
 
 }
 
 
-/* 물결 */
+/* ==================================================
+   LCD 바닥 픽셀
+================================================== */
 
 .playground::after{
 
@@ -860,48 +763,27 @@ button{
 
   position:absolute;
 
-  width:120px;
+  left:0;
 
-  height:55px;
+  right:0;
 
-  right:-15px;
+  bottom:0;
 
-  top:20px;
-
-  background:#c2c2c2;
-
-  border-radius:50%;
-
-  box-shadow:
-    -45px 35px 0 #c2c2c2,
-    -80px 65px 0 #c2c2c2;
-
-  z-index:1;
-
-}
-
-
-/* ==================================================
-   놀이터 장식
-================================================== */
-
-.playground-decoration{
-
-  position:absolute;
-
-  z-index:2;
-
-  font-size:24px;
+  height:105px;
 
   pointer-events:none;
 
-  user-select:none;
+  z-index:2;
 
-  -webkit-user-select:none;
+  background:
 
-  filter:grayscale(1);
-
-  image-rendering:pixelated;
+    repeating-linear-gradient(
+      0deg,
+      rgba(64,72,40,.10) 0px,
+      rgba(64,72,40,.10) 3px,
+      transparent 3px,
+      transparent 7px
+    );
 
 }
 
@@ -926,13 +808,19 @@ button{
 
   padding:30px;
 
-  color:#555;
+  color:#4e5535;
 
-  font-size:13px;
+  font-family:
+    "Courier New",
+    monospace;
 
-  font-weight:800;
+  font-size:12px;
 
-  line-height:1.7;
+  font-weight:900;
+
+  line-height:1.9;
+
+  letter-spacing:.2px;
 
   z-index:10;
 
@@ -952,11 +840,21 @@ button{
   position:absolute;
 
   width:48px;
+
   height:48px;
 
   object-fit:contain;
 
   z-index:5;
+
+  image-rendering:pixelated;
+
+  image-rendering:crisp-edges;
+
+  filter:
+    grayscale(1)
+    contrast(1.25)
+    brightness(.82);
 
   user-select:none;
 
@@ -964,17 +862,13 @@ button{
 
   -webkit-touch-callout:none;
 
+  -webkit-user-drag:none;
+
   pointer-events:auto;
 
-  cursor:pointer;
+  cursor:grab;
 
-  touch-action:manipulation;
-
-  image-rendering:pixelated;
-
-  filter:
-    grayscale(1)
-    contrast(1.15);
+  touch-action:none;
 
   transition:
     left .35s linear,
@@ -983,7 +877,29 @@ button{
 }
 
 
-/* 감자 이름 */
+/* ==================================================
+   감자를 잡고 있는 동안
+================================================== */
+
+.play-potato.dragging{
+
+  cursor:grabbing;
+
+  z-index:20;
+
+  transition:none;
+
+  filter:
+    grayscale(1)
+    contrast(1.4)
+    brightness(.72);
+
+}
+
+
+/* ==================================================
+   감자 이름
+================================================== */
 
 .play-potato-name{
 
@@ -993,21 +909,23 @@ button{
 
   transform:translateX(-50%);
 
-  padding:3px 6px;
+  padding:2px 4px;
 
-  border-radius:3px;
+  background:#c9d39a;
 
-  background:rgba(235,235,235,.9);
+  border:2px solid #596044;
 
-  border:1px solid #666;
+  color:#42492e;
 
-  color:#333;
+  font-family:
+    "Courier New",
+    monospace;
 
-  font-family:monospace;
-
-  font-size:8px;
+  font-size:7px;
 
   font-weight:900;
+
+  line-height:1.1;
 
   white-space:nowrap;
 
@@ -1016,6 +934,9 @@ button{
   user-select:none;
 
   -webkit-user-select:none;
+
+  box-shadow:
+    2px 2px 0 rgba(50,55,30,.25);
 
 }
 
@@ -1101,9 +1022,7 @@ button{
 }
 
 .play-stun{
-
   animation:playStun 1.4s ease;
-
 }
 
 @keyframes playStun{
@@ -1140,9 +1059,7 @@ button{
 ================================================== */
 
 .play-touch{
-
   animation:playTouch .55s ease;
-
 }
 
 @keyframes playTouch{
@@ -1276,6 +1193,7 @@ button{
 .collection-card img{
 
   width:115px;
+
   height:115px;
 
   object-fit:contain;
@@ -1818,7 +1736,7 @@ button{
 
 
   <div class="playground-subtitle">
-    모은 감자들이 여기서 같이 놀아요!
+    감자를 꾹 눌러 원하는 곳으로 움직여보세요!
   </div>
 
 
@@ -3451,7 +3369,6 @@ function renderCollection(){
 
   startPlayground();
 
-
 }
 
 
@@ -3498,7 +3415,7 @@ function startPlayground(){
 
 
   /* -----------------------------------------
-     놀이터 터치/복사 방지
+     놀이터 터치 / 복사 방지
   ----------------------------------------- */
 
   playground.onselectstart = () => false;
@@ -3507,18 +3424,26 @@ function startPlayground(){
 
   playground.oncut = () => false;
 
+  playground.onpaste = () => false;
+
   playground.oncontextmenu = () => false;
+
+  playground.ondragstart = () => false;
 
 
   playground.addEventListener(
     "touchstart",
     function(e){
+
       if(
         e.target === playground ||
         e.target.closest(".play-potato")
       ){
+
         e.stopPropagation();
+
       }
+
     },
     {
       passive:true
@@ -3527,51 +3452,8 @@ function startPlayground(){
 
 
   /* -----------------------------------------
-     놀이터 장식
+     감자 생성
   ----------------------------------------- */
-
-  const decorations = [
-    ["🌱",10,72],
-    ["🌼",28,63],
-    ["🪨",48,78],
-    ["🍀",70,70],
-    ["🌿",88,58],
-    ["💧",76,18]
-  ];
-
-
-  decorations.forEach(
-    decoration => {
-
-      const el =
-        document.createElement(
-          "div"
-        );
-
-
-      el.className =
-        "playground-decoration";
-
-
-      el.innerText =
-        decoration[0];
-
-
-      el.style.left =
-        decoration[1] + "%";
-
-
-      el.style.top =
-        decoration[2] + "%";
-
-
-      playground.appendChild(
-        el
-      );
-
-    }
-  );
-
 
   state.collection.forEach(
 
@@ -3641,8 +3523,7 @@ function stopPlayground(){
 
         ".play-potato, " +
         ".play-potato-name, " +
-        ".play-effect, " +
-        ".playground-decoration"
+        ".play-effect"
 
       );
 
@@ -3760,22 +3641,244 @@ function createPlayPotato(
     actionCooldown:
       500 +
       Math.random() *
-      1500
+      1500,
+
+    pressing:false,
+
+    dragging:false,
+
+    longPressTimer:null,
+
+    suppressClick:false
 
   };
 
 
-  /*
-    감자 클릭
-  */
+  /* ==================================================
+     감자 클릭
+  ================================================== */
 
   img.onclick = () => {
+
+    if(
+      actor.suppressClick
+    ){
+
+      actor.suppressClick =
+        false;
+
+      return;
+
+    }
+
 
     playPotatoTouch(
       actor
     );
 
   };
+
+
+  /* ==================================================
+     감자 꾹 누르기
+  ================================================== */
+
+  img.addEventListener(
+    "pointerdown",
+    function(e){
+
+      if(
+        actor.stunned
+      ){
+
+        return;
+
+      }
+
+
+      e.preventDefault();
+
+      e.stopPropagation();
+
+
+      actor.pressing = true;
+
+
+      actor.longPressTimer =
+
+        setTimeout(
+          () => {
+
+            if(
+              !actor.pressing
+            ){
+
+              return;
+
+            }
+
+
+            actor.dragging = true;
+
+            actor.suppressClick = true;
+
+
+            img.classList.add(
+              "dragging"
+            );
+
+
+            try{
+
+              img.setPointerCapture(
+                e.pointerId
+              );
+
+            }
+            catch(error){}
+
+
+          },
+
+          450
+
+        );
+
+    }
+  );
+
+
+  /* ==================================================
+     감자 이동
+  ================================================== */
+
+  img.addEventListener(
+    "pointermove",
+    function(e){
+
+      if(
+        !actor.dragging
+      ){
+
+        return;
+
+      }
+
+
+      e.preventDefault();
+
+      e.stopPropagation();
+
+
+      const rect =
+        playground.getBoundingClientRect();
+
+
+      actor.x =
+        e.clientX -
+        rect.left -
+        24;
+
+
+      actor.y =
+        e.clientY -
+        rect.top -
+        24;
+
+
+      keepInside(
+        actor
+      );
+
+
+      updateActorPosition(
+        actor
+      );
+
+    }
+  );
+
+
+  /* ==================================================
+     손가락 떼기
+  ================================================== */
+
+  function releasePotato(e){
+
+    actor.pressing =
+      false;
+
+
+    if(
+      actor.longPressTimer
+    ){
+
+      clearTimeout(
+        actor.longPressTimer
+      );
+
+      actor.longPressTimer =
+        null;
+
+    }
+
+
+    if(
+      actor.dragging
+    ){
+
+      actor.dragging =
+        false;
+
+
+      img.classList.remove(
+        "dragging"
+      );
+
+
+      try{
+
+        img.releasePointerCapture(
+          e.pointerId
+        );
+
+      }
+      catch(error){}
+
+
+      updateActorPosition(
+        actor
+      );
+
+    }
+
+  }
+
+
+  img.addEventListener(
+    "pointerup",
+    releasePotato
+  );
+
+
+  img.addEventListener(
+    "pointercancel",
+    releasePotato
+  );
+
+
+  img.addEventListener(
+    "pointerleave",
+    function(){
+
+      /*
+        모바일에서는 pointerleave가
+        드래그 중 발생할 수 있으므로
+        이동 자체는 계속 유지한다.
+      */
+
+    }
+  );
 
 
   playgroundPotatoes.push(
@@ -3800,7 +3903,8 @@ function playPotatoTouch(
 
   if(
     !actor ||
-    actor.stunned
+    actor.stunned ||
+    actor.dragging
   ){
 
     return;
@@ -4052,7 +4156,8 @@ function playgroundTick(){
     actor => {
 
       if(
-        actor.stunned
+        actor.stunned ||
+        actor.dragging
       ){
 
         updateActorPosition(
@@ -4070,7 +4175,6 @@ function playgroundTick(){
 
       /* -----------------------------------------
          꾼감자
-         적극적으로 다른 감자에게 접근
       ----------------------------------------- */
 
       if(
@@ -4109,7 +4213,6 @@ function playgroundTick(){
 
       /* -----------------------------------------
          대장감자
-         느긋하게 중앙 주변을 돌아다님
       ----------------------------------------- */
 
       else if(
@@ -4146,17 +4249,17 @@ function playgroundTick(){
 
       /* -----------------------------------------
          독감자
-         다른 감자를 쫓지 않고
-         혼자 랜덤하게 이동
       ----------------------------------------- */
 
       else if(
         style === "poison"
       ){
 
-        actor.x += actor.vx;
+        actor.x +=
+          actor.vx;
 
-        actor.y += actor.vy;
+        actor.y +=
+          actor.vy;
 
 
         if(
@@ -4185,7 +4288,6 @@ function playgroundTick(){
 
       /* -----------------------------------------
          폭력감자
-         가까운 감자를 적극적으로 추격
       ----------------------------------------- */
 
       else if(
@@ -4224,16 +4326,17 @@ function playgroundTick(){
 
       /* -----------------------------------------
          저능감자
-         랜덤 방향으로 멍하게 움직임
       ----------------------------------------- */
 
       else if(
         style === "silly"
       ){
 
-        actor.x += actor.vx;
+        actor.x +=
+          actor.vx;
 
-        actor.y += actor.vy;
+        actor.y +=
+          actor.vy;
 
 
         if(
@@ -4299,7 +4402,8 @@ function getNearestOther(
 
       if(
         other === actor ||
-        other.stunned
+        other.stunned ||
+        other.dragging
       ){
 
         return;
@@ -4507,6 +4611,15 @@ function playActorAnimation(
   action
 ){
 
+  if(
+    actor.dragging
+  ){
+
+    return;
+
+  }
+
+
   actor.img.classList.remove(
 
     "play-jump",
@@ -4610,7 +4723,9 @@ function checkPlaygroundCollisions(){
 
       if(
         a.stunned ||
-        b.stunned
+        b.stunned ||
+        a.dragging ||
+        b.dragging
       ){
 
         continue;
@@ -4635,11 +4750,6 @@ function checkPlaygroundCollisions(){
         );
 
 
-      /*
-        48px 감자끼리 실제로
-        거의 닿았을 때 충돌
-      */
-
       if(
         distance < 43
       ){
@@ -4660,10 +4770,6 @@ function checkPlaygroundCollisions(){
         b.lastCollision =
           now;
 
-
-        /*
-          서로 튕겨나감
-        */
 
         const angle =
           Math.atan2(
@@ -4698,17 +4804,9 @@ function checkPlaygroundCollisions(){
         );
 
 
-        /*
-          독감자 충돌
-
-          독감자 → 다른 감자
-          30% 확률 기절
-
-          70% 확률 일반 반응
-
-          독감자 ↔ 독감자
-          기절 없음
-        */
+        /* -----------------------------------------
+           독감자 충돌
+        ----------------------------------------- */
 
         if(
           a.data.style === "poison" &&
@@ -4861,10 +4959,6 @@ function stunPotato(
     "😵"
   );
 
-
-  /*
-    독감자는 태연함
-  */
 
   playActorAnimation(
     attacker,
