@@ -2,12 +2,10 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 <title>감자 키우기</title>
 
 <style>
-
 *{
   box-sizing:border-box;
   -webkit-tap-highlight-color:transparent;
@@ -15,40 +13,33 @@
 
 body{
   margin:0;
-  background:#f5ead7;
-  color:#4b3525;
+  background:#f5ead8;
   font-family:
     -apple-system,
     BlinkMacSystemFont,
     "Apple SD Gothic Neo",
     "Noto Sans KR",
     sans-serif;
+  color:#4b3525;
 }
 
 button{
   border:0;
   font-family:inherit;
   cursor:pointer;
-  touch-action:manipulation;
-}
-
-#app{
-  width:100%;
-  max-width:500px;
-  min-height:100vh;
-  margin:0 auto;
-  background:#fffaf1;
-  overflow:hidden;
-}
-
-.screen{
-  min-height:100vh;
-  display:flex;
-  flex-direction:column;
 }
 
 .hidden{
   display:none !important;
+}
+
+.screen{
+  width:100%;
+  max-width:500px;
+  min-height:100vh;
+  margin:0 auto;
+  background:#fffaf2;
+  overflow:hidden;
 }
 
 
@@ -57,54 +48,404 @@ button{
 ========================= */
 
 #startScreen{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
   align-items:center;
   justify-content:center;
   padding:30px;
   text-align:center;
 }
 
-.game-title{
+.start-title{
   font-size:42px;
   font-weight:1000;
-  margin-bottom:12px;
+  margin-bottom:10px;
 }
 
-.game-subtitle{
+.start-subtitle{
   font-size:15px;
-  line-height:1.7;
   color:#806b58;
-  margin-bottom:35px;
+  margin-bottom:30px;
+  line-height:1.5;
+}
+
+.start-potato{
+  font-size:90px;
+  margin-bottom:25px;
 }
 
 .start-button{
   width:220px;
   padding:17px 20px;
   border-radius:18px;
-  background:#8c633f;
+  background:#d79b55;
   color:white;
-  font-size:18px;
+  font-size:17px;
   font-weight:900;
-  box-shadow:0 5px 0 #65452d;
+  box-shadow:0 5px 0 #b87838;
 }
 
 .start-button:active{
   transform:translateY(4px);
-  box-shadow:0 1px 0 #65452d;
+  box-shadow:0 1px 0 #b87838;
 }
 
 
 /* =========================
-   상단
+   성장 화면
 ========================= */
 
 .header{
-  padding:18px 18px 12px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
+  padding:20px 20px 12px;
+  text-align:center;
 }
 
 .header-title{
+  font-size:27px;
+  font-weight:1000;
+}
+
+.header-subtitle{
+  margin-top:5px;
+  color:#8b7765;
+  font-size:12px;
+}
+
+.egg-scene{
+  position:relative;
+  height:360px;
+  overflow:hidden;
+  background:
+    linear-gradient(
+      to bottom,
+      #bde8ff 0%,
+      #dff5ff 62%,
+      #9a673e 62%,
+      #855431 100%
+    );
+}
+
+.sun{
+  position:absolute;
+  top:25px;
+  right:35px;
+  font-size:48px;
+}
+
+.cloud{
+  position:absolute;
+  font-size:45px;
+  opacity:.85;
+}
+
+.cloud.one{
+  top:40px;
+  left:35px;
+}
+
+.cloud.two{
+  top:105px;
+  left:180px;
+}
+
+.sprout{
+  position:absolute;
+  z-index:3;
+  left:50%;
+  top:62%;
+  transform:translate(-50%,-50%);
+  width:100px;
+  height:100px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:75px;
+  filter:drop-shadow(0 5px 3px rgba(0,0,0,.15));
+}
+
+.growth-info{
+  text-align:center;
+  padding:16px 20px 4px;
+}
+
+.growth-title{
+  font-size:18px;
+  font-weight:1000;
+  margin-bottom:7px;
+}
+
+.growth-percent{
+  font-size:13px;
+  color:#806b58;
+  margin-bottom:8px;
+}
+
+.growth-bar{
+  width:100%;
+  height:14px;
+  background:#eadfce;
+  border-radius:20px;
+  overflow:hidden;
+}
+
+.growth-fill{
+  height:100%;
+  width:0%;
+  background:#79b84b;
+  border-radius:20px;
+  transition:.25s;
+}
+
+.growth-buttons{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  padding:16px;
+}
+
+.growth-button{
+  min-height:54px;
+  border-radius:15px;
+  background:#eadcc6;
+  color:#4b3525;
+  font-size:14px;
+  font-weight:900;
+  box-shadow:0 3px 0 #d1bea3;
+}
+
+.growth-button:active{
+  transform:translateY(3px);
+  box-shadow:0 0 0 #d1bea3;
+}
+
+
+/* =========================
+   감자 화면
+========================= */
+
+.field{
+  position:relative;
+  height:300px;
+  background:
+    linear-gradient(
+      to bottom,
+      #bde8ff 0%,
+      #dff5ff 55%,
+      #9a673e 55%,
+      #855431 100%
+    );
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+}
+
+.field-sun{
+  position:absolute;
+  top:18px;
+  right:25px;
+  font-size:42px;
+}
+
+.field-cloud{
+  position:absolute;
+  top:35px;
+  left:25px;
+  font-size:40px;
+}
+
+.character{
+  width:190px;
+  height:190px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+  z-index:3;
+}
+
+.character img{
+  width:180px;
+  height:180px;
+  object-fit:contain;
+  display:block;
+}
+
+.walking{
+  animation:walk 0.5s infinite alternate;
+}
+
+@keyframes walk{
+  from{
+    transform:translateX(-7px) rotate(-3deg);
+  }
+  to{
+    transform:translateX(7px) rotate(3deg);
+  }
+}
+
+.walk-icon{
+  position:absolute;
+  font-size:42px;
+  animation:runIcon 1s ease-out forwards;
+  pointer-events:none;
+  z-index:10;
+}
+
+@keyframes runIcon{
+  0%{
+    opacity:1;
+    transform:translateX(-10px) scale(.8);
+  }
+  100%{
+    opacity:0;
+    transform:translateX(80px) scale(1.2);
+  }
+}
+
+.message{
+  position:relative;
+  z-index:10;
+  width:calc(100% - 32px);
+  margin:14px 16px 18px;
+  padding:14px 16px;
+  min-height:56px;
+  border-radius:16px;
+  background:#fff0c9;
+  border:2px solid #ead7ae;
+  color:#4b3525;
+  text-align:center;
+  font-size:14px;
+  font-weight:800;
+  line-height:1.6;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-shadow:0 2px 5px rgba(0,0,0,.06);
+  overflow:visible;
+}
+
+.info{
+  padding:0 16px;
+  position:relative;
+  z-index:5;
+}
+
+.potato-name{
+  text-align:center;
+  font-size:25px;
+  font-weight:1000;
+  margin:4px 0 8px;
+  line-height:1.3;
+  position:relative;
+  z-index:5;
+}
+
+.personality{
+  text-align:center;
+  color:#806b58;
+  font-size:13px;
+  font-weight:800;
+  margin:0 0 18px;
+  line-height:1.4;
+  position:relative;
+  z-index:5;
+}
+
+.stat{
+  margin-bottom:12px;
+  position:relative;
+  z-index:5;
+}
+
+.stat-line{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:5px;
+  font-size:12px;
+  font-weight:800;
+  line-height:1.4;
+}
+
+.stat-bar{
+  width:100%;
+  height:11px;
+  border-radius:20px;
+  background:#eadfce;
+  overflow:hidden;
+}
+
+.stat-fill{
+  height:100%;
+  width:0%;
+  border-radius:20px;
+  transition:.25s;
+}
+
+.hunger-fill{
+  background:#e59b54;
+}
+
+.water-fill{
+  background:#70bde8;
+}
+
+.love-fill{
+  background:#e783a5;
+}
+
+.energy-fill{
+  background:#91bb55;
+}
+
+.action-buttons{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  padding:20px 16px 24px;
+  position:relative;
+  z-index:5;
+}
+
+.action-button{
+  min-height:56px;
+  padding:12px 8px;
+  border-radius:15px;
+  background:#eadcc6;
+  color:#4b3525;
+  font-size:14px;
+  font-weight:900;
+  line-height:1.3;
+  box-shadow:0 3px 0 #d1bea3;
+}
+
+.action-button:active{
+  transform:translateY(3px);
+  box-shadow:0 0 0 #d1bea3;
+}
+
+.action-button.harvest{
+  background:#d79b55;
+  color:white;
+  box-shadow:0 3px 0 #b87838;
+}
+
+
+/* =========================
+   도감
+========================= */
+
+.collection-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:18px 16px;
+  border-bottom:1px solid #eadfce;
+}
+
+.collection-title{
   font-size:24px;
   font-weight:1000;
 }
@@ -113,409 +454,16 @@ button{
   padding:9px 13px;
   border-radius:12px;
   background:#eadcc6;
-  color:#604a36;
-  font-weight:800;
-}
-
-
-/* =========================
-   싹 성장 화면
-========================= */
-
-.egg-scene{
-  position:relative;
-  height:360px;
-  overflow:hidden;
-
-  background:
-    linear-gradient(
-      to bottom,
-      #bfe5ff 0%,
-      #dff3ff 62%,
-      #a8794f 62%,
-      #8f633f 100%
-    );
-}
-
-.sun{
-  position:absolute;
-  top:25px;
-  right:30px;
-  font-size:48px;
-}
-
-.cloud{
-  position:absolute;
-  top:45px;
-  left:30px;
-  font-size:42px;
-}
-
-.sprout{
-  position:absolute;
-  z-index:3;
-
-  left:50%;
-  top:62%;
-
-  transform:translate(-50%,-50%);
-
-  width:100px;
-  height:100px;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  font-size:75px;
-
-  filter:
-    drop-shadow(
-      0 5px 3px rgba(0,0,0,.15)
-    );
-}
-
-.growth-title{
-  text-align:center;
-  font-size:21px;
-  font-weight:1000;
-  margin:18px 0 4px;
-}
-
-.growth-percent{
-  text-align:center;
-  font-size:14px;
-  color:#806b58;
-  margin-bottom:12px;
-}
-
-.progress-wrap{
-  margin:0 20px 18px;
-  height:18px;
-  border-radius:20px;
-  background:#e5d7c3;
-  overflow:hidden;
-}
-
-.progress{
-  height:100%;
-  width:0%;
-  border-radius:20px;
-  background:#83a95c;
-  transition:.3s;
-}
-
-.growth-buttons{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
-  padding:0 16px 20px;
-}
-
-.growth-button{
-  padding:15px 8px;
-  border-radius:15px;
-  background:#eadcc6;
   color:#4b3525;
-  font-size:14px;
   font-weight:900;
-}
-
-.growth-button:active{
-  transform:scale(.97);
-}
-
-#beforeMessage{
-  margin-top:0;
-  margin-bottom:24px;
-}
-
-
-/* =========================
-   메시지
-========================= */
-
-.message{
-  margin:12px 16px 16px;
-
-  padding:14px 16px;
-
-  min-height:52px;
-
-  border-radius:16px;
-
-  background:#fff0c9;
-
-  border:2px solid #ead7ae;
-
-  color:#4b3525;
-
-  text-align:center;
-
-  font-size:14px;
-
-  font-weight:800;
-
-  line-height:1.5;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  box-shadow:
-    0 2px 5px rgba(0,0,0,.06);
-}
-
-
-/* =========================
-   감자 밭
-========================= */
-
-.field{
-  position:relative;
-
-  height:290px;
-
-  overflow:hidden;
-
-  background:
-    linear-gradient(
-      to bottom,
-      #bfe5ff 0%,
-      #dff3ff 48%,
-      #a8794f 48%,
-      #8f633f 100%
-    );
-}
-
-.field::after{
-  content:"";
-
-  position:absolute;
-
-  left:0;
-  right:0;
-  bottom:0;
-
-  height:55%;
-
-  background:
-    radial-gradient(
-      circle at 20% 30%,
-      rgba(255,255,255,.12) 0 3px,
-      transparent 4px
-    ),
-    radial-gradient(
-      circle at 70% 60%,
-      rgba(255,255,255,.08) 0 3px,
-      transparent 4px
-    );
-
-  pointer-events:none;
-}
-
-.field-cloud{
-  position:absolute;
-  top:25px;
-  left:25px;
-  font-size:38px;
-}
-
-.field-sun{
-  position:absolute;
-  top:18px;
-  right:25px;
-  font-size:43px;
-}
-
-.character{
-  position:absolute;
-
-  left:50%;
-  bottom:18px;
-
-  transform:translateX(-50%);
-
-  width:210px;
-  height:210px;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  z-index:3;
-
-  transition:.25s;
-}
-
-.character img{
-  max-width:100%;
-  max-height:100%;
-
-  object-fit:contain;
-
-  filter:
-    drop-shadow(
-      0 8px 5px rgba(0,0,0,.2)
-    );
-}
-
-.character.walking{
-  animation:
-    walk .7s ease-in-out infinite;
-}
-
-@keyframes walk{
-
-  0%{
-    transform:
-      translateX(-50%)
-      translateY(0)
-      rotate(-4deg);
-  }
-
-  50%{
-    transform:
-      translateX(-50%)
-      translateY(-14px)
-      rotate(4deg);
-  }
-
-  100%{
-    transform:
-      translateX(-50%)
-      translateY(0)
-      rotate(-4deg);
-  }
-
-}
-
-
-/* =========================
-   감자 정보
-========================= */
-
-.info{
-  padding:0 16px;
-}
-
-.potato-name{
-  text-align:center;
-  font-size:25px;
-  font-weight:1000;
-  margin:4px 0 12px;
-}
-
-.personality{
-  text-align:center;
-  color:#806b58;
-  font-size:13px;
-  font-weight:800;
-  margin-bottom:15px;
-}
-
-.stat{
-  margin-bottom:9px;
-}
-
-.stat-line{
-  display:flex;
-  justify-content:space-between;
-  margin-bottom:4px;
-  font-size:12px;
-  font-weight:800;
-}
-
-.stat-bar{
-  height:12px;
-  background:#e6dac9;
-  border-radius:20px;
-  overflow:hidden;
-}
-
-.stat-fill{
-  height:100%;
-  border-radius:20px;
-  transition:.3s;
-}
-
-.hunger-fill{
-  background:#d89b5b;
-}
-
-.water-fill{
-  background:#72b5d5;
-}
-
-.love-fill{
-  background:#df8496;
-}
-
-.energy-fill{
-  background:#8cae66;
-}
-
-
-/* =========================
-   행동 버튼
-========================= */
-
-.action-buttons{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
-
-  padding:17px 16px 20px;
-}
-
-.action-button{
-  min-height:54px;
-
-  border-radius:15px;
-
-  background:#eadcc6;
-
-  color:#4b3525;
-
-  font-size:14px;
-  font-weight:900;
-
-  box-shadow:
-    0 3px 0 #d1bea3;
-}
-
-.action-button:active{
-  transform:translateY(3px);
-
-  box-shadow:
-    0 0 0 #d1bea3;
-}
-
-.action-button.harvest{
-  background:#8c633f;
-  color:white;
-
-  box-shadow:
-    0 3px 0 #65452d;
-}
-
-
-/* =========================
-   도감
-========================= */
-
-.collection-title{
-  text-align:center;
-  font-size:27px;
-  font-weight:1000;
-  margin:8px 0 4px;
 }
 
 .collection-count{
   text-align:center;
-  color:#806b58;
+  padding:16px;
   font-size:14px;
-  margin-bottom:18px;
+  font-weight:900;
+  color:#806b58;
 }
 
 .collection-list{
@@ -526,48 +474,43 @@ button{
 }
 
 .collection-card{
-  min-height:210px;
-
-  padding:14px;
-
+  min-height:190px;
+  padding:15px 10px;
+  background:white;
+  border:2px solid #eadfce;
   border-radius:18px;
-
-  background:#fff;
-
-  border:2px solid #eadcc6;
-
   text-align:center;
 }
 
 .collection-card img{
-  width:120px;
-  height:120px;
-
+  width:105px;
+  height:105px;
   object-fit:contain;
 }
 
-.collection-card .unknown{
-  width:120px;
-  height:120px;
-
-  margin:auto;
-
+.collection-question{
+  width:105px;
+  height:105px;
   display:flex;
   align-items:center;
   justify-content:center;
-
-  font-size:58px;
+  margin:0 auto;
+  border-radius:50%;
+  background:#f1eadf;
+  font-size:55px;
+  color:#b8a794;
 }
 
-.collection-card-name{
+.collection-name{
+  margin-top:7px;
+  font-size:15px;
   font-weight:1000;
-  margin-top:4px;
 }
 
-.collection-card-desc{
+.collection-status{
+  margin-top:5px;
   font-size:11px;
   color:#806b58;
-  margin-top:5px;
 }
 
 
@@ -575,43 +518,31 @@ button{
    모달
 ========================= */
 
-.modal-bg{
+.modal{
   position:fixed;
-
   inset:0;
-
+  z-index:100;
   background:rgba(0,0,0,.45);
-
   display:flex;
-
   align-items:center;
   justify-content:center;
-
-  padding:20px;
-
-  z-index:100;
+  padding:25px;
 }
 
-.modal{
+.modal-box{
   width:100%;
   max-width:360px;
-
-  background:#fffaf1;
-
+  background:#fffaf2;
   border-radius:22px;
-
-  padding:25px 20px;
-
+  padding:25px 20px 20px;
   text-align:center;
-
-  box-shadow:
-    0 10px 30px rgba(0,0,0,.2);
+  box-shadow:0 10px 30px rgba(0,0,0,.2);
 }
 
 .modal-title{
-  font-size:23px;
+  font-size:22px;
   font-weight:1000;
-  margin-bottom:10px;
+  margin-bottom:12px;
 }
 
 .modal-text{
@@ -624,160 +555,149 @@ button{
 .modal-button{
   width:100%;
   padding:14px;
-
   border-radius:14px;
-
-  background:#8c633f;
+  background:#d79b55;
   color:white;
-
-  font-size:15px;
   font-weight:900;
+  font-size:14px;
 }
 
+
+/* =========================
+   작은 화면
+========================= */
+
+@media(max-width:360px){
+
+  .start-title{
+    font-size:36px;
+  }
+
+  .start-potato{
+    font-size:75px;
+  }
+
+  .egg-scene{
+    height:330px;
+  }
+
+  .field{
+    height:280px;
+  }
+
+  .character img{
+    width:160px;
+    height:160px;
+  }
+
+  .action-buttons{
+    gap:9px;
+    padding-left:12px;
+    padding-right:12px;
+  }
+
+  .action-button{
+    font-size:13px;
+  }
+}
 </style>
 </head>
 
-
 <body>
-
-<div id="app">
 
 
 <!-- =========================
      시작 화면
 ========================= -->
 
-<section
-  id="startScreen"
-  class="screen">
+<section id="startScreen" class="screen">
 
-  <div class="game-title">
-    🥔 감자 키우기
+  <div class="start-potato">🥔</div>
+
+  <div class="start-title">
+    감자 키우기
   </div>
 
-  <div class="game-subtitle">
-    작은 싹에서 시작해서<br>
-    세상에 하나뿐인 감자를 키워보세요!
+  <div class="start-subtitle">
+    나만의 감자를 키워보세요!
   </div>
 
-  <button
-    class="start-button"
-    onclick="startGame()">
-
-    🌱 감자 키우기 시작
-
+  <button class="start-button" onclick="startGame()">
+    게임 시작
   </button>
 
 </section>
-
 
 
 <!-- =========================
      성장 화면
 ========================= -->
 
-<section
-  id="beforeScreen"
-  class="screen hidden">
+<section id="beforeScreen" class="screen hidden">
 
   <div class="header">
-
     <div class="header-title">
-      🌱 감자 키우기
+      감자 키우기
     </div>
 
+    <div class="header-subtitle">
+      새싹을 잘 키워보세요
+    </div>
   </div>
 
 
   <div class="egg-scene">
 
-    <div class="sun">
-      ☀️
-    </div>
+    <div class="sun">☀️</div>
 
-    <div class="cloud">
-      ☁️
-    </div>
+    <div class="cloud one">☁️</div>
+    <div class="cloud two">☁️</div>
 
-    <div class="sprout">
+    <div id="sprout" class="sprout">
       🌱
     </div>
 
   </div>
 
 
-  <div
-    id="beforeMessage"
-    class="message">
+  <div class="growth-info">
 
-    작은 싹이 자라고 있어요!
+    <div class="growth-title">
+      새싹 성장 중
+    </div>
 
-  </div>
+    <div id="growthPercent" class="growth-percent">
+      0%
+    </div>
 
-
-  <div class="growth-title">
-    감자 성장시키기
-  </div>
-
-  <div
-    id="growthPercent"
-    class="growth-percent">
-
-    성장도 0%
-
-  </div>
-
-
-  <div class="progress-wrap">
-
-    <div
-      id="growthBar"
-      class="progress">
+    <div class="growth-bar">
+      <div id="growthFill" class="growth-fill"></div>
     </div>
 
   </div>
 
 
+  <div id="beforeMessage" class="message">
+    새싹을 잘 키워주세요!
+  </div>
+
+
   <div class="growth-buttons">
 
-    <button
-      class="growth-button"
-      onclick="grow('fertilizer')">
-
-      🧪 비료 주기
-      <br>
-      +12
-
+    <button class="growth-button" onclick="fertilize()">
+      🌱 비료 주기
     </button>
 
-    <button
-      class="growth-button"
-      onclick="grow('water')">
-
+    <button class="growth-button" onclick="waterSprout()">
       💧 물 주기
-      <br>
-      +10
-
     </button>
 
-    <button
-      class="growth-button"
-      onclick="grow('sunshine')">
-
-      ☀️ 햇빛 쬐기
-      <br>
-      +8
-
+    <button class="growth-button" onclick="sunSprout()">
+      ☀️ 햇빛 주기
     </button>
 
-    <button
-      class="growth-button"
-      onclick="grow('random')">
-
-      ✨ 응원하기
-      <br>
-      +5
-
+    <button class="growth-button" onclick="cheer()">
+      📣 응원하기
     </button>
 
   </div>
@@ -785,19 +705,20 @@ button{
 </section>
 
 
-
 <!-- =========================
      감자 화면
 ========================= -->
 
-<section
-  id="gameScreen"
-  class="screen hidden">
+<section id="gameScreen" class="screen hidden">
 
   <div class="header">
 
     <div class="header-title">
-      🥔 감자 키우기
+      감자 키우기
+    </div>
+
+    <div class="header-subtitle">
+      감자와 함께 생활해보세요
     </div>
 
   </div>
@@ -805,69 +726,44 @@ button{
 
   <div class="field">
 
-    <div class="field-cloud">
-      ☁️
-    </div>
-
     <div class="field-sun">
       ☀️
     </div>
 
-    <div
-      id="character"
-      class="character">
+    <div class="field-cloud">
+      ☁️
     </div>
+
+    <div id="character" class="character"></div>
 
   </div>
 
 
-  <!-- 감자 바로 아래 메시지 -->
-
-  <div
-    id="message"
-    class="message">
-
+  <div id="message" class="message">
     감자가 태어났어요!
-
   </div>
 
 
   <div class="info">
 
-    <div
-      id="potatoName"
-      class="potato-name">
-
+    <div id="potatoName" class="potato-name">
       감자
-
     </div>
 
-    <div
-      id="personality"
-      class="personality">
-
+    <div id="personality" class="personality">
       성격
-
     </div>
 
 
     <div class="stat">
 
       <div class="stat-line">
-
         <span>🍖 배고픔</span>
-
-        <span id="hungerText">100</span>
-
+        <span id="hungerText">100 / 100</span>
       </div>
 
       <div class="stat-bar">
-
-        <div
-          id="hungerBar"
-          class="stat-fill hunger-fill">
-        </div>
-
+        <div id="hungerFill" class="stat-fill hunger-fill"></div>
       </div>
 
     </div>
@@ -876,20 +772,12 @@ button{
     <div class="stat">
 
       <div class="stat-line">
-
         <span>💧 수분</span>
-
-        <span id="waterText">100</span>
-
+        <span id="waterText">100 / 100</span>
       </div>
 
       <div class="stat-bar">
-
-        <div
-          id="waterBar"
-          class="stat-fill water-fill">
-        </div>
-
+        <div id="waterFill" class="stat-fill water-fill"></div>
       </div>
 
     </div>
@@ -898,20 +786,12 @@ button{
     <div class="stat">
 
       <div class="stat-line">
-
-        <span>❤️ 호감도</span>
-
-        <span id="loveText">30</span>
-
+        <span>❤️ 애정</span>
+        <span id="loveText">50 / 100</span>
       </div>
 
       <div class="stat-bar">
-
-        <div
-          id="loveBar"
-          class="stat-fill love-fill">
-        </div>
-
+        <div id="loveFill" class="stat-fill love-fill"></div>
       </div>
 
     </div>
@@ -920,20 +800,12 @@ button{
     <div class="stat">
 
       <div class="stat-line">
-
         <span>⚡ 체력</span>
-
-        <span id="energyText">100</span>
-
+        <span id="energyText">100 / 100</span>
       </div>
 
       <div class="stat-bar">
-
-        <div
-          id="energyBar"
-          class="stat-fill energy-fill">
-        </div>
-
+        <div id="energyFill" class="stat-fill energy-fill"></div>
       </div>
 
     </div>
@@ -941,146 +813,86 @@ button{
   </div>
 
 
-  <!--
-    다시 키우기 버튼은 제거.
-    수확 + 도감만 남김.
-  -->
-
   <div class="action-buttons">
 
-    <button
-      class="action-button"
-      onclick="feed()">
-
+    <button class="action-button" onclick="feed()">
       🍖 먹이 주기
-
     </button>
 
-    <button
-      class="action-button"
-      onclick="giveWater()">
-
+    <button class="action-button" onclick="giveWater()">
       💧 물 주기
-
     </button>
 
-    <button
-      class="action-button"
-      onclick="pet()">
-
+    <button class="action-button" onclick="pet()">
       ❤️ 쓰다듬기
-
     </button>
 
-    <button
-      class="action-button"
-      onclick="walk()">
-
+    <button class="action-button" onclick="walk()">
       🏃 산책하기
-
     </button>
 
-    <button
-      class="action-button harvest"
-      onclick="harvest()">
-
+    <button class="action-button harvest" onclick="harvest()">
       🥔 수확하기
-
     </button>
 
-    <button
-      class="action-button"
-      onclick="showCollection()">
-
+    <button class="action-button" onclick="showCollection()">
       📖 도감 보기
-
     </button>
 
   </div>
 
 </section>
-
 
 
 <!-- =========================
      도감 화면
 ========================= -->
 
-<section
-  id="collectionScreen"
-  class="screen hidden">
+<section id="collectionScreen" class="screen hidden">
 
-  <div class="header">
+  <div class="collection-header">
 
-    <div class="header-title">
-      📖 감자 도감
-    </div>
-
-    <button
-      class="back-button"
-      onclick="closeCollection()">
-
-      돌아가기
-
+    <button class="back-button" onclick="closeCollection()">
+      ← 돌아가기
     </button>
 
+    <div class="collection-title">
+      감자 도감
+    </div>
+
+    <div style="width:70px;"></div>
+
   </div>
 
 
-  <div class="collection-title">
-    감자 도감
-  </div>
-
-  <div
-    id="collectionCount"
-    class="collection-count">
-
+  <div id="collectionCount" class="collection-count">
     발견한 감자 0 / 5
-
   </div>
 
 
-  <div
-    id="collectionList"
-    class="collection-list">
-  </div>
+  <div id="collectionList" class="collection-list"></div>
 
 </section>
-
 
 
 <!-- =========================
      모달
 ========================= -->
 
-<div
-  id="modalBg"
-  class="modal-bg hidden">
+<div id="modal" class="modal hidden">
 
-  <div class="modal">
+  <div class="modal-box">
 
-    <div
-      id="modalTitle"
-      class="modal-title">
-
-      새로운 감자 발견!
-
+    <div id="modalTitle" class="modal-title">
+      🥔 새로운 감자 발견!
     </div>
 
-    <div
-      id="modalText"
-      class="modal-text">
-
+    <div id="modalText" class="modal-text">
       새로운 감자를 발견했어요!
-
     </div>
 
-    <button
-      class="modal-button"
-      onclick="closeModal()">
-
+    <button class="modal-button" onclick="closeModal()">
       확인
-
     </button>
 
   </div>
@@ -1088,18 +900,13 @@ button{
 </div>
 
 
-</div>
-
-
-
 <script>
-
 
 /* =========================
    감자 데이터
 ========================= */
 
-const characters = [
+const potatoes = [
 
   {
     name:"꾼감자",
@@ -1130,22 +937,19 @@ const characters = [
 
 
 const personalities = [
-
   "애교쟁이",
   "느긋한",
   "장난꾸러기",
   "호기심 많은",
   "겁이 많은"
-
 ];
 
 
-const STORAGE_KEY =
-  "POTATO_GAME_FINAL_V3";
+const STORAGE_KEY = "POTATO_GAME_FINAL_V3";
 
 
 /* =========================
-   게임 상태
+   상태
 ========================= */
 
 let state = {
@@ -1164,7 +968,7 @@ let state = {
 
   water:100,
 
-  love:30,
+  love:50,
 
   energy:100,
 
@@ -1174,7 +978,7 @@ let state = {
 
 
 /* =========================
-   저장
+   저장 / 불러오기
 ========================= */
 
 function save(){
@@ -1187,31 +991,20 @@ function save(){
 }
 
 
-/* =========================
-   불러오기
-========================= */
-
 function load(){
 
   const saved =
-    localStorage.getItem(
-      STORAGE_KEY
-    );
+    localStorage.getItem(STORAGE_KEY);
 
   if(saved){
 
     try{
 
-      state =
-        JSON.parse(saved);
+      state = JSON.parse(saved);
 
-    }
+    }catch(e){
 
-    catch(e){
-
-      console.log(
-        "저장 데이터 불러오기 실패"
-      );
+      console.log("저장 데이터 오류");
 
     }
 
@@ -1224,16 +1017,12 @@ function load(){
    화면 전환
 ========================= */
 
-function hideAll(){
+function hideAllScreens(){
 
   document
     .querySelectorAll(".screen")
     .forEach(screen => {
-
-      screen.classList.add(
-        "hidden"
-      );
-
+      screen.classList.add("hidden");
     });
 
 }
@@ -1243,39 +1032,20 @@ function startGame(){
 
   state.started = true;
 
-  save();
-
   showBeforeScreen();
 
-}
-
-
-function showStartScreen(){
-
-  hideAll();
-
-  document
-    .getElementById(
-      "startScreen"
-    )
-    .classList.remove(
-      "hidden"
-    );
+  save();
 
 }
 
 
 function showBeforeScreen(){
 
-  hideAll();
+  hideAllScreens();
 
   document
-    .getElementById(
-      "beforeScreen"
-    )
-    .classList.remove(
-      "hidden"
-    );
+    .getElementById("beforeScreen")
+    .classList.remove("hidden");
 
   updateGrowth();
 
@@ -1284,166 +1054,176 @@ function showBeforeScreen(){
 
 function showGameScreen(){
 
-  hideAll();
+  hideAllScreens();
 
   document
-    .getElementById(
-      "gameScreen"
-    )
-    .classList.remove(
-      "hidden"
-    );
+    .getElementById("gameScreen")
+    .classList.remove("hidden");
 
-  updateGame();
+  updateCharacter();
+
+  updateStats();
+
+}
+
+
+function showStartScreen(){
+
+  hideAllScreens();
+
+  document
+    .getElementById("startScreen")
+    .classList.remove("hidden");
 
 }
 
 
 /* =========================
-   성장
+   새싹 성장
 ========================= */
 
-function grow(type){
+function increaseGrowth(amount, text){
 
-  let amount = 5;
+  if(state.born) return;
 
-  let text = "";
+  state.growth += amount;
 
-
-  if(type === "fertilizer"){
-
-    amount = 12;
-
-    text =
-      "🧪 비료를 먹고 쑥쑥 자라고 있어요!";
-
+  if(state.growth > 100){
+    state.growth = 100;
   }
 
-  else if(type === "water"){
-
-    amount = 10;
-
-    text =
-      "💧 물을 마시고 촉촉해졌어요!";
-
-  }
-
-  else if(type === "sunshine"){
-
-    amount = 8;
-
-    text =
-      "☀️ 햇빛을 받아 힘이 나요!";
-
-  }
-
-  else{
-
-    amount = 5;
-
-    text =
-      "✨ 응원을 받고 조금 더 자랐어요!";
-
-  }
-
-
-  state.growth =
-    Math.min(
-      100,
-      state.growth + amount
-    );
-
-
-  showBeforeMessage(text);
+  document
+    .getElementById("beforeMessage")
+    .innerText = text;
 
   updateGrowth();
 
   save();
 
-
   if(state.growth >= 100){
 
-    hatchPotato();
+    setTimeout(() => {
+
+      hatchPotato();
+
+    }, 400);
 
   }
 
 }
 
 
-function showBeforeMessage(text){
+function fertilize(){
 
-  document
-    .getElementById(
-      "beforeMessage"
-    )
-    .innerHTML = text;
+  increaseGrowth(
+    12,
+    "🌱 비료를 먹고 새싹이 쑥쑥 자랐어요!"
+  );
+
+}
+
+
+function waterSprout(){
+
+  increaseGrowth(
+    10,
+    "💧 촉촉하게 물을 마셨어요!"
+  );
+
+}
+
+
+function sunSprout(){
+
+  increaseGrowth(
+    8,
+    "☀️ 햇빛을 받아 기운이 났어요!"
+  );
+
+}
+
+
+function cheer(){
+
+  increaseGrowth(
+    5,
+    "📣 응원을 듣고 새싹이 힘을 냈어요!"
+  );
 
 }
 
 
 function updateGrowth(){
 
-  const percent =
-    Math.round(
-      state.growth
-    );
-
+  const percent = state.growth;
 
   document
-    .getElementById(
-      "growthPercent"
-    )
-    .textContent =
-      `성장도 ${percent}%`;
-
+    .getElementById("growthPercent")
+    .innerText = percent + "%";
 
   document
-    .getElementById(
-      "growthBar"
-    )
-    .style.width =
-      `${percent}%`;
+    .getElementById("growthFill")
+    .style.width = percent + "%";
+
+  const sprout =
+    document.getElementById("sprout");
+
+  if(percent < 30){
+
+    sprout.innerText = "🌱";
+
+  }else if(percent < 60){
+
+    sprout.innerText = "🌿";
+
+  }else if(percent < 90){
+
+    sprout.innerText = "🌳";
+
+  }else{
+
+    sprout.innerText = "🥔";
+
+  }
 
 }
 
 
 /* =========================
    감자 탄생
-   ※ 여기서는 도감 등록 안 함
 ========================= */
 
 function hatchPotato(){
 
+  if(state.born) return;
+
   const character =
-    characters[
+    potatoes[
       Math.floor(
-        Math.random() *
-        characters.length
+        Math.random() * potatoes.length
       )
     ];
-
 
   const personality =
     personalities[
       Math.floor(
-        Math.random() *
-        personalities.length
+        Math.random() * personalities.length
       )
     ];
 
 
   state.born = true;
 
-  state.character =
-    character.name;
+  state.character = character;
 
-  state.personality =
-    personality;
-
+  state.personality = personality;
 
   state.hunger = 100;
+
   state.water = 100;
-  state.love = 30;
+
+  state.love = 50;
+
   state.energy = 100;
 
 
@@ -1452,90 +1232,49 @@ function hatchPotato(){
   showGameScreen();
 
 
-  /*
-    태어났을 때는 도감에 등록하지 않음.
-    수확할 때만 등록됨.
-  */
-
-  showMessage(
-    "feed"
-  );
-
-
   document
-    .getElementById(
-      "message"
-    )
+    .getElementById("message")
     .innerHTML =
       `🥔 ${character.name}가 태어났어요!<br>
-       성격은 <b>${personality}</b>이에요.`;
+       성격은 <b>${personality}</b>이에요!`;
 
 }
 
 
 /* =========================
-   현재 감자 찾기
+   캐릭터 표시
 ========================= */
 
-function getCharacter(){
-
-  return characters.find(
-    item =>
-      item.name ===
-      state.character
-  );
-
-}
-
-
-/* =========================
-   게임 화면
-========================= */
-
-function updateGame(){
+function updateCharacter(){
 
   const character =
-    getCharacter();
+    state.character;
 
-
-  if(!character){
-
-    return;
-
-  }
-
-
-  const characterBox =
-    document.getElementById(
-      "character"
-    );
-
-
-  characterBox.innerHTML = `
-
-    <img
-      src="${character.image}"
-      alt="${character.name}"
-    >
-
-  `;
-
+  if(!character) return;
 
   document
-    .getElementById(
-      "potatoName"
-    )
-    .textContent =
+    .getElementById("character")
+    .innerHTML =
+      `<img src="${character.image}" alt="${character.name}">`;
+
+  document
+    .getElementById("potatoName")
+    .innerText =
       character.name;
 
-
   document
-    .getElementById(
-      "personality"
-    )
-    .textContent =
-      `성격 : ${state.personality}`;
+    .getElementById("personality")
+    .innerText =
+      "성격 · " + state.personality;
 
+}
+
+
+/* =========================
+   스탯
+========================= */
+
+function updateStats(){
 
   updateStat(
     "hunger",
@@ -1560,35 +1299,25 @@ function updateGame(){
 }
 
 
-function updateStat(
-  name,
-  value
-){
+function updateStat(name, value){
 
-  const number =
+  value =
     Math.max(
       0,
-      Math.min(
-        100,
-        Math.round(value)
-      )
+      Math.min(100, value)
     );
 
+  state[name] = value;
 
   document
-    .getElementById(
-      `${name}Text`
-    )
-    .textContent =
-      number;
-
+    .getElementById(name + "Text")
+    .innerText =
+      value + " / 100";
 
   document
-    .getElementById(
-      `${name}Bar`
-    )
+    .getElementById(name + "Fill")
     .style.width =
-      `${number}%`;
+      value + "%";
 
 }
 
@@ -1601,235 +1330,61 @@ const dialogues = {
 
   "애교쟁이":{
 
-    feed:[
-      "🍖 냠냠! 역시 주인이 최고야!",
-      "맛있는 거 줬다! 헤헤!",
-      "한 입만 더 먹어도 돼?"
-    ],
-
-    water:[
-      "💧 물이다! 시원해!",
-      "꿀꺽꿀꺽! 고마워!",
-      "물을 주다니 착한 사람이네!"
-    ],
-
-    pet:[
-      "❤️ 쓰다듬어줘서 기분 좋아!",
-      "헤헤... 계속 쓰다듬어줘!",
-      "나 귀여워?"
-    ],
-
-    walk:[
-      "🏃 같이 가자!",
-      "산책 너무 좋아!",
-      "신난다! 뛰어가자!"
-    ],
-
-    tired:[
-      "😴 조금 쉬고 싶어...",
-      "힘이 빠졌어...",
-      "잠깐만 쉬자..."
-    ],
-
-    hungry:[
-      "🥺 배고파...",
-      "먹을 거 없어?",
-      "배에서 꼬르륵 소리 나..."
-    ],
-
-    thirsty:[
-      "💧 목말라...",
-      "물 한 모금만!",
-      "물이 필요해..."
-    ]
+    feed:"냠냠! 더 먹고 싶어요!",
+    water:"꿀꺽꿀꺽! 시원해요!",
+    pet:"헤헤... 쓰다듬어주는 거 좋아요!",
+    walk:"같이 산책 가요!",
+    tired:"조금 피곤해요... 쉬고 싶어요.",
+    hungry:"배가 너무 고파요...",
+    thirsty:"목이 말라요... 물 주세요!"
 
   },
-
 
   "느긋한":{
 
-    feed:[
-      "음... 맛있네.",
-      "천천히 먹어야지.",
-      "먹을 시간이구나."
-    ],
-
-    water:[
-      "물 좋네...",
-      "천천히 마실게.",
-      "시원하구만."
-    ],
-
-    pet:[
-      "음... 편안하네.",
-      "조금 더 해도 괜찮아.",
-      "나쁘지 않아."
-    ],
-
-    walk:[
-      "천천히 가자.",
-      "급할 거 없어.",
-      "산책이라..."
-    ],
-
-    tired:[
-      "좀 쉬어야겠네.",
-      "잠깐 쉬자.",
-      "피곤하구만."
-    ],
-
-    hungry:[
-      "배가 조금 고프네.",
-      "뭐 좀 먹을까.",
-      "슬슬 배가 비었네."
-    ],
-
-    thirsty:[
-      "물이 필요하군.",
-      "조금 목마르네.",
-      "물 한 잔이면 좋겠어."
-    ]
+    feed:"천천히 먹을게요.",
+    water:"음... 시원하네요.",
+    pet:"흐음... 편안하네요.",
+    walk:"천천히 가요.",
+    tired:"조금 쉬었다 갈까요?",
+    hungry:"슬슬 배가 고프네요.",
+    thirsty:"물을 조금 마시고 싶어요."
 
   },
-
 
   "장난꾸러기":{
 
-    feed:[
-      "🍖 이걸 나한테 주는 거야?",
-      "냠! 훔쳐먹기 성공!",
-      "한 개 더 없나~?"
-    ],
-
-    water:[
-      "💧 물이다! 장난칠까?",
-      "물을 뿌리면 안 돼?",
-      "꿀꺽! 몰래 다 마셔버려야지!"
-    ],
-
-    pet:[
-      "히히! 간지럽다!",
-      "잡아봐~!",
-      "한 번만 더 해봐!"
-    ],
-
-    walk:[
-      "🏃 잡아봐!",
-      "먼저 간다!",
-      "어디까지 갈 수 있나 보자!"
-    ],
-
-    tired:[
-      "헉... 좀 힘들다.",
-      "잠깐 쉬자.",
-      "나 사실 체력 약해."
-    ],
-
-    hungry:[
-      "배고픈 척 하는 중이야!",
-      "...진짜 배고파.",
-      "먹을 거 내놔!"
-    ],
-
-    thirsty:[
-      "물 내놔!",
-      "목말라 죽겠다!",
-      "물을 찾아 떠난다!"
-    ]
+    feed:"냠! 내 거 뺏어 먹지 마요!",
+    water:"물이다! 퐁당!",
+    pet:"간지러워요!ㅋㅋ",
+    walk:"누가 더 빨리 가나 달리기!",
+    tired:"헥헥... 내가 졌다...",
+    hungry:"배고픈 척하는 중이에요!",
+    thirsty:"물 안 주면 장난칠 거예요!"
 
   },
-
 
   "호기심 많은":{
 
-    feed:[
-      "이건 무슨 맛이지?",
-      "오! 맛있어!",
-      "이걸 먹으면 어떻게 될까?"
-    ],
-
-    water:[
-      "물이 왜 시원할까?",
-      "신기하다!",
-      "물도 종류가 다를까?"
-    ],
-
-    pet:[
-      "어? 이건 무슨 느낌이지?",
-      "오... 신기해.",
-      "계속 만져봐!"
-    ],
-
-    walk:[
-      "🏃 저쪽에는 뭐가 있어?",
-      "어디까지 갈 수 있을까?",
-      "새로운 곳을 발견하자!"
-    ],
-
-    tired:[
-      "에너지가 부족해졌어.",
-      "휴식도 중요한 건가?",
-      "조금 쉬어볼까?"
-    ],
-
-    hungry:[
-      "배고픔은 왜 생기는 걸까?",
-      "뭔가 먹고 싶어.",
-      "먹으면 배고픔이 사라지겠지?"
-    ],
-
-    thirsty:[
-      "목이 마른 이유가 뭘까?",
-      "물이 필요해.",
-      "물을 마시면 어떻게 될까?"
-    ]
+    feed:"이건 무슨 맛이에요?",
+    water:"물이 왜 이렇게 시원하죠?",
+    pet:"오? 이렇게 만지는 거군요!",
+    walk:"저쪽에는 뭐가 있을까요?",
+    tired:"쉬면 또 새로운 걸 볼 수 있겠죠?",
+    hungry:"배고프면 어떻게 되는 걸까요?",
+    thirsty:"물은 어디서 오는 걸까요?"
 
   },
 
-
   "겁이 많은":{
 
-    feed:[
-      "🍖 이거 먹어도 괜찮아?",
-      "조금만 먹을게...",
-      "맛있...는 것 같아."
-    ],
-
-    water:[
-      "💧 물 맞는 거 아니지?",
-      "조심해서 마실게...",
-      "물이구나..."
-    ],
-
-    pet:[
-      "앗! 깜짝이야!",
-      "조금 놀랐어...",
-      "살살 해줘..."
-    ],
-
-    walk:[
-      "🏃 밖에 나가는 거야?",
-      "무서운데...",
-      "조금만 다녀오자."
-    ],
-
-    tired:[
-      "무서워... 힘도 없어.",
-      "조금 쉬고 싶어.",
-      "여기서 쉬면 안 돼?"
-    ],
-
-    hungry:[
-      "배가 고픈데...",
-      "혹시 먹을 거 있어?",
-      "배고파..."
-    ],
-
-    thirsty:[
-      "목말라...",
-      "물이 있으면 좋겠다.",
-      "조금 목이 말라..."
-    ]
+    feed:"이거... 먹어도 괜찮아요?",
+    water:"천천히 마실게요...",
+    pet:"깜짝이야! 그래도 좋아요.",
+    walk:"저... 너무 멀리 가진 말아요.",
+    tired:"조금 무서워요... 쉬고 싶어요.",
+    hungry:"배고픈데... 먹어도 되죠?",
+    thirsty:"물이 필요해요..."
 
   }
 
@@ -1837,53 +1392,27 @@ const dialogues = {
 
 
 /* =========================
-   대사 출력
+   메시지
 ========================= */
 
-function getDialogue(
-  action
-){
+function showMessage(type){
 
   const personality =
     state.personality;
 
-
-  const list =
-    dialogues[
-      personality
-    ]?.[action];
-
-
   if(
-    !list ||
-    list.length === 0
+    !dialogues[personality] ||
+    !dialogues[personality][type]
   ){
 
-    return "🥔 ...";
+    return;
 
   }
 
-
-  return list[
-    Math.floor(
-      Math.random() *
-      list.length
-    )
-  ];
-
-}
-
-
-function showMessage(
-  action
-){
-
   document
-    .getElementById(
-      "message"
-    )
-    .innerHTML =
-      getDialogue(action);
+    .getElementById("message")
+    .innerText =
+      dialogues[personality][type];
 
 }
 
@@ -1894,30 +1423,23 @@ function showMessage(
 
 function feed(){
 
+  if(!state.born) return;
+
   state.hunger =
     Math.min(
       100,
       state.hunger + 25
     );
 
-
   state.energy =
     Math.min(
       100,
-      state.energy + 3
+      state.energy + 5
     );
-
-
-  state.love =
-    Math.min(
-      100,
-      state.love + 3
-    );
-
 
   showMessage("feed");
 
-  updateGame();
+  updateStats();
 
   save();
 
@@ -1930,30 +1452,17 @@ function feed(){
 
 function giveWater(){
 
+  if(!state.born) return;
+
   state.water =
     Math.min(
       100,
       state.water + 30
     );
 
-
-  state.energy =
-    Math.min(
-      100,
-      state.energy + 2
-    );
-
-
-  state.love =
-    Math.min(
-      100,
-      state.love + 2
-    );
-
-
   showMessage("water");
 
-  updateGame();
+  updateStats();
 
   save();
 
@@ -1966,23 +1475,23 @@ function giveWater(){
 
 function pet(){
 
+  if(!state.born) return;
+
   state.love =
     Math.min(
       100,
-      state.love + 8
+      state.love + 12
     );
-
 
   state.energy =
     Math.max(
       0,
-      state.energy - 1
+      state.energy - 2
     );
-
 
   showMessage("pet");
 
-  updateGame();
+  updateStats();
 
   save();
 
@@ -1995,9 +1504,9 @@ function pet(){
 
 function walk(){
 
-  if(
-    state.energy < 10
-  ){
+  if(!state.born) return;
+
+  if(state.energy < 15){
 
     showMessage("tired");
 
@@ -2005,63 +1514,61 @@ function walk(){
 
   }
 
-
   state.energy =
     Math.max(
       0,
-      state.energy - 10
+      state.energy - 15
     );
-
 
   state.love =
     Math.min(
       100,
-      state.love + 7
+      state.love + 10
     );
-
 
   state.hunger =
     Math.max(
       0,
-      state.hunger - 5
+      state.hunger - 8
     );
-
 
   state.water =
     Math.max(
       0,
-      state.water - 5
+      state.water - 8
     );
 
 
-  const characterBox =
-    document.getElementById(
-      "character"
-    );
+  const character =
+    document.getElementById("character");
+
+  character.classList.add("walking");
 
 
-  characterBox.classList.add(
-    "walking"
-  );
+  const icon =
+    document.createElement("div");
+
+  icon.className = "walk-icon";
+
+  icon.innerText = "🏃";
+
+  character.appendChild(icon);
+
+
+  setTimeout(() => {
+
+    character.classList.remove("walking");
+
+    icon.remove();
+
+  },1000);
 
 
   showMessage("walk");
 
-  updateGame();
+  updateStats();
 
   save();
-
-
-  setTimeout(
-    () => {
-
-      characterBox.classList.remove(
-        "walking"
-      );
-
-    },
-    2100
-  );
 
 }
 
@@ -2070,106 +1577,67 @@ function walk(){
    자동 감소
 ========================= */
 
-setInterval(
-  () => {
+setInterval(() => {
 
-    if(
-      state.started &&
-      state.born
-    ){
+  if(!state.born) return;
 
-      state.hunger =
-        Math.max(
-          0,
-          state.hunger - 2
-        );
+  state.hunger =
+    Math.max(
+      0,
+      state.hunger - 2
+    );
 
+  state.water =
+    Math.max(
+      0,
+      state.water - 2
+    );
 
-      state.water =
-        Math.max(
-          0,
-          state.water - 2
-        );
-
-
-      state.energy =
-        Math.max(
-          0,
-          state.energy - 1
-        );
+  state.energy =
+    Math.max(
+      0,
+      state.energy - 1
+    );
 
 
-      if(
-        state.hunger <= 20
-      ){
+  updateStats();
 
-        showMessage(
-          "hungry"
-        );
-
-      }
-
-      else if(
-        state.water <= 20
-      ){
-
-        showMessage(
-          "thirsty"
-        );
-
-      }
+  save();
 
 
-      updateGame();
+  if(state.hunger <= 20){
 
-      save();
+    showMessage("hungry");
 
-    }
+  }else if(state.water <= 20){
 
-  },
-  10000
-);
+    showMessage("thirsty");
+
+  }else if(state.energy <= 15){
+
+    showMessage("tired");
+
+  }
+
+},10000);
 
 
 /* =========================
    수확
-   ★ 여기에서만 도감 등록
 ========================= */
 
 function harvest(){
 
-  if(!state.born){
-
-    return;
-
-  }
-
+  if(!state.born) return;
 
   const character =
-    getCharacter();
-
-
-  if(!character){
-
-    return;
-
-  }
-
-
-  /*
-    지금까지 수확한 적이 없는
-    감자인지 확인
-  */
+    state.character;
 
   const isNew =
     !state.collection.includes(
       character.name
     );
 
-
-  /*
-    ★ 수확하는 순간 도감 등록
-  */
 
   if(isNew){
 
@@ -2180,11 +1648,6 @@ function harvest(){
   }
 
 
-  /*
-    감자를 수확했으므로
-    다시 싹부터 시작
-  */
-
   state.born = false;
 
   state.growth = 0;
@@ -2194,8 +1657,11 @@ function harvest(){
   state.personality = null;
 
   state.hunger = 100;
+
   state.water = 100;
-  state.love = 30;
+
+  state.love = 50;
+
   state.energy = 100;
 
 
@@ -2204,28 +1670,33 @@ function harvest(){
   showBeforeScreen();
 
 
-  /*
-    처음 수확한 감자라면
-    발견 모달 표시
-  */
-
   if(isNew){
 
-    showModal(
-      "🥔 새로운 감자 발견!",
-      `<b>${character.name}</b>를 수확했어요!<br><br>
-       도감에 등록되었습니다!<br><br>
-       발견한 감자 ${state.collection.length} / ${characters.length}`
-    );
+    setTimeout(() => {
 
-  }
+      document
+        .getElementById("modalTitle")
+        .innerText =
+          "🥔 새로운 감자 발견!";
 
-  else{
+      document
+        .getElementById("modalText")
+        .innerHTML =
+          `<b>${character.name}</b>를 수확했어요!<br>
+           도감에 등록되었습니다.`;
 
-    showBeforeMessage(
-      `🥔 ${character.name}를 수확했어요!<br>
-       이미 도감에 등록된 감자예요.`
-    );
+      document
+        .getElementById("modal")
+        .classList.remove("hidden");
+
+    },300);
+
+  }else{
+
+    document
+      .getElementById("beforeMessage")
+      .innerText =
+        `${character.name}는 이미 도감에 등록되어 있어요!`;
 
   }
 
@@ -2238,16 +1709,11 @@ function harvest(){
 
 function showCollection(){
 
-  hideAll();
+  hideAllScreens();
 
   document
-    .getElementById(
-      "collectionScreen"
-    )
-    .classList.remove(
-      "hidden"
-    );
-
+    .getElementById("collectionScreen")
+    .classList.remove("hidden");
 
   renderCollection();
 
@@ -2260,15 +1726,11 @@ function closeCollection(){
 
     showGameScreen();
 
-  }
-
-  else if(state.started){
+  }else if(state.started){
 
     showBeforeScreen();
 
-  }
-
-  else{
+  }else{
 
     showStartScreen();
 
@@ -2284,99 +1746,77 @@ function renderCollection(){
       "collectionList"
     );
 
+  list.innerHTML = "";
+
 
   const count =
     state.collection.length;
 
 
   document
-    .getElementById(
-      "collectionCount"
-    )
-    .textContent =
-      `발견한 감자 ${count} / ${characters.length}`;
+    .getElementById("collectionCount")
+    .innerText =
+      `발견한 감자 ${count} / ${potatoes.length}`;
 
 
-  list.innerHTML = "";
+  potatoes.forEach(potato => {
+
+    const found =
+      state.collection.includes(
+        potato.name
+      );
 
 
-  characters.forEach(
-    character => {
+    const card =
+      document.createElement("div");
 
-      const found =
-        state.collection.includes(
-          character.name
-        );
+    card.className =
+      "collection-card";
 
 
-      const card =
-        document.createElement(
-          "div"
-        );
+    if(found){
 
+      card.innerHTML = `
 
-      card.className =
-        "collection-card";
+        <img
+          src="${potato.image}"
+          alt="${potato.name}"
+        >
 
+        <div class="collection-name">
+          ${potato.name}
+        </div>
 
-      if(found){
+        <div class="collection-status">
+          발견 완료 ✓
+        </div>
 
-        card.innerHTML = `
+      `;
 
-          <img
-            src="${character.image}"
-            alt="${character.name}"
-          >
+    }else{
 
-          <div
-            class="collection-card-name">
+      card.innerHTML = `
 
-            ${character.name}
+        <div class="collection-question">
+          ❓
+        </div>
 
-          </div>
+        <div class="collection-name">
+          ???
+        </div>
 
-          <div
-            class="collection-card-desc">
+        <div class="collection-status">
+          아직 발견하지 못했어요
+        </div>
 
-            발견 완료 ✓
-
-          </div>
-
-        `;
-
-      }
-
-      else{
-
-        card.innerHTML = `
-
-          <div class="unknown">
-            ❓
-          </div>
-
-          <div
-            class="collection-card-name">
-
-            ???
-
-          </div>
-
-          <div
-            class="collection-card-desc">
-
-            아직 발견하지 못했어요
-
-          </div>
-
-        `;
-
-      }
-
-
-      list.appendChild(card);
+      `;
 
     }
-  );
+
+
+    list.appendChild(card);
+
+  });
 
 }
 
@@ -2385,47 +1825,11 @@ function renderCollection(){
    모달
 ========================= */
 
-function showModal(
-  title,
-  text
-){
-
-  document
-    .getElementById(
-      "modalTitle"
-    )
-    .innerHTML =
-      title;
-
-
-  document
-    .getElementById(
-      "modalText"
-    )
-    .innerHTML =
-      text;
-
-
-  document
-    .getElementById(
-      "modalBg"
-    )
-    .classList.remove(
-      "hidden"
-    );
-
-}
-
-
 function closeModal(){
 
   document
-    .getElementById(
-      "modalBg"
-    )
-    .classList.add(
-      "hidden"
-    );
+    .getElementById("modal")
+    .classList.add("hidden");
 
 }
 
@@ -2443,17 +1847,13 @@ if(state.started){
 
     showGameScreen();
 
-  }
-
-  else{
+  }else{
 
     showBeforeScreen();
 
   }
 
-}
-
-else{
+}else{
 
   showStartScreen();
 
