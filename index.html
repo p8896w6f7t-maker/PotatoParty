@@ -6318,21 +6318,14 @@ function tamaPet(){
 
 }
 
-
 /* ==================================================
    간식
 ================================================== */
 
 function tamaSnack(){
 
-    const tama=
-        document.getElementById(
-            "tama"
-        );
-
-
     if(
-        !game.tamaPotatoes.length
+        game.tamaPotatoes.length===0
     ){
 
         return;
@@ -6340,7 +6333,13 @@ function tamaSnack(){
     }
 
 
-    const foods=[
+    const tama=
+        document.getElementById(
+            "tama"
+        );
+
+
+    const emojis=[
         "🍬",
         "🍪",
         "🍭",
@@ -6350,60 +6349,8 @@ function tamaSnack(){
 
 
     /*
-       기존에 남아 있는 간식이 있다면
-       새 간식을 계속 쌓지 않는다.
-    */
-
-    const existing=
-        tama.querySelectorAll(
-            ".snack"
-        );
-
-
-    if(
-        existing.length>0
-    ){
-
-        game.tamaPotatoes.forEach(
-            obj=>{
-
-                if(
-                    obj.sleeping
-                ){
-
-                    return;
-
-                }
-
-
-                showTamaSpeech(
-                    obj,
-                    randomDialogue(
-                        obj.data.tama.snack,
-                        obj
-                    )
-                );
-
-
-                showTamaEmotion(
-                    obj,
-                    "🍬"
-                );
-
-            }
-        );
-
-
-        return;
-
-    }
-
-
-    game.tamaSnacks=[];
-
-
-    /*
-       간식 8개 생성
+       버튼을 누를 때마다
+       새로운 간식 8개를 추가한다.
     */
 
     for(
@@ -6412,46 +6359,29 @@ function tamaSnack(){
         i++
     ){
 
-        const snack=
+        const el=
             document.createElement(
                 "div"
             );
 
 
-        snack.className=
+        el.className=
             "snack";
 
 
-        snack.textContent=
+        el.textContent=
             random(
-                foods
+                emojis
             );
 
 
-        const startX=
-            10+
-            Math.random()*80;
+        const snack={
 
+            element:el,
 
-        snack.style.left=
-            startX+
-            "%";
-
-
-        snack.style.top=
-            "-5%";
-
-
-        tama.appendChild(
-            snack
-        );
-
-
-        const snackData={
-
-            element:snack,
-
-            x:startX,
+            x:
+                10+
+                Math.random()*80,
 
             y:-5,
 
@@ -6461,15 +6391,37 @@ function tamaSnack(){
 
             eaten:false,
 
-            target:null
+            target:null,
+
+            created:
+                performance.now()
 
         };
 
 
-        game.tamaSnacks.push(
-            snackData
+        el.style.left=
+            snack.x+
+            "%";
+
+
+        el.style.top=
+            snack.y+
+            "%";
+
+
+        tama.appendChild(
+            el
         );
 
+
+        game.tamaSnacks.push(
+            snack
+        );
+
+
+        /*
+           간식 떨어뜨리기
+        */
 
         const start=
             performance.now();
@@ -6480,8 +6432,8 @@ function tamaSnack(){
         ){
 
             if(
-                !snack.parentNode||
-                snackData.eaten
+                !el.parentNode||
+                snack.eaten
             ){
 
                 return;
@@ -6490,7 +6442,8 @@ function tamaSnack(){
 
 
             const elapsed=
-                now-start;
+                now-
+                start;
 
 
             const percent=
@@ -6501,13 +6454,14 @@ function tamaSnack(){
                 );
 
 
-            snackData.y=
+            snack.y=
                 -5+
-                percent*78;
+                percent*
+                78;
 
 
-            snack.style.top=
-                snackData.y+
+            el.style.top=
+                snack.y+
                 "%";
 
 
@@ -6522,15 +6476,14 @@ function tamaSnack(){
             }else{
 
                 /*
-                   바닥에 도착한 뒤
-                   그대로 유지
+                   바닥에 도착
                 */
 
-                snackData.y=73;
+                snack.y=73;
 
-                snackData.landed=true;
+                snack.landed=true;
 
-                snack.style.top=
+                el.style.top=
                     "73%";
 
             }
@@ -6544,6 +6497,10 @@ function tamaSnack(){
 
     }
 
+
+    /*
+       감자들이 간식을 보고 반응
+    */
 
     game.tamaPotatoes.forEach(
         obj=>{
@@ -6575,6 +6532,11 @@ function tamaSnack(){
     );
 
 
+    /*
+       꾼감자가 있으면
+       보리도 등장
+    */
+
     if(
         isKkungInTama()
     ){
@@ -6583,120 +6545,7 @@ function tamaSnack(){
 
     }
 
-
-    /*
-       간식이 바닥에 모두 떨어진 뒤
-       감자들이 직접 찾아가기 시작
-    */
-
-    setTimeout(
-        processTamaSnacks,
-        2100
-    );
-
 }
-
-
-/* ==================================================
-   간식
-================================================== */
-
-function tamaSnack(){
-
-    if(
-        game.tamaPotatoes.length===0
-    )
-        return;
-
-    const tama=
-        document.getElementById(
-            "tama"
-        );
-
-    const emojis=[
-        "🍬",
-        "🍪",
-        "🍭",
-        "🍫",
-        "🍩"
-    ];
-
-    for(
-        let i=0;
-        i<8;
-        i++
-    ){
-
-        const el=
-            document.createElement(
-                "div"
-            );
-
-        el.className=
-            "snack";
-
-        el.textContent=
-            random(emojis);
-
-        const snack={
-
-            element:el,
-
-            x:
-                10+
-                Math.random()*80,
-
-            y:-5,
-
-            speed:
-                25+
-                Math.random()*15,
-
-            landed:false,
-
-            created:
-                performance.now()
-        };
-
-        el.style.left=
-            snack.x+"%";
-
-        el.style.top=
-            snack.y+"%";
-
-        tama.appendChild(
-            el
-        );
-
-        game.tamaSnacks.push(
-            snack
-        );
-    }
-
-    game.tamaPotatoes.forEach(
-        obj=>{
-
-            if(
-                obj.sleeping
-            )
-                return;
-
-            showTamaSpeech(
-                obj,
-                randomDialogue(
-                    obj.data.tama.snack,
-                    obj
-                )
-            );
-
-            showTamaEmotion(
-                obj,
-                "🍬"
-            );
-        }
-    );
-}
-
 
 /* ==================================================
    감자 간식 먹기
