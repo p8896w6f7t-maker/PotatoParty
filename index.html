@@ -5180,7 +5180,7 @@ function autonomousSpeech(
         "꾼감자" &&
         text.includes("보리") &&
         isKkungInTama() &&
-        Math.random()<.50
+        Math.random()<.10
     ){
 
         showBori();
@@ -6153,14 +6153,12 @@ function tamaReaction(
         obj.data.name===
         "꾼감자" &&
         isKkungInTama() &&
-        Math.random()<.30
+        Math.random()<.10
     ){
 
         const boriLines=[
 
             "보리야! 여기 있었구나!",
-
-            "보리 보고 싶었는데!",
 
             "보리도 같이 놀자!",
 
@@ -7016,6 +7014,7 @@ let boriTimeout=null;
 
 let boriMoveTimeout=null;
 
+let boriCooldownUntil=0;
 
 function isKkungInTama(){
 
@@ -8707,6 +8706,21 @@ function boriToyInteraction(){
         );
 }
 
+function finishBoriInteraction(){
+
+    boriInteractionBusy=false;
+
+    game.dialogueLock=false;
+
+    boriCooldownUntil=
+        performance.now()+
+        3000;
+
+    game.nextBoriInteraction=
+        boriCooldownUntil+
+        Math.random()*2000;
+
+}
 
 function tryBoriInteraction(){
 
@@ -8717,7 +8731,14 @@ function tryBoriInteraction(){
         return;
 
     }
+        if(
+        performance.now()<
+        boriCooldownUntil
+    ){
 
+        return;
+
+    }
 
     if(
         !getBori()
@@ -8752,7 +8773,7 @@ function tryBoriInteraction(){
 
 
     if(
-        roll<.28
+        roll<.40
     ){
 
         boriPetInteraction();
