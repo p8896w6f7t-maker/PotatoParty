@@ -932,7 +932,7 @@ button:active{
 .tamaPotato.walking{
     animation:
         tamaWalk
-        .55s
+        1.2s
         infinite
         alternate;
 }
@@ -940,19 +940,19 @@ button:active{
 @keyframes tamaWalk{
 
     from{
-        margin-top:2px;
+        margin-top:1px;
 
         transform:
             translate(-50%,-50%)
-            rotate(-2deg);
+            rotate(-1.2deg);
     }
 
     to{
-        margin-top:-2px;
+        margin-top:-1px;
 
         transform:
             translate(-50%,-50%)
-            rotate(2deg);
+            rotate(1.2deg);
     }
 
 }
@@ -1221,8 +1221,8 @@ button:active{
     pointer-events:none;
 
     transition:
-        left 2.2s linear,
-        top 2.2s linear;
+        left 3.5s linear,
+        top 3.5s linear;
 
     filter:
         drop-shadow(
@@ -4044,9 +4044,15 @@ function renderTama(){
 
                 targetY:null,
 
+                /*
+                   평상시 이동 속도 감소
+                   기존 .45~.75
+                   -> .12~.22
+                */
+
                 maxSpeed:
-                    .45+
-                    Math.random()*.3,
+                    .12+
+                    Math.random()*.10,
 
                 dragging:false,
 
@@ -4087,10 +4093,6 @@ function renderTama(){
         }
     );
 
-
-    /*
-       그룹 대화 다음 실행 시간
-    */
 
     game.nextGroupDialogue=
         performance.now()+
@@ -4206,10 +4208,6 @@ function chooseTarget(
     obj
 ){
 
-    /*
-       독감자는 완전히 독립적으로 이동
-    */
-
     if(
         obj.data.style==="toxic"
     ){
@@ -4236,11 +4234,6 @@ function chooseTarget(
 
     }
 
-
-    /*
-       폭력감자는 독감자를 좋아해서
-       독감자 주변으로 이동
-    */
 
     if(
         obj.data.style==="violent"
@@ -4283,11 +4276,6 @@ function chooseTarget(
     }
 
 
-    /*
-       저능감자는 더 이상
-       대장을 자동으로 따라가지 않음
-    */
-
     if(
         obj.data.style==="dummy"
     ){
@@ -4310,10 +4298,6 @@ function chooseTarget(
 
     }
 
-
-    /*
-       일반 이동
-    */
 
     obj.targetX=
         randomRange(
@@ -4437,11 +4421,6 @@ function enableLongPress(
 
                             game.leaderRescueMode=
                                 true;
-
-
-                            element.classList.add(
-                                "leaderHeld"
-                            );
 
 
                             leaderRescue(
@@ -4848,8 +4827,23 @@ function updateTamaMovement(
     }
 
 
-    const speed=
+    /*
+       평상시에는 느리게 걷고
+       대장 구출 중일 때만 빠르게 이동
+    */
+
+    let speed=
         obj.maxSpeed;
+
+
+    if(
+        game.leaderRescueMode
+    ){
+
+        speed*=
+            4;
+
+    }
 
 
     obj.x+=
@@ -4994,15 +4988,17 @@ function autonomousSpeech(
 
 
     /*
-       꾼감자가 보리 이야기를 하면
-       70% 확률로 보리 등장
+       꾼감자가 보리를 언급하면
+       기존 랜덤 이벤트도 유지.
+       단, 보리는 실제 방에 있을 때만 등장.
     */
 
     if(
         obj.data.name===
         "꾼감자" &&
         text.includes("보리") &&
-        Math.random()<.70
+        isKkungInTama() &&
+        Math.random()<.50
     ){
 
         showBori();
@@ -5540,11 +5536,6 @@ function findGroupDialogue(
     }
 
 
-    /*
-       현재 방에 실제로 존재하는
-       감자 조합을 찾는다.
-    */
-
     const shuffled=
         [...source];
 
@@ -5645,20 +5636,12 @@ function playGroupDialogue(
     game.dialogueLock=true;
 
 
-    /*
-       대화 시간
-    */
-
     game.dialogueUntil=
         performance.now()+
         conversation.length*
         1500+
         800;
 
-
-    /*
-       대화하는 동안 이동 정지
-    */
 
     selected.forEach(
         obj=>{
@@ -5984,6 +5967,56 @@ function tamaReaction(
     );
 
 
+    /*
+       꾼감자를 직접 터치하면
+       30% 확률로 보리 등장.
+    */
+
+    if(
+        obj.data.name===
+        "꾼감자" &&
+        isKkungInTama() &&
+        Math.random()<.30
+    ){
+
+        const boriLines=[
+
+            "보리야! 여기 있었구나!",
+
+            "보리 보고 싶었는데!",
+
+            "보리도 같이 놀자!",
+
+            "보리 왔어!",
+
+            "보리야! 이리 와!"
+
+        ];
+
+
+        const boriText=
+            random(
+                boriLines
+            );
+
+
+        showTamaSpeech(
+            obj,
+            boriText
+        );
+
+
+        showTamaEmotion(
+            obj,
+            "🐈"
+        );
+
+
+        showBori();
+
+    }
+
+
     if(
         obj.data.style===
         "leader"
@@ -6287,6 +6320,20 @@ function tamaSnack(){
         }
     );
 
+
+    /*
+       간식을 주면 꾼감자가 있을 경우
+       보리가 30초 동안 등장한다.
+    */
+
+    if(
+        isKkungInTama()
+    ){
+
+        showBori();
+
+    }
+
 }
 
 
@@ -6471,6 +6518,7 @@ function removeBori(){
 
 /*
    보리 등장
+   기본 등장 시간 = 30초
 */
 
 function showBori(){
@@ -6501,18 +6549,50 @@ function showBori(){
     }
 
 
-    if(
+    /*
+       이미 보리가 있다면
+       타이머만 새로 시작해서
+       이벤트 발생 시 30초 유지
+    */
+
+    let cat=
         document.getElementById(
             "boriCat"
-        )
+        );
+
+
+    if(
+        cat
     ){
+
+        if(
+            boriTimeout
+        ){
+
+            clearTimeout(
+                boriTimeout
+            );
+
+        }
+
+
+        boriTimeout=
+            setTimeout(
+                ()=>{
+
+                    removeBori();
+
+                },
+                30000
+            );
+
 
         return;
 
     }
 
 
-    const cat=
+    cat=
         document.createElement(
             "div"
         );
@@ -6524,14 +6604,6 @@ function showBori(){
 
     cat.textContent=
         "🐈";
-
-
-    cat.style.left=
-        "50px";
-
-
-    cat.style.top=
-        "100px";
 
 
     room.appendChild(
@@ -6549,8 +6621,7 @@ function showBori(){
                 removeBori();
 
             },
-            7000+
-            Math.random()*5000
+            30000
         );
 
 }
@@ -6640,8 +6711,8 @@ function moveBori(){
     boriMoveTimeout=
         setTimeout(
             moveBori,
-            2200+
-            Math.random()*2200
+            3500+
+            Math.random()*2500
         );
 
 }
@@ -6703,10 +6774,6 @@ function startTamaLoop(){
             now;
 
 
-        /*
-           대화가 끝났는지
-        */
-
         if(
             game.dialogueLock &&
             now>=game.dialogueUntil
@@ -6716,12 +6783,6 @@ function startTamaLoop(){
 
         }
 
-
-        /*
-           ==================================================
-           감자 이동
-           ==================================================
-        */
 
         game.tamaPotatoes.forEach(
             obj=>{
@@ -6742,9 +6803,14 @@ function startTamaLoop(){
                     }
 
 
+                    /*
+                       목표를 너무 자주 바꾸지 않도록
+                       평소에는 4~7초마다 방향 변경
+                    */
+
                     obj.nextDecision=
                         now+
-                        2500+
+                        4000+
                         Math.random()*3000;
 
                 }
@@ -6756,10 +6822,6 @@ function startTamaLoop(){
                     now
                 );
 
-
-                /*
-                   혼잣말
-                */
 
                 if(
                     now>
@@ -6785,10 +6847,6 @@ function startTamaLoop(){
                 }
 
 
-                /*
-                   말풍선 위치
-                */
-
                 if(
                     obj.speechEl &&
                     obj.speechEl.parentNode
@@ -6811,12 +6869,6 @@ function startTamaLoop(){
         );
 
 
-        /*
-           ==================================================
-           그룹 대화
-           ==================================================
-        */
-
         if(
             !game.dialogueLock &&
             now>=game.nextGroupDialogue
@@ -6828,11 +6880,6 @@ function startTamaLoop(){
                         !obj.sleeping
                 ).length;
 
-
-            /*
-               사람이 많을수록
-               5인 대화를 우선
-            */
 
             if(
                 total>=5 &&
@@ -6865,12 +6912,6 @@ function startTamaLoop(){
 
         }
 
-
-        /*
-           ==================================================
-           보리 조건
-           ==================================================
-        */
 
         if(
             !isKkungInTama()
