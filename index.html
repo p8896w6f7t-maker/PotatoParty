@@ -1,11 +1,18 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no,maximum-scale=1.0">
+
+<meta
+    name="viewport"
+    content="width=device-width,initial-scale=1.0,user-scalable=no,maximum-scale=1.0"
+>
+
 <title>감자키우기</title>
 
 <style>
+
 *{
     box-sizing:border-box;
     -webkit-tap-highlight-color:transparent;
@@ -14,13 +21,17 @@
     -webkit-touch-callout:none;
 }
 
-html,body{
+html,
+body{
     margin:0;
     padding:0;
     width:100%;
     min-height:100%;
     background:#f3ead7;
-    font-family:"Apple SD Gothic Neo","Noto Sans KR",sans-serif;
+    font-family:
+        "Apple SD Gothic Neo",
+        "Noto Sans KR",
+        sans-serif;
     overflow-x:hidden;
 }
 
@@ -59,19 +70,22 @@ button:active{
     background:#fffaf0;
 }
 
-/* =========================
+
+/* ==================================================
    시작
-========================= */
+================================================== */
 
 #startScreen{
     display:flex;
     justify-content:center;
     align-items:center;
-    background:radial-gradient(
-        circle at center,
-        #fff9eb 0%,
-        #f3dfb8 100%
-    );
+
+    background:
+        radial-gradient(
+            circle at center,
+            #fff9eb 0%,
+            #f3dfb8 100%
+        );
 }
 
 .startBox{
@@ -81,12 +95,24 @@ button:active{
 
 .bigPotato{
     font-size:80px;
-    animation:floatPotato 2s infinite ease-in-out;
+    animation:
+        floatPotato
+        2s
+        infinite
+        ease-in-out;
 }
 
 @keyframes floatPotato{
-    0%,100%{transform:translateY(0)}
-    50%{transform:translateY(-10px)}
+
+    0%,
+    100%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-10px);
+    }
+
 }
 
 .gameTitle{
@@ -105,9 +131,10 @@ button:active{
     box-shadow:0 6px 0 #50351f;
 }
 
-/* =========================
+
+/* ==================================================
    성장
-========================= */
+================================================== */
 
 .growHeader{
     padding:18px;
@@ -131,11 +158,13 @@ button:active{
     margin:10px 15px;
     overflow:hidden;
     border-radius:25px;
+
     background:
         linear-gradient(
             #bfe8ff 0 67%,
             #8fc66c 67% 100%
         );
+
     border:4px solid #725236;
 }
 
@@ -145,13 +174,18 @@ button:active{
     top:25px;
     right:35px;
     font-size:45px;
-    animation:sunPulse 2s infinite;
+    animation:
+        sunPulse
+        2s
+        infinite;
 }
 
 @keyframes sunPulse{
+
     50%{
         transform:scale(1.08);
     }
+
 }
 
 .ground,
@@ -160,6 +194,7 @@ button:active{
     bottom:0;
     width:100%;
     height:32%;
+
     background:
         repeating-linear-gradient(
             0deg,
@@ -174,33 +209,56 @@ button:active{
     position:absolute;
     left:50%;
     bottom:20%;
-    transform:translateX(-50%);
+
+    transform:
+        translateX(-50%);
+
     width:150px;
     height:180px;
+
     display:flex;
     justify-content:center;
     align-items:center;
+
     font-size:100px;
     z-index:5;
 }
 
 .growPotato.jump{
-    animation:potatoJump .6s ease;
+    animation:
+        potatoJump
+        .6s
+        ease;
 }
 
 @keyframes potatoJump{
+
     0%{
-        transform:translateX(-50%) translateY(0);
+        transform:
+            translateX(-50%)
+            translateY(0);
     }
+
     35%{
-        transform:translateX(-50%) translateY(-55px) rotate(-8deg);
+        transform:
+            translateX(-50%)
+            translateY(-55px)
+            rotate(-8deg);
     }
+
     70%{
-        transform:translateX(-50%) translateY(-25px) rotate(8deg);
+        transform:
+            translateX(-50%)
+            translateY(-25px)
+            rotate(8deg);
     }
+
     100%{
-        transform:translateX(-50%) translateY(0);
+        transform:
+            translateX(-50%)
+            translateY(0);
     }
+
 }
 
 .growthInfo{
@@ -244,9 +302,10 @@ button:active{
     font-weight:800;
 }
 
-/* =========================
+
+/* ==================================================
    키우기
-========================= */
+================================================== */
 
 .petPage{
     min-height:100vh;
@@ -258,11 +317,19 @@ button:active{
     position:fixed;
     top:0;
     left:50%;
-    transform:translateX(-50%);
+
+    transform:
+        translateX(-50%);
+
     width:min(600px,100%);
+
     z-index:999;
+
     background:#fffaf0;
-    box-shadow:0 5px 18px rgba(80,50,20,.12);
+
+    box-shadow:
+        0 5px 18px
+        rgba(80,50,20,.12);
 }
 
 .petFixedSpacer{
@@ -292,13 +359,17 @@ button:active{
 .petStage{
     position:relative;
     height:285px;
+
     border-radius:24px;
+
     background:
         linear-gradient(
             #c7ecff 0 70%,
             #9bc76e 70%
         );
+
     border:4px solid #725236;
+
     overflow:hidden;
     touch-action:none;
 }
@@ -309,41 +380,68 @@ button:active{
 
 .petImage{
     position:absolute;
+
     width:165px;
     height:165px;
+
     left:50%;
     top:46%;
-    transform:translate(-50%,-50%);
+
+    transform:
+        translate(-50%,-50%);
+
     background-repeat:no-repeat;
     background-position:center;
     background-size:contain;
+
     image-rendering:pixelated;
+
     z-index:5;
+
     touch-action:none;
     pointer-events:auto;
 }
 
 .petImage.breathe{
-    animation:potatoBreathe 2.2s ease-in-out infinite;
+    animation:
+        potatoBreathe
+        2.2s
+        ease-in-out
+        infinite;
 }
 
 @keyframes potatoBreathe{
-    0%,100%{
-        transform:translate(-50%,-50%) scale(1);
+
+    0%,
+    100%{
+        transform:
+            translate(-50%,-50%)
+            scale(1);
     }
+
     50%{
-        transform:translate(-50%,-52%) scale(1.025) rotate(-1deg);
+        transform:
+            translate(-50%,-52%)
+            scale(1.025)
+            rotate(-1deg);
     }
+
 }
 
 .petImage.petJump{
-    animation:petJump .65s ease;
+    animation:
+        petJump
+        .65s
+        ease;
 }
 
 @keyframes petJump{
+
     0%{
-        transform:translate(-50%,-50%);
+        transform:
+            translate(-50%,-50%);
     }
+
     30%{
         transform:
             translate(-50%,-50%)
@@ -351,6 +449,7 @@ button:active{
             rotate(-8deg)
             scale(1.03);
     }
+
     55%{
         transform:
             translate(-50%,-50%)
@@ -358,90 +457,149 @@ button:active{
             rotate(8deg)
             scale(1.04);
     }
+
     100%{
-        transform:translate(-50%,-50%);
+        transform:
+            translate(-50%,-50%);
     }
+
 }
 
 .petImage.tilt{
-    animation:potatoTilt .55s ease;
+    animation:
+        potatoTilt
+        .55s
+        ease;
 }
 
 @keyframes potatoTilt{
+
     0%{
-        transform:translate(-50%,-50%) rotate(0);
+        transform:
+            translate(-50%,-50%)
+            rotate(0);
     }
+
     25%{
-        transform:translate(-50%,-50%) rotate(-10deg);
+        transform:
+            translate(-50%,-50%)
+            rotate(-10deg);
     }
+
     50%{
-        transform:translate(-50%,-50%) rotate(10deg);
+        transform:
+            translate(-50%,-50%)
+            rotate(10deg);
     }
+
     75%{
-        transform:translate(-50%,-50%) rotate(-5deg);
+        transform:
+            translate(-50%,-50%)
+            rotate(-5deg);
     }
+
     100%{
-        transform:translate(-50%,-50%) rotate(0);
+        transform:
+            translate(-50%,-50%)
+            rotate(0);
     }
+
 }
 
 .petImage.running{
-    animation:runPotato .55s infinite alternate;
+    animation:
+        runPotato
+        .55s
+        infinite
+        alternate;
 }
 
 @keyframes runPotato{
+
     from{
         transform:
             translate(-50%,-50%)
             translateY(2px)
             rotate(-3deg);
     }
+
     to{
         transform:
             translate(-50%,-50%)
             translateY(-3px)
             rotate(3deg);
     }
+
 }
 
 .petEmotion{
     position:absolute;
+
     z-index:30;
+
     left:50%;
     top:30%;
+
     font-size:30px;
+
     pointer-events:none;
-    animation:emotionFloat 1s ease-out forwards;
+
+    animation:
+        emotionFloat
+        1s
+        ease-out
+        forwards;
 }
 
 @keyframes emotionFloat{
+
     0%{
         opacity:0;
-        transform:translate(-50%,10px) scale(.5);
+
+        transform:
+            translate(-50%,10px)
+            scale(.5);
     }
+
     20%{
         opacity:1;
     }
+
     100%{
         opacity:0;
-        transform:translate(-50%,-45px) scale(1.15);
+
+        transform:
+            translate(-50%,-45px)
+            scale(1.15);
     }
+
 }
 
 .message{
     position:absolute;
+
     left:50%;
     bottom:12px;
-    transform:translateX(-50%);
+
+    transform:
+        translateX(-50%);
+
     width:82%;
     min-height:42px;
+
     background:white;
+
     border:3px solid #543b26;
+
     border-radius:18px;
+
     padding:9px;
+
     text-align:center;
+
     font-size:13px;
     font-weight:700;
+
     z-index:40;
 }
 
@@ -464,31 +622,42 @@ button:active{
 .stats{
     margin:12px 0;
     padding:12px;
+
     display:grid;
     grid-template-columns:1fr 1fr;
     gap:10px;
+
     background:#f2e7d4;
+
     border-radius:20px;
 }
 
 .stat{
     background:white;
     border-radius:15px;
+
     padding:9px;
+
     display:flex;
     align-items:center;
+
     gap:8px;
 }
 
 .statCircle{
     width:42px;
     height:42px;
+
     border-radius:50%;
+
     background:#eee4d2;
+
     display:flex;
     justify-content:center;
     align-items:center;
+
     font-size:19px;
+
     flex-shrink:0;
 }
 
@@ -504,6 +673,7 @@ button:active{
 
 .petActions{
     padding:4px 0 30px;
+
     display:grid;
     grid-template-columns:1fr 1fr;
     gap:10px;
@@ -511,15 +681,19 @@ button:active{
 
 .petAction{
     padding:14px 5px;
+
     border-radius:15px;
+
     background:#ead8ba;
+
     font-size:14px;
     font-weight:900;
 }
 
-/* =========================
+
+/* ==================================================
    감자사전
-========================= */
+================================================== */
 
 .dictionary{
     min-height:100vh;
@@ -530,8 +704,11 @@ button:active{
     display:flex;
     align-items:center;
     justify-content:space-between;
+
     padding:15px;
+
     border-bottom:2px solid #e5d7c0;
+
     background:#fffaf0;
 }
 
@@ -542,28 +719,42 @@ button:active{
 
 .backBtn{
     padding:7px 11px;
+
     border-radius:10px;
+
     background:#e5d5b8;
+
     font-weight:800;
 }
 
 .tama{
     margin:18px auto;
+
     width:min(92vw,500px);
+
     aspect-ratio:1/1;
+
     position:relative;
+
     overflow:hidden;
+
     border:12px solid #473d35;
+
     border-radius:12px;
+
     background:#9aaf72;
+
     touch-action:none;
+
     isolation:isolate;
 }
 
 .pixelWall{
     position:absolute;
     inset:0;
+
     background-color:#c8a47b;
+
     background-image:
         repeating-linear-gradient(
             0deg,
@@ -579,15 +770,20 @@ button:active{
             rgba(150,110,70,.28) 23px,
             rgba(150,110,70,.28) 25px
         );
+
     z-index:1;
 }
 
 .pixelFloor{
     position:absolute;
+
     bottom:0;
+
     width:100%;
     height:31%;
+
     background-color:#b17d4e;
+
     background-image:
         repeating-linear-gradient(
             0deg,
@@ -603,274 +799,431 @@ button:active{
             rgba(115,75,42,.42) 15px,
             rgba(115,75,42,.42) 18px
         );
+
     z-index:3;
 }
 
 .window{
     position:absolute;
+
     top:28px;
     left:25px;
+
     width:100px;
     height:75px;
+
     background:#9edcf1;
+
     border:8px solid #6e4c36;
+
     z-index:5;
 }
 
 .window:before{
     content:"";
+
     position:absolute;
+
     left:50%;
     top:0;
+
     width:5px;
     height:100%;
+
     background:#6e4c36;
 }
 
 .window:after{
     content:"";
+
     position:absolute;
+
     left:0;
     top:50%;
+
     width:100%;
     height:5px;
+
     background:#6e4c36;
 }
 
 .sofa{
     position:absolute;
+
     bottom:65px;
     right:20px;
+
     width:130px;
     height:55px;
+
     background:#865d4c;
+
     border:7px solid #654535;
+
     z-index:8;
 }
 
 .sofa:before{
     content:"";
+
     position:absolute;
+
     left:8px;
     right:8px;
     top:-18px;
+
     height:20px;
+
     background:#865d4c;
+
     border:7px solid #654535;
 }
 
 .tv{
     position:absolute;
+
     top:25px;
     right:22px;
+
     width:75px;
     height:55px;
+
     background:#2e302e;
+
     border:7px solid #4b4035;
+
     z-index:7;
 }
 
 .tvScreen{
     position:absolute;
     inset:7px;
+
     background:#71a3a2;
 }
 
-/* =========================
+
+/* ==================================================
    다마고치
-========================= */
+================================================== */
 
 .tamaPotato{
     position:absolute;
+
     width:65px;
     height:65px;
+
     z-index:20;
-    transform:translate(-50%,-50%);
+
+    transform:
+        translate(-50%,-50%);
+
     background-repeat:no-repeat;
     background-position:center;
     background-size:contain;
+
     image-rendering:pixelated;
+
     touch-action:none;
+
     cursor:grab;
 }
 
 .tamaPotato.walking{
-    animation:tamaWalk .55s infinite alternate;
+    animation:
+        tamaWalk
+        .55s
+        infinite
+        alternate;
 }
 
 @keyframes tamaWalk{
+
     from{
         margin-top:2px;
+
         transform:
             translate(-50%,-50%)
             rotate(-2deg);
     }
+
     to{
         margin-top:-2px;
+
         transform:
             translate(-50%,-50%)
             rotate(2deg);
     }
+
 }
 
 .tamaPotato.selected{
-    filter:drop-shadow(0 0 7px white);
+    filter:
+        drop-shadow(
+            0 0 7px white
+        );
 }
 
 .tamaPotato.leaderHeld{
-    filter:drop-shadow(0 0 10px #ffd84d);
+    filter:
+        drop-shadow(
+            0 0 10px #ffd84d
+        );
 }
 
 .tamaPotato.reactionJump{
-    animation:tamaReactionJump .6s ease;
+    animation:
+        tamaReactionJump
+        .6s
+        ease;
 }
 
 @keyframes tamaReactionJump{
+
     0%{
-        transform:translate(-50%,-50%);
+        transform:
+            translate(-50%,-50%);
     }
+
     35%{
         transform:
             translate(-50%,-50%)
             translateY(-18px)
             rotate(-10deg);
     }
+
     65%{
         transform:
             translate(-50%,-50%)
             translateY(-10px)
             rotate(10deg);
     }
+
     100%{
-        transform:translate(-50%,-50%);
+        transform:
+            translate(-50%,-50%);
     }
+
 }
 
 .tamaPotato.reactionTilt{
-    animation:tamaTilt .65s ease;
+    animation:
+        tamaTilt
+        .65s
+        ease;
 }
 
 @keyframes tamaTilt{
+
     0%{
-        transform:translate(-50%,-50%) rotate(0);
+        transform:
+            translate(-50%,-50%)
+            rotate(0);
     }
+
     25%{
-        transform:translate(-50%,-50%) rotate(-12deg);
+        transform:
+            translate(-50%,-50%)
+            rotate(-12deg);
     }
+
     50%{
-        transform:translate(-50%,-50%) rotate(12deg);
+        transform:
+            translate(-50%,-50%)
+            rotate(12deg);
     }
+
     75%{
-        transform:translate(-50%,-50%) rotate(-5deg);
+        transform:
+            translate(-50%,-50%)
+            rotate(-5deg);
     }
+
     100%{
-        transform:translate(-50%,-50%) rotate(0);
+        transform:
+            translate(-50%,-50%)
+            rotate(0);
     }
+
 }
 
 .tamaPotato.stunned{
-    filter:grayscale(1) brightness(.7);
-    animation:stunShake .25s infinite alternate;
+    filter:
+        grayscale(1)
+        brightness(.7);
+
+    animation:
+        stunShake
+        .25s
+        infinite
+        alternate;
 }
 
 @keyframes stunShake{
+
     from{
         margin-left:-3px;
     }
+
     to{
         margin-left:3px;
     }
+
 }
 
 .tamaSpeech{
     position:absolute;
+
     z-index:70;
+
     background:white;
+
     border:2px solid #332a22;
+
     border-radius:10px;
+
     padding:3px 6px;
+
     font-size:10px;
     font-weight:900;
+
     white-space:nowrap;
+
     pointer-events:none;
-    animation:speech 1.5s ease forwards;
+
+    animation:
+        speech
+        1.5s
+        ease
+        forwards;
 }
 
 @keyframes speech{
+
     0%{
         opacity:0;
-        transform:translate(-50%,8px) scale(.8);
+
+        transform:
+            translate(-50%,8px)
+            scale(.8);
     }
+
     20%{
         opacity:1;
-        transform:translate(-50%,0) scale(1);
+
+        transform:
+            translate(-50%,0)
+            scale(1);
     }
+
     80%{
         opacity:1;
     }
+
     100%{
         opacity:0;
-        transform:translate(-50%,-15px);
+
+        transform:
+            translate(-50%,-15px);
     }
+
 }
 
 .tamaEmotion{
     position:absolute;
+
     z-index:80;
+
     font-size:22px;
+
     pointer-events:none;
-    animation:tamaEmotionFloat 1s ease-out forwards;
+
+    animation:
+        tamaEmotionFloat
+        1s
+        ease-out
+        forwards;
 }
 
 @keyframes tamaEmotionFloat{
+
     0%{
         opacity:0;
-        transform:translate(-50%,10px) scale(.5);
+
+        transform:
+            translate(-50%,10px)
+            scale(.5);
     }
+
     20%{
         opacity:1;
     }
+
     100%{
         opacity:0;
-        transform:translate(-50%,-30px) scale(1.1);
+
+        transform:
+            translate(-50%,-30px)
+            scale(1.1);
     }
+
 }
 
 .snack{
     position:absolute;
+
     z-index:100;
+
     font-size:28px;
+
     pointer-events:none;
-    transform:translate(-50%,-50%);
+
+    transform:
+        translate(-50%,-50%);
 }
 
 .sleepOverlay{
     position:absolute;
+
     inset:0;
-    background:rgba(25,30,55,.58);
+
+    background:
+        rgba(25,30,55,.58);
+
     z-index:150;
+
     display:flex;
     align-items:center;
     justify-content:center;
+
     color:white;
+
     font-size:22px;
     font-weight:900;
+
     pointer-events:none;
 }
 
-/* =========================
+
+/* ==================================================
    보리
-========================= */
+================================================== */
 
 #boriCat{
     position:absolute;
+
     font-size:30px;
+
     line-height:1;
+
     z-index:35;
+
     pointer-events:none;
+
     transition:
         left 2.2s linear,
         top 2.2s linear;
+
     filter:
         drop-shadow(
             1px 2px 1px
@@ -878,34 +1231,45 @@ button:active{
         );
 }
 
-/* =========================
+
+/* ==================================================
    다마고치 버튼
-========================= */
+================================================== */
 
 .tamaControls{
     display:grid;
+
     grid-template-columns:
         repeat(3,1fr);
+
     gap:8px;
+
     padding:0 15px;
 }
 
 .tamaControl{
     padding:13px 4px;
+
     border-radius:14px;
+
     background:#e4d0ad;
+
     font-size:13px;
     font-weight:900;
 }
 
-/* =========================
+
+/* ==================================================
    도감
-========================= */
+================================================== */
 
 .discovery{
     margin:20px 15px;
+
     padding:16px;
+
     border-radius:18px;
+
     background:#f0e3cd;
 }
 
@@ -916,55 +1280,76 @@ button:active{
 
 .discoverySub{
     font-size:13px;
+
     color:#777;
+
     margin:4px 0 15px;
 }
 
 .potatoList{
     display:flex;
+
     flex-direction:column;
+
     gap:8px;
 }
 
 .bookItem{
     background:white;
+
     border-radius:14px;
+
     padding:8px;
+
     display:flex;
+
     align-items:center;
+
     gap:10px;
+
     min-height:65px;
 }
 
 .bookImage{
     width:50px;
     height:50px;
+
     flex-shrink:0;
+
     background-repeat:no-repeat;
     background-position:center;
     background-size:contain;
+
     image-rendering:pixelated;
 }
 
 .bookItemName{
     flex:1;
+
     text-align:left;
+
     font-size:13px;
     font-weight:900;
 }
 
 .bookStatus{
     font-size:10px;
+
     color:#999;
+
     margin-top:3px;
 }
 
 .potatoToggle{
     width:52px;
     height:29px;
+
     border-radius:20px;
+
     background:#aaa;
+
     position:relative;
+
     flex-shrink:0;
 }
 
@@ -974,13 +1359,19 @@ button:active{
 
 .potatoToggle:after{
     content:"";
+
     position:absolute;
+
     top:4px;
     left:4px;
+
     width:21px;
     height:21px;
+
     background:white;
+
     border-radius:50%;
+
     transition:left .2s;
 }
 
@@ -990,12 +1381,18 @@ button:active{
 
 .switchInfo{
     margin-top:14px;
+
     padding-top:12px;
+
     border-top:2px solid #dfceb1;
+
     font-size:11px;
+
     color:#777;
+
     text-align:center;
 }
+
 
 @media(max-width:420px){
 
@@ -1016,19 +1413,27 @@ button:active{
         width:58px;
         height:58px;
     }
+
 }
+
 </style>
+
 </head>
+
 
 <body>
 
 <div id="app">
 
+
 <!-- ==================================================
      시작
 ================================================== -->
 
-<section id="startScreen" class="screen">
+<section
+    id="startScreen"
+    class="screen"
+>
 
     <div class="startBox">
 
@@ -1254,6 +1659,7 @@ button:active{
                 </div>
 
                 <div>
+
                     <div class="statText">
                         배고픔
                     </div>
@@ -1264,6 +1670,7 @@ button:active{
                     >
                         0 / 100
                     </div>
+
                 </div>
 
             </div>
@@ -1276,6 +1683,7 @@ button:active{
                 </div>
 
                 <div>
+
                     <div class="statText">
                         수분
                     </div>
@@ -1286,6 +1694,7 @@ button:active{
                     >
                         0 / 100
                     </div>
+
                 </div>
 
             </div>
@@ -1298,6 +1707,7 @@ button:active{
                 </div>
 
                 <div>
+
                     <div class="statText">
                         사랑
                     </div>
@@ -1308,6 +1718,7 @@ button:active{
                     >
                         0 / 100
                     </div>
+
                 </div>
 
             </div>
@@ -1320,6 +1731,7 @@ button:active{
                 </div>
 
                 <div>
+
                     <div class="statText">
                         체력
                     </div>
@@ -1330,6 +1742,7 @@ button:active{
                     >
                         0 / 100
                     </div>
+
                 </div>
 
             </div>
@@ -1438,7 +1851,9 @@ button:active{
         <div class="sofa"></div>
 
         <div class="tv">
+
             <div class="tvScreen"></div>
+
         </div>
 
     </div>
@@ -1507,6 +1922,7 @@ button:active{
 
 <script>
 
+
 /* ==================================================
    감자 데이터
 ================================================== */
@@ -1515,12 +1931,18 @@ const POTATOES=[
 
 {
     name:"꾼감자",
+
     image:"Potato1.PNG",
+
     style:"social",
-    personality:"사교적이고 사랑이 넘친다",
+
+    personality:
+        "사교적이고 사랑이 넘친다",
+
     favorite:"모두",
 
     lines:{
+
         food:[
             "오! 먹을 거다! 나눠 먹자!",
             "냠냠! 맛있다!",
@@ -1555,9 +1977,11 @@ const POTATOES=[
             "같이 놀자!",
             "하트 받아! ❤️"
         ]
+
     },
 
     tama:{
+
         idle:[
             "오늘은 누구랑 놀까?",
             "친구가 많으면 좋겠다!",
@@ -1601,17 +2025,26 @@ const POTATOES=[
             "같이 놀자!",
             "하트 받아!"
         ]
+
     }
+
 },
+
 
 {
     name:"대장감자",
+
     image:"Potato2.PNG",
+
     style:"leader",
-    personality:"당당하고 책임감이 강하다",
+
+    personality:
+        "당당하고 책임감이 강하다",
+
     favorite:"저능감자",
 
     lines:{
+
         food:[
             "좋다. 대장에게 힘을 보태라.",
             "훌륭한 보급이다.",
@@ -1646,9 +2079,11 @@ const POTATOES=[
             "집합!",
             "대장은 여기 있다."
         ]
+
     },
 
     tama:{
+
         idle:[
             "현재 인원 확인.",
             "모두 잘 있군.",
@@ -1683,17 +2118,26 @@ const POTATOES=[
             "상황 보고.",
             "대장은 여기 있다."
         ]
+
     }
+
 },
+
 
 {
     name:"독감자",
+
     image:"Potato3.PNG",
+
     style:"toxic",
-    personality:"예민하고 혼자 있는 것을 좋아한다",
+
+    personality:
+        "예민하고 혼자 있는 것을 좋아한다",
+
     favorite:"폭력감자",
 
     lines:{
+
         food:[
             "가까이 오지 말고 그냥 놔.",
             "먹을 건 두고 가.",
@@ -1723,9 +2167,11 @@ const POTATOES=[
             "뭐야.",
             "건드리지 마."
         ]
+
     },
 
     tama:{
+
         idle:[
             "조용하네.",
             "혼자가 편해.",
@@ -1759,17 +2205,26 @@ const POTATOES=[
             "왜 만져?",
             "저리 가."
         ]
+
     }
+
 },
+
 
 {
     name:"폭력감자",
+
     image:"Potato4.PNG",
+
     style:"violent",
-    personality:"다혈질이고 싸움을 좋아한다",
+
+    personality:
+        "다혈질이고 싸움을 좋아한다",
+
     favorite:"독감자",
 
     lines:{
+
         food:[
             "더 줘! 이걸로 부족해!",
             "힘이 난다!",
@@ -1799,9 +2254,11 @@ const POTATOES=[
             "뭐야!",
             "한판 붙을래?"
         ]
+
     },
 
     tama:{
+
         idle:[
             "심심하다.",
             "누구랑 한판 붙을까?",
@@ -1833,17 +2290,26 @@ const POTATOES=[
             "한판 할래?",
             "같이 뛰자!"
         ]
+
     }
+
 },
+
 
 {
     name:"저능감자",
+
     image:"Potato5.PNG",
+
     style:"dummy",
-    personality:"느긋하고 순하며 조금 멍하다",
+
+    personality:
+        "느긋하고 순하며 조금 멍하다",
+
     favorite:"모두",
 
     lines:{
+
         food:[
             "먹는 거... 맞지?",
             "우와... 맛있다...",
@@ -1873,9 +2339,11 @@ const POTATOES=[
             "헤헤...",
             "나 여기 있어."
         ]
+
     },
 
     tama:{
+
         idle:[
             "음...",
             "뭐 하지?",
@@ -1909,7 +2377,9 @@ const POTATOES=[
             "헤헤...",
             "같이 놀래?"
         ]
+
     }
+
 }
 
 ];
@@ -1920,8 +2390,11 @@ const POTATOES=[
 ================================================== */
 
 let game={
+
     growth:0,
+
     stage:0,
+
     day:1,
 
     potato:null,
@@ -1938,19 +2411,25 @@ let game={
     tamaEnabled:{},
 
     tamaPotatoes:[],
+
     tamaSnacks:[],
 
     sleeping:false,
 
     tamaAnimationId:null,
+
     lastTamaTime:0,
 
     dialogueLock:false,
+
     dialogueUntil:0,
+
     nextGroupDialogue:0,
 
     leaderHeld:false,
+
     leaderRescueMode:false
+
 };
 
 
@@ -2048,6 +2527,17 @@ function random(array){
 }
 
 
+function randomRange(
+    min,
+    max
+){
+
+    return min+
+        Math.random()*
+        (max-min);
+}
+
+
 function clamp(value){
 
     return Math.max(
@@ -2064,7 +2554,9 @@ function clamp(value){
    화면 전환
 ================================================== */
 
-function showScreen(screen){
+function showScreen(
+    screen
+){
 
     [
         startScreen,
@@ -2087,6 +2579,7 @@ function showScreen(screen){
         0
     );
 
+
     if(
         screen===
         dictionaryScreen
@@ -2101,6 +2594,7 @@ function showScreen(screen){
         stopTamaLoop();
 
     }
+
 }
 
 
@@ -2115,8 +2609,11 @@ document
         ()=>{
 
             game.growth=0;
+
             game.stage=0;
+
             game.day=1;
+
             game.potato=null;
 
             game.stats={
@@ -2143,7 +2640,9 @@ document
 let creatingPotato=false;
 
 
-function growAction(type){
+function growAction(
+    type
+){
 
     if(
         creatingPotato
@@ -2151,7 +2650,9 @@ function growAction(type){
         return;
     }
 
+
     let amount=7;
+
 
     if(
         type==="fertilizer"
@@ -2159,11 +2660,13 @@ function growAction(type){
         amount=12;
     }
 
+
     if(
         type==="water"
     ){
         amount=8;
     }
+
 
     if(
         type==="sun"
@@ -2171,17 +2674,20 @@ function growAction(type){
         amount=9;
     }
 
+
     if(
         type==="cheer"
     ){
         amount=6;
     }
 
+
     game.growth=
         clamp(
             game.growth+
             amount
         );
+
 
     game.stage=
         Math.min(
@@ -2191,13 +2697,16 @@ function growAction(type){
             )
         );
 
+
     growPotato
         .classList
         .remove(
             "jump"
         );
 
+
     void growPotato.offsetWidth;
+
 
     growPotato
         .classList
@@ -2205,7 +2714,9 @@ function growAction(type){
             "jump"
         );
 
+
     updateGrow();
+
 
     if(
         game.growth>=100 &&
@@ -2213,6 +2724,7 @@ function growAction(type){
     ){
 
         creatingPotato=true;
+
 
         setTimeout(
             ()=>{
@@ -2224,7 +2736,9 @@ function growAction(type){
             },
             650
         );
+
     }
+
 }
 
 
@@ -2234,25 +2748,30 @@ function updateGrow(){
         game.growth+
         "%";
 
+
     growthText.textContent=
         game.growth+
         " / 100%";
+
 
     stageText.textContent=
         STAGES[
             game.stage
         ];
 
+
     growPotato.textContent=
         STAGE_EMOJIS[
             game.stage
         ];
+
 
     document.getElementById(
         "growDay"
     ).textContent=
         game.day+
         "일차";
+
 }
 
 
@@ -2267,6 +2786,7 @@ function createRandomPotato(){
             POTATOES
         );
 
+
     if(
         !game.discovered.includes(
             game.potato.name
@@ -2276,11 +2796,14 @@ function createRandomPotato(){
         game.discovered.push(
             game.potato.name
         );
+
     }
+
 
     game.tamaEnabled[
         game.potato.name
     ]=true;
+
 
     game.stats={
         hunger:50,
@@ -2289,11 +2812,14 @@ function createRandomPotato(){
         energy:100
     };
 
+
     updatePet();
+
 
     showScreen(
         petScreen
     );
+
 
     showEmotion(
         emotionEmoji(
@@ -2301,13 +2827,16 @@ function createRandomPotato(){
         )
     );
 
+
     speak(
         "짜잔! "+
         game.potato.name+
         " 등장! 🥔"
     );
 
+
     saveGame();
+
 }
 
 
@@ -2315,7 +2844,9 @@ function createRandomPotato(){
    감정
 ================================================== */
 
-function emotionEmoji(p){
+function emotionEmoji(
+    p
+){
 
     if(
         p.style==="social"
@@ -2323,11 +2854,13 @@ function emotionEmoji(p){
         return "💕";
     }
 
+
     if(
         p.style==="leader"
     ){
         return "🫡";
     }
+
 
     if(
         p.style==="toxic"
@@ -2335,68 +2868,86 @@ function emotionEmoji(p){
         return "☠️";
     }
 
+
     if(
         p.style==="violent"
     ){
         return "💢";
     }
 
+
     return "🥺";
+
 }
 
 
-function emotionSet(p){
+function emotionSet(
+    p
+){
 
     if(
         p.style==="social"
     ){
-        return [
+
+        return[
             "💕",
             "❤️",
             "🥰",
             "✨"
         ];
+
     }
+
 
     if(
         p.style==="leader"
     ){
-        return [
+
+        return[
             "🫡",
             "⭐",
             "📣",
             "💪"
         ];
+
     }
+
 
     if(
         p.style==="toxic"
     ){
-        return [
+
+        return[
             "☠️",
             "💢",
             "😑",
             "⚠️"
         ];
+
     }
+
 
     if(
         p.style==="violent"
     ){
-        return [
+
+        return[
             "💢",
             "👊",
             "🔥",
             "😤"
         ];
+
     }
 
-    return [
+
+    return[
         "🥺",
         "😳",
         "💭",
         "😊"
     ];
+
 }
 
 
@@ -2413,40 +2964,52 @@ function showEmotion(
             "petStage"
         );
 
+
     const old=
         stage.querySelector(
             ".petEmotion"
         );
 
+
     if(old){
         old.remove();
     }
+
 
     const el=
         document.createElement(
             "div"
         );
 
+
     el.className=
         "petEmotion";
 
+
     el.textContent=
         emoji;
+
 
     stage.appendChild(
         el
     );
 
+
     setTimeout(
         ()=>{
+
             if(
                 el.parentNode
             ){
+
                 el.remove();
+
             }
+
         },
         1000
     );
+
 }
 
 
@@ -2463,8 +3026,10 @@ function speak(
             "petMessage"
         );
 
+
     box.textContent=
         text;
+
 }
 
 
@@ -2480,11 +3045,13 @@ function updateStats(){
         game.stats.hunger+
         " / 100";
 
+
     document.getElementById(
         "water"
     ).textContent=
         game.stats.water+
         " / 100";
+
 
     document.getElementById(
         "love"
@@ -2492,11 +3059,13 @@ function updateStats(){
         game.stats.love+
         " / 100";
 
+
     document.getElementById(
         "energy"
     ).textContent=
         game.stats.energy+
         " / 100";
+
 }
 
 
@@ -2512,13 +3081,16 @@ function updatePet(){
         return;
     }
 
+
     petImage.style.backgroundImage=
         `url("${game.potato.image}")`;
+
 
     document.getElementById(
         "potatoName"
     ).textContent=
         game.potato.name;
+
 
     document.getElementById(
         "potatoPersonality"
@@ -2526,13 +3098,16 @@ function updatePet(){
         "성격 • "+
         game.potato.personality;
 
+
     document.getElementById(
         "petDay"
     ).textContent=
         game.day+
         "일차";
 
+
     updateStats();
+
 }
 
 
@@ -2541,8 +3116,11 @@ function updatePet(){
 ================================================== */
 
 let petTouchStart=0;
+
 let petTouchStartX=0;
+
 let petTouchStartY=0;
+
 let petTouchMoved=false;
 
 
@@ -2552,14 +3130,18 @@ petImage.addEventListener(
 
         e.preventDefault();
 
+
         petTouchStart=
             performance.now();
+
 
         petTouchStartX=
             e.clientX;
 
+
         petTouchStartY=
             e.clientY;
+
 
         petTouchMoved=false;
 
@@ -2576,13 +3158,16 @@ petImage.addEventListener(
 
         e.preventDefault();
 
+
         const dx=
             e.clientX-
             petTouchStartX;
 
+
         const dy=
             e.clientY-
             petTouchStartY;
+
 
         if(
             Math.hypot(
@@ -2590,7 +3175,9 @@ petImage.addEventListener(
                 dy
             )>8
         ){
+
             petTouchMoved=true;
+
         }
 
     },
@@ -2606,9 +3193,11 @@ petImage.addEventListener(
 
         e.preventDefault();
 
+
         const elapsed=
             performance.now()-
             petTouchStart;
+
 
         if(
             !petTouchMoved &&
@@ -2634,8 +3223,10 @@ function touchPet(){
         return;
     }
 
+
     const p=
         game.potato;
+
 
     petImage.classList.remove(
         "breathe",
@@ -2643,7 +3234,9 @@ function touchPet(){
         "tilt"
     );
 
+
     void petImage.offsetWidth;
+
 
     if(
         Math.random()<.5
@@ -2658,18 +3251,23 @@ function touchPet(){
         petImage.classList.add(
             "tilt"
         );
+
     }
+
 
     petImage.classList.add(
         "breathe"
     );
 
+
     const emotions=
         emotionSet(p);
+
 
     showEmotion(
         random(emotions)
     );
+
 
     speak(
         random(
@@ -2679,12 +3277,15 @@ function touchPet(){
         random(emotions)
     );
 
+
     game.stats.love=
         clamp(
             game.stats.love+5
         );
 
+
     updateStats();
+
 }
 
 
@@ -2702,6 +3303,7 @@ function petAction(
         return;
     }
 
+
     const p=
         game.potato;
 
@@ -2715,10 +3317,12 @@ function petAction(
                 game.stats.hunger+20
             );
 
+
         game.stats.energy=
             clamp(
                 game.stats.energy+10
             );
+
 
         speak(
             random(
@@ -2726,9 +3330,12 @@ function petAction(
             )
         );
 
+
         showEmotion("🍖");
 
+
         jumpPet();
+
     }
 
 
@@ -2741,10 +3348,12 @@ function petAction(
                 game.stats.water+20
             );
 
+
         game.stats.energy=
             clamp(
                 game.stats.energy+10
             );
+
 
         speak(
             random(
@@ -2752,9 +3361,12 @@ function petAction(
             )
         );
 
+
         showEmotion("💧");
 
+
         jumpPet();
+
     }
 
 
@@ -2767,13 +3379,16 @@ function petAction(
                 game.stats.love+15
             );
 
+
         speak(
             random(
                 p.lines.pet
             )
         );
 
+
         showEmotion("❤️");
+
 
         if(
             Math.random()<.5
@@ -2786,6 +3401,7 @@ function petAction(
             tiltPet();
 
         }
+
     }
 
 
@@ -2798,15 +3414,18 @@ function petAction(
                 game.stats.energy-15
             );
 
+
         game.stats.hunger=
             clamp(
                 game.stats.hunger-1
             );
 
+
         game.stats.water=
             clamp(
                 game.stats.water-1
             );
+
 
         speak(
             random(
@@ -2814,14 +3433,19 @@ function petAction(
             )
         );
 
+
         showEmotion("🏃");
 
+
         runPet();
+
     }
+
 
     updateStats();
 
     saveGame();
+
 }
 
 
@@ -2836,11 +3460,14 @@ function jumpPet(){
         "tilt"
     );
 
+
     void petImage.offsetWidth;
+
 
     petImage.classList.add(
         "petJump"
     );
+
 }
 
 
@@ -2851,11 +3478,14 @@ function tiltPet(){
         "tilt"
     );
 
+
     void petImage.offsetWidth;
+
 
     petImage.classList.add(
         "tilt"
     );
+
 }
 
 
@@ -2864,8 +3494,11 @@ function tiltPet(){
 ================================================== */
 
 let petWalkFrame=null;
+
 let petWalkStart=0;
+
 let petWalkX=50;
+
 let petWalkDirection=1;
 
 
@@ -2878,16 +3511,21 @@ function runPet(){
         cancelAnimationFrame(
             petWalkFrame
         );
+
     }
+
 
     petImage.classList.add(
         "running"
     );
 
+
     petWalkStart=
         performance.now();
 
+
     petWalkX=50;
+
 
     petWalkDirection=
         Math.random()<.5
@@ -2903,6 +3541,7 @@ function runPet(){
             now-
             petWalkStart;
 
+
         if(
             elapsed>=3000
         ){
@@ -2911,42 +3550,56 @@ function runPet(){
                 "running"
             );
 
+
             petImage.style.left=
                 "50%";
 
+
             petWalkFrame=null;
 
+
             return;
+
         }
+
 
         petWalkX+=
             petWalkDirection*
             .08;
+
 
         if(
             petWalkX>=78
         ){
 
             petWalkX=78;
+
             petWalkDirection=-1;
+
         }
+
 
         if(
             petWalkX<=22
         ){
 
             petWalkX=22;
+
             petWalkDirection=1;
+
         }
+
 
         petImage.style.left=
             petWalkX+
             "%";
 
+
         petWalkFrame=
             requestAnimationFrame(
                 walkFrame
             );
+
     }
 
 
@@ -2954,6 +3607,7 @@ function runPet(){
         requestAnimationFrame(
             walkFrame
         );
+
 }
 
 
@@ -2969,8 +3623,10 @@ function harvest(){
         return;
     }
 
+
     const old=
         game.potato;
+
 
     const confirmed=
         window.confirm(
@@ -2979,6 +3635,7 @@ function harvest(){
             "을(를) 수확할까요?\n\n"+
             "수확하면 현재 감자와의 키우기가 끝납니다."
         );
+
 
     if(
         !confirmed
@@ -2993,17 +3650,23 @@ function harvest(){
             ])
         );
 
+
         showEmotion("🥺");
 
+
         return;
+
     }
+
 
     speak(
         old.name+
         " 수확 완료! 🥔"
     );
 
+
     showEmotion("🥔");
+
 
     setTimeout(
         ()=>{
@@ -3016,9 +3679,11 @@ function harvest(){
 
             game.day++;
 
+
             updateGrow();
 
             saveGame();
+
 
             showScreen(
                 growScreen
@@ -3027,6 +3692,7 @@ function harvest(){
         },
         900
     );
+
 }
 
 
@@ -3038,9 +3704,11 @@ function openDictionary(){
 
     renderDictionary();
 
+
     showScreen(
         dictionaryScreen
     );
+
 }
 
 
@@ -3048,9 +3716,11 @@ function backToPet(){
 
     updatePet();
 
+
     showScreen(
         petScreen
     );
+
 }
 
 
@@ -3066,6 +3736,7 @@ function renderDictionary(){
         game.day+
         "일차";
 
+
     document.getElementById(
         "discoveredCount"
     ).textContent=
@@ -3078,6 +3749,7 @@ function renderDictionary(){
         document.getElementById(
             "potatoList"
         );
+
 
     list.innerHTML="";
 
@@ -3096,6 +3768,7 @@ function renderDictionary(){
                     "div"
                 );
 
+
             item.className=
                 "bookItem";
 
@@ -3104,6 +3777,7 @@ function renderDictionary(){
                 document.createElement(
                     "div"
                 );
+
 
             image.className=
                 "bookImage";
@@ -3114,23 +3788,30 @@ function renderDictionary(){
                     "div"
                 );
 
+
             info.className=
                 "bookItemName";
 
 
-            if(!found){
+            if(
+                !found
+            ){
 
                 image.textContent=
                     "❔";
 
+
                 image.style.display=
                     "flex";
+
 
                 image.style.alignItems=
                     "center";
 
+
                 image.style.justifyContent=
                     "center";
+
 
                 image.style.fontSize=
                     "28px";
@@ -3144,19 +3825,24 @@ function renderDictionary(){
                     </div>
                     `;
 
+
                 item.appendChild(
                     image
                 );
+
 
                 item.appendChild(
                     info
                 );
 
+
                 list.appendChild(
                     item
                 );
 
+
                 return;
+
             }
 
 
@@ -3188,8 +3874,10 @@ function renderDictionary(){
                     "button"
                 );
 
+
             toggle.type=
                 "button";
+
 
             toggle.className=
                 "potatoToggle"+
@@ -3208,9 +3896,11 @@ function renderDictionary(){
 
                     e.stopPropagation();
 
+
                     game.tamaEnabled[
                         p.name
                     ]=!enabled;
+
 
                     renderDictionary();
 
@@ -3224,13 +3914,16 @@ function renderDictionary(){
                 image
             );
 
+
             item.appendChild(
                 info
             );
 
+
             item.appendChild(
                 toggle
             );
+
 
             list.appendChild(
                 item
@@ -3241,6 +3934,7 @@ function renderDictionary(){
 
 
     renderTama();
+
 }
 
 
@@ -3284,7 +3978,10 @@ function renderTama(){
 
 
     selected.forEach(
-        (name,index)=>{
+        (
+            name,
+            index
+        )=>{
 
             const p=
                 POTATOES.find(
@@ -3292,8 +3989,12 @@ function renderTama(){
                         x.name===name
                 );
 
-            if(!p)
+
+            if(
+                !p
+            ){
                 return;
+            }
 
 
             const angle=
@@ -3336,9 +4037,11 @@ function renderTama(){
                     10,
 
                 vx:0,
+
                 vy:0,
 
                 targetX:null,
+
                 targetY:null,
 
                 maxSpeed:
@@ -3346,6 +4049,7 @@ function renderTama(){
                     Math.random()*.3,
 
                 dragging:false,
+
                 sleeping:false,
 
                 stunnedUntil:0,
@@ -3370,9 +4074,11 @@ function renderTama(){
                 obj
             );
 
+
             createTamaPotato(
                 obj
             );
+
 
             chooseTarget(
                 obj
@@ -3380,6 +4086,17 @@ function renderTama(){
 
         }
     );
+
+
+    /*
+       그룹 대화 다음 실행 시간
+    */
+
+    game.nextGroupDialogue=
+        performance.now()+
+        9000+
+        Math.random()*7000;
+
 }
 
 
@@ -3396,22 +4113,28 @@ function createTamaPotato(
             "div"
         );
 
+
     el.className=
         "tamaPotato";
 
+
     el.dataset.id=
         obj.id;
+
 
     el.style.left=
         obj.x+
         "%";
 
+
     el.style.top=
         obj.y+
         "%";
 
+
     el.style.backgroundImage=
         `url("${obj.data.image}")`;
+
 
     document
         .getElementById("tama")
@@ -3424,6 +4147,7 @@ function createTamaPotato(
         el,
         obj
     );
+
 }
 
 
@@ -3436,12 +4160,13 @@ function clampTamaX(
 ){
 
     return Math.max(
-        8,
+        5,
         Math.min(
-            92,
+            95,
             x
         )
     );
+
 }
 
 
@@ -3450,12 +4175,13 @@ function clampTamaY(
 ){
 
     return Math.max(
-        50,
+        8,
         Math.min(
-            89,
+            92,
             y
         )
     );
+
 }
 
 
@@ -3468,6 +4194,7 @@ function distance(
         a.x-b.x,
         a.y-b.y
     );
+
 }
 
 
@@ -3479,6 +4206,10 @@ function chooseTarget(
     obj
 ){
 
+    /*
+       독감자는 완전히 독립적으로 이동
+    */
+
     if(
         obj.data.style==="toxic"
     ){
@@ -3487,21 +4218,29 @@ function chooseTarget(
             clampTamaX(
                 obj.x+
                 random(
-                    [-15,15]
+                    [-18,18]
                 )
             );
+
 
         obj.targetY=
             clampTamaY(
                 obj.y+
                 random(
-                    [-10,10]
+                    [-18,18]
                 )
             );
 
+
         return;
+
     }
 
+
+    /*
+       폭력감자는 독감자를 좋아해서
+       독감자 주변으로 이동
+    */
 
     if(
         obj.data.style==="violent"
@@ -3514,7 +4253,10 @@ function chooseTarget(
                     "toxic"
             );
 
-        if(toxic){
+
+        if(
+            toxic
+        ){
 
             obj.targetX=
                 clampTamaX(
@@ -3524,6 +4266,7 @@ function chooseTarget(
                     )
                 );
 
+
             obj.targetY=
                 clampTamaY(
                     toxic.y+
@@ -3532,67 +4275,59 @@ function chooseTarget(
                     )
                 );
 
+
             return;
+
         }
+
     }
 
+
+    /*
+       저능감자는 더 이상
+       대장을 자동으로 따라가지 않음
+    */
 
     if(
         obj.data.style==="dummy"
     ){
 
-        const leader=
-            game.tamaPotatoes.find(
-                x=>
-                    x.data.style===
-                    "leader"
+        obj.targetX=
+            randomRange(
+                10,
+                90
             );
 
-        if(leader){
 
-            obj.targetX=
-                clampTamaX(
-                    leader.x+
-                    random(
-                        [-10,10]
-                    )
-                );
+        obj.targetY=
+            randomRange(
+                10,
+                90
+            );
 
-            obj.targetY=
-                clampTamaY(
-                    leader.y+
-                    random(
-                        [-7,7]
-                    )
-                );
 
-            return;
-        }
+        return;
+
     }
 
 
+    /*
+       일반 이동
+    */
+
     obj.targetX=
         randomRange(
-            15,
-            85
+            8,
+            92
         );
+
 
     obj.targetY=
         randomRange(
-            57,
-            84
+            10,
+            90
         );
-}
 
-
-function randomRange(
-    min,
-    max
-){
-
-    return min+
-        Math.random()*
-        (max-min);
 }
 
 
@@ -3607,6 +4342,7 @@ function getTamaElement(
     return document.querySelector(
         `[data-id="${obj.id}"]`
     );
+
 }
 
 
@@ -3619,16 +4355,23 @@ function updateTamaDOM(
             obj
         );
 
-    if(!el)
+
+    if(
+        !el
+    ){
         return;
+    }
+
 
     el.style.left=
         obj.x+
         "%";
 
+
     el.style.top=
         obj.y+
         "%";
+
 }
 
 
@@ -3658,10 +4401,14 @@ function enableLongPress(
 
             e.preventDefault();
 
+
             startX=e.clientX;
+
             startY=e.clientY;
 
+
             moved=false;
+
             dragging=false;
 
 
@@ -3672,6 +4419,7 @@ function enableLongPress(
                         dragging=true;
 
                         obj.dragging=true;
+
 
                         element.classList.add(
                             "selected"
@@ -3686,16 +4434,20 @@ function enableLongPress(
                             game.leaderHeld=
                                 true;
 
+
                             game.leaderRescueMode=
                                 true;
+
 
                             element.classList.add(
                                 "leaderHeld"
                             );
 
+
                             leaderRescue(
                                 obj
                             );
+
                         }
 
                     },
@@ -3715,6 +4467,7 @@ function enableLongPress(
 
             e.preventDefault();
 
+
             if(
                 Math.hypot(
                     e.clientX-startX,
@@ -3730,7 +4483,9 @@ function enableLongPress(
             if(
                 !dragging
             ){
+
                 return;
+
             }
 
 
@@ -3738,6 +4493,7 @@ function enableLongPress(
                 document.getElementById(
                     "tama"
                 );
+
 
             const rect=
                 room.getBoundingClientRect();
@@ -3766,7 +4522,9 @@ function enableLongPress(
 
 
             obj.vx=0;
+
             obj.vy=0;
+
 
             updateTamaDOM(
                 obj
@@ -3781,6 +4539,7 @@ function enableLongPress(
                 updateFollowers(
                     obj
                 );
+
             }
 
         },
@@ -3805,6 +4564,7 @@ function enableLongPress(
 
             obj.dragging=false;
 
+
             element.classList.remove(
                 "selected"
             );
@@ -3818,6 +4578,7 @@ function enableLongPress(
                 game.leaderHeld=false;
 
                 game.leaderRescueMode=false;
+
 
                 element.classList.remove(
                     "leaderHeld"
@@ -3837,6 +4598,7 @@ function enableLongPress(
             tamaReaction(
                 obj
             );
+
         }
 
     }
@@ -3847,10 +4609,12 @@ function enableLongPress(
         finish
     );
 
+
     element.addEventListener(
         "pointercancel",
         finish
     );
+
 }
 
 
@@ -3868,9 +4632,12 @@ function updateFollowers(
             if(
                 obj===leader||
                 obj.dragging||
-                obj.sleeping
+                obj.sleeping||
+                obj.data.style==="toxic"
             ){
+
                 return;
+
             }
 
 
@@ -3903,13 +4670,16 @@ function updateFollowers(
                     offset[0]
                 );
 
+
             obj.targetY=
                 clampTamaY(
                     leader.y+
                     offset[1]
                 );
+
         }
     );
+
 }
 
 
@@ -3923,6 +4693,7 @@ function leaderRescue(
 
     game.dialogueLock=true;
 
+
     game.dialogueUntil=
         performance.now()+
         1600;
@@ -3935,7 +4706,10 @@ function leaderRescue(
                 !obj.sleeping
         )
         .forEach(
-            (obj,index)=>{
+            (
+                obj,
+                index
+            )=>{
 
                 obj.targetX=
                     clampTamaX(
@@ -3944,6 +4718,7 @@ function leaderRescue(
                             [-12,12]
                         )
                     );
+
 
                 obj.targetY=
                     clampTamaY(
@@ -3968,6 +4743,7 @@ function leaderRescue(
                             ])
                         );
 
+
                         showTamaEmotion(
                             obj,
                             random([
@@ -3988,10 +4764,13 @@ function leaderRescue(
 
     setTimeout(
         ()=>{
+
             game.dialogueLock=false;
+
         },
         1700
     );
+
 }
 
 
@@ -4012,6 +4791,7 @@ function updateTamaMovement(
     ){
 
         return;
+
     }
 
 
@@ -4021,6 +4801,7 @@ function updateTamaMovement(
     ){
 
         return;
+
     }
 
 
@@ -4032,6 +4813,7 @@ function updateTamaMovement(
         chooseTarget(
             obj
         );
+
     }
 
 
@@ -4039,9 +4821,11 @@ function updateTamaMovement(
         obj.targetX-
         obj.x;
 
+
     const dy=
         obj.targetY-
         obj.y;
+
 
     const d=
         Math.hypot(
@@ -4058,7 +4842,9 @@ function updateTamaMovement(
             obj
         );
 
+
         return;
+
     }
 
 
@@ -4074,6 +4860,7 @@ function updateTamaMovement(
             2
         );
 
+
     obj.y+=
         dy/d*
         speed*
@@ -4088,6 +4875,7 @@ function updateTamaMovement(
             obj.x
         );
 
+
     obj.y=
         clampTamaY(
             obj.y
@@ -4100,7 +4888,9 @@ function updateTamaMovement(
         );
 
 
-    if(el){
+    if(
+        el
+    ){
 
         el.classList.add(
             "walking"
@@ -4112,6 +4902,7 @@ function updateTamaMovement(
     updateTamaDOM(
         obj
     );
+
 }
 
 
@@ -4128,7 +4919,9 @@ function randomDialogue(
         !array||
         !array.length
     ){
+
         return "";
+
     }
 
 
@@ -4152,7 +4945,9 @@ function randomDialogue(
     obj.lastDialogue=
         result;
 
+
     return result;
+
 }
 
 
@@ -4169,7 +4964,9 @@ function autonomousSpeech(
         obj.dragging||
         game.dialogueLock
     ){
+
         return;
+
     }
 
 
@@ -4197,22 +4994,776 @@ function autonomousSpeech(
 
 
     /*
-       ==========================================
        꾼감자가 보리 이야기를 하면
        70% 확률로 보리 등장
-       ==========================================
     */
 
     if(
         obj.data.name===
         "꾼감자" &&
         text.includes("보리") &&
-        Math.random()<0.70
+        Math.random()<.70
     ){
 
         showBori();
 
     }
+
+}
+
+
+/* ==================================================
+   2인 대화
+================================================== */
+
+const TWO_DIALOGUES=[
+
+    {
+        people:[
+            "꾼감자",
+            "대장감자"
+        ],
+
+        lines:[
+
+            [
+                "오늘 뭐 할까?",
+                "일단 순찰부터 하자."
+            ],
+
+            [
+                "대장! 같이 놀자!",
+                "좋다. 잠깐 놀도록 하지."
+            ],
+
+            [
+                "대장감자는 항상 바빠 보여.",
+                "대장에게는 할 일이 많다."
+            ],
+
+            [
+                "우리 다 같이 놀면 재밌겠다!",
+                "좋아. 내가 감자들을 불러보지."
+            ]
+
+        ]
+    },
+
+
+    {
+        people:[
+            "꾼감자",
+            "독감자"
+        ],
+
+        lines:[
+
+            [
+                "독감자야, 같이 놀래?",
+                "가까이 오지는 마."
+            ],
+
+            [
+                "혼자 있으면 안 심심해?",
+                "괜찮아. 너희가 다치지 않는 게 중요해."
+            ],
+
+            [
+                "우리 멀리서 같이 있자!",
+                "그 정도라면 괜찮아."
+            ],
+
+            [
+                "너 우리 싫어하는 거 아니지?",
+                "아니야. 그래서 혼자 있는 거야."
+            ]
+
+        ]
+    },
+
+
+    {
+        people:[
+            "꾼감자",
+            "폭력감자"
+        ],
+
+        lines:[
+
+            [
+                "오늘은 싸우지 말자!",
+                "그럼 뭐 하고 놀아?"
+            ],
+
+            [
+                "같이 산책 갈래?",
+                "좋아! 빨리 가자!"
+            ],
+
+            [
+                "너는 왜 그렇게 싸움을 좋아해?",
+                "재밌잖아!"
+            ],
+
+            [
+                "오늘 기분 좋아 보여!",
+                "싸울 상대만 있으면 더 좋아!"
+            ]
+
+        ]
+    },
+
+
+    {
+        people:[
+            "꾼감자",
+            "저능감자"
+        ],
+
+        lines:[
+
+            [
+                "저능감자야 뭐 해?",
+                "음... 생각하고 있어."
+            ],
+
+            [
+                "같이 놀자!",
+                "응... 뭐 하고 놀까?"
+            ],
+
+            [
+                "오늘 날씨 좋다!",
+                "응... 좋은 것 같아."
+            ],
+
+            [
+                "너는 느긋해서 부러워.",
+                "그런가...?"
+            ]
+
+        ]
+    },
+
+
+    {
+        people:[
+            "대장감자",
+            "독감자"
+        ],
+
+        lines:[
+
+            [
+                "왜 항상 혼자 있지?",
+                "너희가 다칠까 봐."
+            ],
+
+            [
+                "우리에게 가까이 오지 않는 이유가 있나?",
+                "내 독 때문에 아플 수도 있어."
+            ],
+
+            [
+                "그래도 우리는 네 친구다.",
+                "알고 있어. 그래서 더 조심하는 거야."
+            ]
+
+        ]
+    },
+
+
+    {
+        people:[
+            "대장감자",
+            "폭력감자"
+        ],
+
+        lines:[
+
+            [
+                "오늘은 얌전히 있어라.",
+                "싫은데?"
+            ],
+
+            [
+                "다른 감자들을 괴롭히지 마라.",
+                "알았어. 조금만 놀릴게."
+            ],
+
+            [
+                "싸움은 마지막 수단이다.",
+                "그럼 첫 번째 수단은 뭐야?"
+            ]
+
+        ]
+    },
+
+
+    {
+        people:[
+            "대장감자",
+            "저능감자"
+        ],
+
+        lines:[
+
+            [
+                "저능감자, 내 말 듣고 있나?",
+                "응... 아마도."
+            ],
+
+            [
+                "전원 이동한다.",
+                "천천히 가도 돼?"
+            ],
+
+            [
+                "무슨 생각을 하고 있지?",
+                "아무 생각도 안 하고 있어."
+            ]
+
+        ]
+    },
+
+
+    {
+        people:[
+            "독감자",
+            "폭력감자"
+        ],
+
+        lines:[
+
+            [
+                "가까이 오지 마.",
+                "왜? 싸우자는 거야?"
+            ],
+
+            [
+                "내 독 때문에 다칠 수 있어.",
+                "그래도 한판 할래?"
+            ],
+
+            [
+                "나는 너희가 다치길 원하지 않아.",
+                "그럼 멀리서 싸우자!"
+            ]
+
+        ]
+    },
+
+
+    {
+        people:[
+            "독감자",
+            "저능감자"
+        ],
+
+        lines:[
+
+            [
+                "가까이 오지 마.",
+                "왜?"
+            ],
+
+            [
+                "네가 아플까 봐.",
+                "나는 천천히 움직이니까 괜찮아."
+            ],
+
+            [
+                "혼자 있는 게 편해.",
+                "그럼 멀리서 같이 있자."
+            ]
+
+        ]
+    },
+
+
+    {
+        people:[
+            "폭력감자",
+            "저능감자"
+        ],
+
+        lines:[
+
+            [
+                "한판 붙자!",
+                "나는 싸우는 법을 모르는데..."
+            ],
+
+            [
+                "같이 뛰자!",
+                "천천히 갈게."
+            ],
+
+            [
+                "왜 이렇게 느려?",
+                "생각하고 있거든."
+            ]
+
+        ]
+    }
+
+];
+
+
+/* ==================================================
+   4인 대화
+================================================== */
+
+const FOUR_DIALOGUES=[
+
+    {
+        people:[
+            "꾼감자",
+            "대장감자",
+            "폭력감자",
+            "저능감자"
+        ],
+
+        lines:[
+
+            [
+                "우리 뭐 하고 놀까?",
+                "내가 정하지.",
+                "싸우자!",
+                "나는 구경할래."
+            ],
+
+            [
+                "다 같이 모였네!",
+                "전원 확인.",
+                "오늘 누구랑 싸울까?",
+                "음... 간식?"
+            ],
+
+            [
+                "산책 가자!",
+                "대열을 유지해라.",
+                "내가 제일 먼저 갈래!",
+                "나는 천천히 갈게."
+            ]
+
+        ]
+    },
+
+
+    {
+        people:[
+            "꾼감자",
+            "대장감자",
+            "독감자",
+            "저능감자"
+        ],
+
+        lines:[
+
+            [
+                "독감자도 같이 있네!",
+                "너무 가까이 가지 마라.",
+                "나는 여기 있을게.",
+                "그럼 나도 여기 있을래."
+            ],
+
+            [
+                "왜 멀리 있어?",
+                "친구들이 다칠까 봐.",
+                "걱정하지 마.",
+                "그래도 조심하는 게 좋겠어."
+            ]
+
+        ]
+    },
+
+
+    {
+        people:[
+            "꾼감자",
+            "독감자",
+            "폭력감자",
+            "저능감자"
+        ],
+
+        lines:[
+
+            [
+                "오늘 다들 뭐 해?",
+                "난 혼자 있을 거야.",
+                "나는 싸울 거야!",
+                "나는 아직 모르겠어."
+            ],
+
+            [
+                "같이 놀자!",
+                "나는 멀리서 볼게.",
+                "좋아!",
+                "나도... 따라갈까?"
+            ]
+
+        ]
+    },
+
+
+    {
+        people:[
+            "꾼감자",
+            "대장감자",
+            "독감자",
+            "폭력감자"
+        ],
+
+        lines:[
+
+            [
+                "오늘은 사이좋게 지내자!",
+                "질서를 지켜라.",
+                "나는 조금 떨어져 있을게.",
+                "알았어!"
+            ],
+
+            [
+                "독감자도 우리 친구야.",
+                "알고 있다.",
+                "그래도 가까이 오지는 마.",
+                "알겠어."
+            ]
+
+        ]
+    }
+
+];
+
+
+/* ==================================================
+   5인 대화
+================================================== */
+
+const FIVE_DIALOGUES=[
+
+    {
+        people:[
+            "꾼감자",
+            "대장감자",
+            "독감자",
+            "폭력감자",
+            "저능감자"
+        ],
+
+        lines:[
+
+            [
+                "다 모였네!",
+                "전원 집합.",
+                "나는 여기서 조금 떨어져 있을게.",
+                "오늘 뭐 하고 놀까?",
+                "나는 아직 모르겠어."
+            ],
+
+            [
+                "오늘 다 같이 놀자!",
+                "좋다. 내가 지휘한다.",
+                "너희가 다치지 않게 거리를 둘게.",
+                "나는 앞에서 갈래!",
+                "나는 천천히 갈게."
+            ],
+
+            [
+                "감자들이 많으니까 재밌다!",
+                "전원 안전 확인.",
+                "가까이만 오지 마.",
+                "그럼 멀리서 놀면 되지!",
+                "나는 그냥 따라갈래..."
+            ]
+
+        ]
+    }
+
+];
+
+
+/* ==================================================
+   그룹 대화 찾기
+================================================== */
+
+function findGroupDialogue(
+    count
+){
+
+    const available=
+        game.tamaPotatoes.filter(
+            obj=>
+                !obj.sleeping &&
+                !obj.dragging
+        );
+
+
+    if(
+        available.length<count
+    ){
+
+        return null;
+
+    }
+
+
+    let source;
+
+
+    if(
+        count===2
+    ){
+
+        source=
+            TWO_DIALOGUES;
+
+    }else if(
+        count===4
+    ){
+
+        source=
+            FOUR_DIALOGUES;
+
+    }else if(
+        count===5
+    ){
+
+        source=
+            FIVE_DIALOGUES;
+
+    }else{
+
+        return null;
+
+    }
+
+
+    /*
+       현재 방에 실제로 존재하는
+       감자 조합을 찾는다.
+    */
+
+    const shuffled=
+        [...source];
+
+
+    shuffled.sort(
+        ()=>Math.random()-.5
+    );
+
+
+    for(
+        let i=0;
+        i<shuffled.length;
+        i++
+    ){
+
+        const dialogue=
+            shuffled[i];
+
+
+        const selected=
+            dialogue.people.map(
+                name=>
+                    available.find(
+                        obj=>
+                            obj.data.name===
+                            name
+                    )
+            );
+
+
+        if(
+            selected.every(
+                obj=>obj
+            )
+        ){
+
+            return{
+                dialogue,
+                selected
+            };
+
+        }
+
+    }
+
+
+    return null;
+
+}
+
+
+/* ==================================================
+   그룹 대화 실행
+================================================== */
+
+function playGroupDialogue(
+    count
+){
+
+    if(
+        game.dialogueLock
+    ){
+
+        return;
+
+    }
+
+
+    const group=
+        findGroupDialogue(
+            count
+        );
+
+
+    if(
+        !group
+    ){
+
+        return;
+
+    }
+
+
+    const dialogue=
+        group.dialogue;
+
+
+    const selected=
+        group.selected;
+
+
+    const conversation=
+        random(
+            dialogue.lines
+        );
+
+
+    game.dialogueLock=true;
+
+
+    /*
+       대화 시간
+    */
+
+    game.dialogueUntil=
+        performance.now()+
+        conversation.length*
+        1500+
+        800;
+
+
+    /*
+       대화하는 동안 이동 정지
+    */
+
+    selected.forEach(
+        obj=>{
+
+            obj.targetX=
+                obj.x;
+
+            obj.targetY=
+                obj.y;
+
+        }
+    );
+
+
+    conversation.forEach(
+        (
+            text,
+            index
+        )=>{
+
+            const obj=
+                selected[index];
+
+
+            if(
+                !obj
+            ){
+
+                return;
+
+            }
+
+
+            setTimeout(
+                ()=>{
+
+                    if(
+                        obj.sleeping
+                    ){
+
+                        return;
+
+                    }
+
+
+                    showTamaSpeech(
+                        obj,
+                        text
+                    );
+
+
+                    showTamaEmotion(
+                        obj,
+                        random(
+                            emotionSet(
+                                obj.data
+                            )
+                        )
+                    );
+
+                },
+                index*1500
+            );
+
+        }
+    );
+
+
+    setTimeout(
+        ()=>{
+
+            game.dialogueLock=false;
+
+
+            selected.forEach(
+                obj=>{
+
+                    if(
+                        obj.sleeping||
+                        obj.dragging
+                    ){
+
+                        return;
+
+                    }
+
+
+                    obj.targetX=null;
+
+                    obj.targetY=null;
+
+
+                    chooseTarget(
+                        obj
+                    );
+
+                }
+            );
+
+        },
+        conversation.length*
+        1500+
+        900
+    );
+
 }
 
 
@@ -4250,12 +5801,15 @@ function showTamaSpeech(
     speech.className=
         "tamaSpeech";
 
+
     speech.textContent=
         text;
+
 
     speech.style.left=
         obj.x+
         "%";
+
 
     speech.style.top=
         (
@@ -4287,6 +5841,7 @@ function showTamaSpeech(
         },
         1500
     );
+
 }
 
 
@@ -4314,12 +5869,15 @@ function showTamaEmotion(
     emotion.className=
         "tamaEmotion";
 
+
     emotion.textContent=
         emoji;
+
 
     emotion.style.left=
         obj.x+
         "%";
+
 
     emotion.style.top=
         (
@@ -4335,14 +5893,19 @@ function showTamaEmotion(
 
     setTimeout(
         ()=>{
+
             if(
                 emotion.parentNode
             ){
+
                 emotion.remove();
+
             }
+
         },
         1000
     );
+
 }
 
 
@@ -4358,7 +5921,9 @@ function tamaReaction(
         !obj||
         obj.sleeping
     ){
+
         return;
+
     }
 
 
@@ -4368,12 +5933,15 @@ function tamaReaction(
         );
 
 
-    if(el){
+    if(
+        el
+    ){
 
         el.classList.remove(
             "reactionJump",
             "reactionTilt"
         );
+
 
         void el.offsetWidth;
 
@@ -4391,7 +5959,9 @@ function tamaReaction(
             el.classList.add(
                 "reactionTilt"
             );
+
         }
+
     }
 
 
@@ -4422,6 +5992,7 @@ function tamaReaction(
         updateFollowers(
             obj
         );
+
     }
 
 
@@ -4433,7 +6004,9 @@ function tamaReaction(
         toxicAttack(
             obj
         );
+
     }
+
 }
 
 
@@ -4452,7 +6025,9 @@ function toxicAttack(
                 other===toxic||
                 other.data.style==="violent"
             ){
+
                 return;
+
             }
 
 
@@ -4475,17 +6050,22 @@ function toxicAttack(
                     );
 
 
-                if(el){
+                if(
+                    el
+                ){
 
                     el.classList.add(
                         "stunned"
                     );
 
+
                     setTimeout(
                         ()=>{
+
                             el.classList.remove(
                                 "stunned"
                             );
+
                         },
                         3000
                     );
@@ -4502,6 +6082,7 @@ function toxicAttack(
 
         }
     );
+
 }
 
 
@@ -4521,13 +6102,16 @@ function tamaPet(){
     if(
         !list.length
     ){
+
         return;
+
     }
 
 
     tamaReaction(
         random(list)
     );
+
 }
 
 
@@ -4546,7 +6130,9 @@ function tamaSnack(){
     if(
         !game.tamaPotatoes.length
     ){
+
         return;
+
     }
 
 
@@ -4574,8 +6160,12 @@ function tamaSnack(){
         snack.className=
             "snack";
 
+
         snack.textContent=
-            random(foods);
+            random(
+                foods
+            );
+
 
         snack.style.left=
             (
@@ -4583,6 +6173,7 @@ function tamaSnack(){
                 Math.random()*80
             )+
             "%";
+
 
         snack.style.top=
             "-5%";
@@ -4604,7 +6195,9 @@ function tamaSnack(){
             if(
                 !snack.parentNode
             ){
+
                 return;
+
             }
 
 
@@ -4640,22 +6233,28 @@ function tamaSnack(){
 
                 setTimeout(
                     ()=>{
+
                         if(
                             snack.parentNode
                         ){
+
                             snack.remove();
+
                         }
+
                     },
                     2500
                 );
 
             }
+
         }
 
 
         requestAnimationFrame(
             fall
         );
+
     }
 
 
@@ -4665,7 +6264,9 @@ function tamaSnack(){
             if(
                 obj.sleeping
             ){
+
                 return;
+
             }
 
 
@@ -4685,6 +6286,7 @@ function tamaSnack(){
 
         }
     );
+
 }
 
 
@@ -4698,7 +6300,9 @@ function tamaSleep(){
         game.sleeping||
         !game.tamaPotatoes.length
     ){
+
         return;
+
     }
 
 
@@ -4720,6 +6324,7 @@ function tamaSleep(){
     overlay.className=
         "sleepOverlay";
 
+
     overlay.textContent=
         "🌙 Zzz...";
 
@@ -4735,6 +6340,7 @@ function tamaSleep(){
             obj.sleeping=true;
 
             obj.vx=0;
+
             obj.vy=0;
 
 
@@ -4783,6 +6389,7 @@ function tamaSleep(){
         },
         10000
     );
+
 }
 
 
@@ -4809,6 +6416,7 @@ function isKkungInTama(){
             "꾼감자" &&
             !obj.sleeping
     );
+
 }
 
 
@@ -4824,7 +6432,9 @@ function removeBori(){
         );
 
 
-    if(cat){
+    if(
+        cat
+    ){
 
         cat.remove();
 
@@ -4855,6 +6465,7 @@ function removeBori(){
         boriMoveTimeout=null;
 
     }
+
 }
 
 
@@ -4864,10 +6475,6 @@ function removeBori(){
 
 function showBori(){
 
-    /*
-       꾼감자가 없으면 절대 등장하지 않음
-    */
-
     if(
         !isKkungInTama()
     ){
@@ -4875,6 +6482,7 @@ function showBori(){
         removeBori();
 
         return;
+
     }
 
 
@@ -4889,13 +6497,9 @@ function showBori(){
     ){
 
         return;
+
     }
 
-
-    /*
-       이미 나와 있으면
-       또 만들지 않음
-    */
 
     if(
         document.getElementById(
@@ -4904,6 +6508,7 @@ function showBori(){
     ){
 
         return;
+
     }
 
 
@@ -4916,12 +6521,14 @@ function showBori(){
     cat.id=
         "boriCat";
 
+
     cat.textContent=
         "🐈";
 
 
     cat.style.left=
         "50px";
+
 
     cat.style.top=
         "100px";
@@ -4935,18 +6542,17 @@ function showBori(){
     moveBori();
 
 
-    /*
-       7~12초 후 사라짐
-    */
-
     boriTimeout=
         setTimeout(
             ()=>{
+
                 removeBori();
+
             },
             7000+
             Math.random()*5000
         );
+
 }
 
 
@@ -4961,6 +6567,7 @@ function moveBori(){
             "boriCat"
         );
 
+
     const room=
         document.getElementById(
             "tama"
@@ -4973,13 +6580,9 @@ function moveBori(){
     ){
 
         return;
+
     }
 
-
-    /*
-       꾼감자가 사라지면
-       즉시 보리도 사라짐
-    */
 
     if(
         !isKkungInTama()
@@ -4988,6 +6591,7 @@ function moveBori(){
         removeBori();
 
         return;
+
     }
 
 
@@ -5027,6 +6631,7 @@ function moveBori(){
         x+
         "px";
 
+
     cat.style.top=
         y+
         "px";
@@ -5038,6 +6643,7 @@ function moveBori(){
             2200+
             Math.random()*2200
         );
+
 }
 
 
@@ -5054,6 +6660,18 @@ function startTamaLoop(){
         performance.now();
 
 
+    if(
+        !game.nextGroupDialogue
+    ){
+
+        game.nextGroupDialogue=
+            performance.now()+
+            9000+
+            Math.random()*7000;
+
+    }
+
+
     function frame(
         now
     ){
@@ -5067,7 +6685,9 @@ function startTamaLoop(){
             game.tamaAnimationId=
                 null;
 
+
             return;
+
         }
 
 
@@ -5098,7 +6718,9 @@ function startTamaLoop(){
 
 
         /*
+           ==================================================
            감자 이동
+           ==================================================
         */
 
         game.tamaPotatoes.forEach(
@@ -5109,9 +6731,16 @@ function startTamaLoop(){
                     obj.nextDecision
                 ){
 
-                    chooseTarget(
-                        obj
-                    );
+                    if(
+                        !game.dialogueLock
+                    ){
+
+                        chooseTarget(
+                            obj
+                        );
+
+                    }
+
 
                     obj.nextDecision=
                         now+
@@ -5169,6 +6798,7 @@ function startTamaLoop(){
                         obj.x+
                         "%";
 
+
                     obj.speechEl.style.top=
                         (
                             obj.y-11
@@ -5182,10 +6812,64 @@ function startTamaLoop(){
 
 
         /*
-           보리 조건 검사
+           ==================================================
+           그룹 대화
+           ==================================================
+        */
 
-           꾼감자가 꺼져 있거나
-           잠들었으면 즉시 제거
+        if(
+            !game.dialogueLock &&
+            now>=game.nextGroupDialogue
+        ){
+
+            const total=
+                game.tamaPotatoes.filter(
+                    obj=>
+                        !obj.sleeping
+                ).length;
+
+
+            /*
+               사람이 많을수록
+               5인 대화를 우선
+            */
+
+            if(
+                total>=5 &&
+                Math.random()<.25
+            ){
+
+                playGroupDialogue(5);
+
+            }else if(
+                total>=4 &&
+                Math.random()<.40
+            ){
+
+                playGroupDialogue(4);
+
+            }else if(
+                total>=2 &&
+                Math.random()<.80
+            ){
+
+                playGroupDialogue(2);
+
+            }
+
+
+            game.nextGroupDialogue=
+                now+
+                12000+
+                Math.random()*12000;
+
+        }
+
+
+        /*
+           ==================================================
+           보리 조건
+           ==================================================
         */
 
         if(
@@ -5201,6 +6885,7 @@ function startTamaLoop(){
             requestAnimationFrame(
                 frame
             );
+
     }
 
 
@@ -5208,6 +6893,7 @@ function startTamaLoop(){
         requestAnimationFrame(
             frame
         );
+
 }
 
 
@@ -5225,12 +6911,15 @@ function stopTamaLoop(){
             game.tamaAnimationId
         );
 
+
         game.tamaAnimationId=
             null;
+
     }
 
 
     removeBori();
+
 }
 
 
@@ -5244,7 +6933,9 @@ setInterval(
         if(
             !game.potato
         ){
+
             return;
+
         }
 
 
@@ -5253,10 +6944,12 @@ setInterval(
                 game.stats.hunger-1
             );
 
+
         game.stats.water=
             clamp(
                 game.stats.water-1
             );
+
 
         game.stats.energy=
             clamp(
@@ -5275,7 +6968,6 @@ setInterval(
 
 /* ==================================================
    저장
-   기존의 potatoes 오류 제거
 ================================================== */
 
 function saveGame(){
@@ -5320,6 +7012,7 @@ function saveGame(){
         );
 
     }
+
 }
 
 
@@ -5344,6 +7037,7 @@ function loadGame(){
             updateGrow();
 
             return;
+
         }
 
 
@@ -5435,6 +7129,7 @@ function loadGame(){
         );
 
     }
+
 }
 
 
@@ -5504,10 +7199,6 @@ document.addEventListener(
     }
 );
 
-
-/* ==================================================
-   끝
-================================================== */
 
 </script>
 
