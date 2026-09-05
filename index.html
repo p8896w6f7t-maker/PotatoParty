@@ -7741,10 +7741,7 @@ function boriCuteConversation(){
         setTimeout(
             ()=>{
 
-                game.dialogueLock=false;
-
-                boriInteractionBusy=false;
-
+                finishBoriInteraction();
 
                 [kkung,other].forEach(
                     obj=>{
@@ -9025,12 +9022,6 @@ function startTamaLoop(){
         ){
 
             tryBoriInteraction();
-
-
-            game.nextBoriInteraction=
-                now+
-                9000+
-                Math.random()*9000;
 
         }
 
