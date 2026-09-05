@@ -4848,6 +4848,129 @@ function findSnackForPotato(
 
 }
 
+/* ==================================================
+   간식 배정
+================================================== */
+
+function processTamaSnacks(){
+
+    if(
+        game.sleeping||
+        game.dialogueLock
+    ){
+
+        return;
+
+    }
+
+    const available=
+        game.tamaPotatoes.filter(
+            obj=>
+                obj &&
+                !obj.sleeping &&
+                !obj.dragging &&
+                !obj.snackTarget
+        );
+
+    if(
+        !available.length
+    ){
+
+        return;
+
+    }
+
+    const snacks=
+        game.tamaSnacks.filter(
+            snack=>
+                snack &&
+                snack.element &&
+                snack.element.parentNode &&
+                snack.landed &&
+                !snack.eaten &&
+                !snack.eating &&
+                !snack.target
+        );
+
+    if(
+        !snacks.length
+    ){
+
+        return;
+
+    }
+
+    available.forEach(
+        obj=>{
+
+            if(
+                obj.snackTarget
+            ){
+
+                return;
+
+            }
+
+            let nearest=null;
+
+            let nearestDistance=
+                Infinity;
+
+            snacks.forEach(
+                snack=>{
+
+                    if(
+                        snack.target
+                    ){
+
+                        return;
+
+                    }
+
+                    const d=
+                        distance(
+                            obj,
+                            snack
+                        );
+
+                    if(
+                        d<
+                        nearestDistance
+                    ){
+
+                        nearestDistance=
+                            d;
+
+                        nearest=
+                            snack;
+
+                    }
+
+                }
+            );
+
+            if(
+                nearest
+            ){
+
+                nearest.target=
+                    obj;
+
+                obj.snackTarget=
+                    nearest;
+
+                obj.targetX=
+                    nearest.x;
+
+                obj.targetY=
+                    nearest.y;
+
+            }
+
+        }
+    );
+
+}
 
 /* ==================================================
    감자 이동
