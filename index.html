@@ -8237,12 +8237,20 @@ function boriToyInteraction(){
     game.dialogueLock=true;
 
 
+    /*
+       감자가 보리에게 다가간다.
+    */
+
     movePotatoToBori(
         player,
         -6,
         3
     );
 
+
+    /*
+       감자가 들고 흔드는 장난감
+    */
 
     const toy=
         document.createElement(
@@ -8251,27 +8259,16 @@ function boriToyInteraction(){
 
 
     toy.className=
-        "snack";
+        "tamaEmotion";
 
 
     toy.textContent=
-        "🪶";
-
-
-    toy.style.left=
-        (
-            player.x+
-            4
-        )+
-        "%";
-
-
-    toy.style.top=
-        (
-            player.y-
-            5
-        )+
-        "%";
+        random([
+            "🧸",
+            "🎀",
+            "🧶",
+            "✨"
+        ]);
 
 
     toy.style.zIndex=
@@ -8284,6 +8281,70 @@ function boriToyInteraction(){
             toy
         );
 
+
+    /*
+       장난감이 감자 손에 붙어서
+       감자를 따라다니며 흔들린다.
+    */
+
+    let shakeCount=0;
+
+    let toyFollowFrame=null;
+
+
+    function followToy(){
+
+        if(
+            !toy.parentNode ||
+            !boriInteractionBusy ||
+            !player ||
+            player.sleeping
+        ){
+
+            return;
+
+        }
+
+
+        shakeCount++;
+
+
+        toy.style.left=
+            (
+                player.x+
+                5
+            )+
+            "%";
+
+
+        toy.style.top=
+            (
+                player.y-
+                8
+            )+
+            "%";
+
+
+        toy.style.transform=
+            shakeCount%2===0
+            ? "translate(-50%,-50%) rotate(-18deg)"
+            : "translate(-50%,-50%) rotate(18deg)";
+
+
+        toyFollowFrame=
+            requestAnimationFrame(
+                followToy
+            );
+
+    }
+
+
+    followToy();
+
+
+    /*
+       감자가 보리에게 장난감을 보여준다.
+    */
 
     setTimeout(
         ()=>{
@@ -8301,86 +8362,263 @@ function boriToyInteraction(){
             showTamaSpeech(
                 player,
                 random([
-                    "보리야 잡아봐!",
-                    "이거 좋아하지?",
-                    "깃털이다!",
-                    "보리랑 놀자!"
+                    "보리야! 이거 봐!",
+                    "보리! 같이 놀자!",
+                    "보리야 여기 봐!",
+                    "이거 재밌어!",
+                    "보리 이리 와!"
                 ])
             );
 
 
             showTamaEmotion(
                 player,
-                "🪶"
+                "🧸"
             );
 
-
-            toy.style.transition=
-                "left .6s ease, top .6s ease";
-
-
-            toy.style.left=
-                (
-                    player.x+
-                    18
-                )+
-                "%";
-
-
-            toy.style.top=
-                (
-                    player.y-
-                    3
-                )+
-                "%";
-
         },
-        1000
+        600
     );
 
+
+    /*
+       보리가 감자에게 다가온다.
+    */
 
     setTimeout(
         ()=>{
 
+            const currentBori=
+                getBori();
+
+
             if(
-                bori.parentNode
+                !currentBori ||
+                !toy.parentNode
             ){
 
-                const pos=
-                    getBoriPosition();
-
-
-                if(
-                    pos
-                ){
-
-                    toy.style.left=
-                        pos.x+
-                        "%";
-
-
-                    toy.style.top=
-                        pos.y+
-                        "%";
-
-                }
+                return;
 
             }
 
 
+            const room=
+                document.getElementById(
+                    "tama"
+                );
+
+
+            if(
+                !room
+            ){
+
+                return;
+
+            }
+
+
+            const rect=
+                room.getBoundingClientRect();
+
+
+            /*
+               현재 보리 위치를 기준으로
+               감자 근처로 이동
+            */
+
+            const targetX=
+                player.x;
+
+
+            const targetY=
+                player.y;
+
+
+            currentBori.style.transition=
+                "left .8s ease, top .8s ease";
+
+
+            currentBori.style.left=
+                (
+                    targetX+
+                    7
+                )+
+                "%";
+
+
+            currentBori.style.top=
+                (
+                    targetY+
+                    1
+                )+
+                "%";
+
+
+            showTamaSpeech(
+                player,
+                random([
+                    "보리 온다!",
+                    "보리 이리 와!",
+                    "같이 놀자!",
+                    "보리야 여기야!"
+                ])
+            );
+
+
             showTamaEmotion(
                 player,
-                "😆"
+                "💕"
             );
 
         },
-        1900
+        900
     );
 
+
+    /*
+       보리가 도착해서
+       감자와 약 3초 동안 같이 논다.
+    */
+
+    setTimeout(
+        ()=>{
+
+            const currentBori=
+                getBori();
+
+
+            if(
+                !currentBori ||
+                !toy.parentNode
+            ){
+
+                return;
+
+            }
+
+
+            showTamaSpeech(
+                player,
+                random([
+                    "같이 놀자!",
+                    "보리 잡아봐!",
+                    "재밌지?",
+                    "헤헤! 같이 놀자!",
+                    "보리 귀여워!"
+                ])
+            );
+
+
+            showTamaEmotion(
+                player,
+                random([
+                    "🥰",
+                    "💕",
+                    "😆",
+                    "🐈"
+                ])
+            );
+
+
+            /*
+               보리가 장난감을 쳐다보며
+               같이 노는 모션
+            */
+
+            currentBori.style.transform=
+                "scale(1.12) rotate(-6deg)";
+
+
+            setTimeout(
+                ()=>{
+
+                    if(
+                        currentBori.parentNode
+                    ){
+
+                        currentBori.style.transform=
+                            "scale(1.12) rotate(6deg)";
+
+                    }
+
+                },
+                350
+            );
+
+
+            setTimeout(
+                ()=>{
+
+                    if(
+                        currentBori.parentNode
+                    ){
+
+                        currentBori.style.transform=
+                            "scale(1.12) rotate(-6deg)";
+
+                    }
+
+                },
+                700
+            );
+
+
+            setTimeout(
+                ()=>{
+
+                    if(
+                        currentBori.parentNode
+                    ){
+
+                        currentBori.style.transform=
+                            "scale(1.12) rotate(6deg)";
+
+                    }
+
+                },
+                1050
+            );
+
+
+            setTimeout(
+                ()=>{
+
+                    if(
+                        currentBori.parentNode
+                    ){
+
+                        currentBori.style.transform=
+                            "scale(1)";
+
+                    }
+
+                },
+                1400
+            );
+
+        },
+        1700
+    );
+
+
+    /*
+       놀이 시작 후 약 3초 뒤 종료
+    */
 
     boriInteractionTimeout=
         setTimeout(
             ()=>{
+
+                if(
+                    toyFollowFrame
+                ){
+
+                    cancelAnimationFrame(
+                        toyFollowFrame
+                    );
+
+                }
+
 
                 if(
                     toy.parentNode
@@ -8391,21 +8629,55 @@ function boriToyInteraction(){
                 }
 
 
-                showTamaSpeech(
-                    player,
-                    random([
-                        "잡았다!",
-                        "보리 재밌지?",
-                        "한 번 더 놀까?",
-                        "귀여워!"
-                    ])
-                );
+                const currentBori=
+                    getBori();
 
 
-                showTamaEmotion(
-                    player,
-                    "💕"
-                );
+                if(
+                    currentBori
+                ){
+
+                    currentBori.style.transform=
+                        "scale(1)";
+
+
+                    currentBori.style.transition=
+                        "left 1s ease, top 1s ease";
+
+
+                    showTamaSpeech(
+                        player,
+                        random([
+                            "재밌었다!",
+                            "다음에 또 놀자!",
+                            "보리 또 놀자!",
+                            "헤헤! 귀여워!"
+                        ])
+                    );
+
+
+                    showTamaEmotion(
+                        player,
+                        "💕"
+                    );
+
+
+                    setTimeout(
+                        ()=>{
+
+                            if(
+                                getBori()
+                            ){
+
+                                moveBori();
+
+                            }
+
+                        },
+                        500
+                    );
+
+                }
 
 
                 boriInteractionBusy=false;
@@ -8415,12 +8687,14 @@ function boriToyInteraction(){
 
                 if(
                     player &&
-                    !player.sleeping
+                    !player.sleeping &&
+                    !player.dragging
                 ){
 
                     player.targetX=null;
 
                     player.targetY=null;
+
 
                     chooseTarget(
                         player
@@ -8429,9 +8703,8 @@ function boriToyInteraction(){
                 }
 
             },
-            3300
+            4700
         );
-
 }
 
 
