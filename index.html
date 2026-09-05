@@ -1182,8 +1182,6 @@ button:active{
         translate(-50%,-50%);
 
     transition:
-        left .8s ease,
-        top .8s ease,
         transform .3s ease;
 }
 
@@ -2386,9 +2384,6 @@ let game={
 
     nextGroupDialogue:0,
 
-    /*
-       보리 상호작용 다음 실행 시간
-    */
     nextBoriInteraction:0,
 
     leaderHeld:false,
@@ -4030,7 +4025,13 @@ function renderTama(){
 
                 speechEl:null,
 
-                lastDialogue:""
+                lastDialogue:"",
+
+                /*
+                   현재 찾아가는 간식
+                */
+
+                snackTarget:null
 
             };
 
@@ -4058,10 +4059,6 @@ function renderTama(){
         9000+
         Math.random()*7000;
 
-
-    /*
-       보리 상호작용 타이머 초기화
-    */
 
     game.nextBoriInteraction=
         performance.now()+
@@ -4176,6 +4173,32 @@ function distance(
 function chooseTarget(
     obj
 ){
+
+    /*
+       간식을 찾아가는 중이면
+       일반 목표를 새로 만들지 않는다.
+    */
+
+    if(
+        obj.snackTarget &&
+        !obj.snackTarget.eaten &&
+        obj.snackTarget.element &&
+        obj.snackTarget.element.parentNode
+    ){
+
+        obj.targetX=
+            obj.snackTarget.x;
+
+        obj.targetY=
+            obj.snackTarget.y;
+
+        return;
+
+    }
+
+
+    obj.snackTarget=null;
+
 
     if(
         obj.data.style==="toxic"
@@ -4372,6 +4395,8 @@ function enableLongPress(
                         dragging=true;
 
                         obj.dragging=true;
+
+                        obj.snackTarget=null;
 
 
                         element.classList.add(
@@ -4581,7 +4606,8 @@ function updateFollowers(
                 obj===leader||
                 obj.dragging||
                 obj.sleeping||
-                obj.data.style==="toxic"
+                obj.data.style==="toxic"||
+                obj.snackTarget
             ){
 
                 return;
@@ -4723,6 +4749,107 @@ function leaderRescue(
 
 
 /* ==================================================
+   간식 찾아가기
+================================================== */
+
+function findSnackForPotato(
+    obj
+){
+
+    if(
+        !obj||
+        obj.sleeping||
+        obj.dragging||
+        obj.snackTarget
+    ){
+
+        return false;
+
+    }
+
+
+    const snacks=
+        game.tamaSnacks.filter(
+            snack=>
+                snack &&
+                snack.element &&
+                snack.element.parentNode &&
+                snack.landed &&
+                !snack.eaten &&
+                !snack.eating &&
+                !snack.target
+        );
+
+
+    if(
+        !snacks.length
+    ){
+
+        return false;
+
+    }
+
+
+    let nearest=null;
+
+    let nearestDistance=Infinity;
+
+
+    snacks.forEach(
+        snack=>{
+
+            const d=
+                distance(
+                    obj,
+                    snack
+                );
+
+
+            if(
+                d<
+                nearestDistance
+            ){
+
+                nearestDistance=d;
+
+                nearest=snack;
+
+            }
+
+        }
+    );
+
+
+    if(
+        !nearest
+    ){
+
+        return false;
+
+    }
+
+
+    nearest.target=obj;
+
+
+    obj.snackTarget=
+        nearest;
+
+
+    obj.targetX=
+        nearest.x;
+
+
+    obj.targetY=
+        nearest.y;
+
+
+    return true;
+
+}
+
+
+/* ==================================================
    감자 이동
 ================================================== */
 
@@ -4749,6 +4876,103 @@ function updateTamaMovement(
     ){
 
         return;
+
+    }
+
+
+    /*
+       간식이 배정되어 있으면
+       일반 산책보다 간식 찾기를 우선한다.
+    */
+
+    if(
+        obj.snackTarget
+    ){
+
+        const snack=
+            obj.snackTarget;
+
+
+        if(
+            !snack||
+            snack.eaten||
+            !snack.element||
+            !snack.element.parentNode
+        ){
+
+            if(
+                snack &&
+                snack.target===obj
+            ){
+
+                snack.target=null;
+
+            }
+
+
+            obj.snackTarget=null;
+
+
+            chooseTarget(
+                obj
+            );
+
+        }else{
+
+            obj.targetX=
+                snack.x;
+
+
+            obj.targetY=
+                snack.y;
+
+
+            const snackDistance=
+                distance(
+                    obj,
+                    snack
+                );
+
+
+            if(
+                snackDistance<=3
+            ){
+
+                obj.targetX=
+                    obj.x;
+
+                obj.targetY=
+                    obj.y;
+
+
+                eatTamaSnack(
+                    snack,
+                    obj
+                );
+
+
+                return;
+
+            }
+
+        }
+
+    }else{
+
+        /*
+           아직 간식을 배정받지 않았다면
+           주변의 바닥 간식을 찾아간다.
+        */
+
+        if(
+            findSnackForPotato(
+                obj
+            )
+        ){
+
+            return;
+
+        }
 
     }
 
@@ -6181,10 +6405,6 @@ function tamaSnack(){
     }
 
 
-    /*
-       실제 간식 배열 초기화
-    */
-
     game.tamaSnacks=[];
 
 
@@ -6308,8 +6528,8 @@ function tamaSnack(){
             }else{
 
                 /*
-                   바닥에 도착한 뒤에는
-                   절대로 자동 삭제하지 않는다.
+                   바닥에 도착한 뒤
+                   그대로 유지
                 */
 
                 snackData.y=73;
@@ -6330,10 +6550,6 @@ function tamaSnack(){
 
     }
 
-
-    /*
-       간식 대사
-    */
 
     game.tamaPotatoes.forEach(
         obj=>{
@@ -6365,10 +6581,6 @@ function tamaSnack(){
     );
 
 
-    /*
-       꾼감자가 있으면 보리 등장
-    */
-
     if(
         isKkungInTama()
     ){
@@ -6379,8 +6591,8 @@ function tamaSnack(){
 
 
     /*
-       간식 먹기 시작
-       바닥에 모두 떨어진 뒤 실행
+       간식이 바닥에 모두 떨어진 뒤
+       감자들이 직접 찾아가기 시작
     */
 
     setTimeout(
@@ -6406,10 +6618,6 @@ function processTamaSnacks(){
     }
 
 
-    /*
-       아직 먹지 않은 간식 찾기
-    */
-
     const availableSnacks=
         game.tamaSnacks.filter(
             snack=>
@@ -6418,7 +6626,8 @@ function processTamaSnacks(){
                 snack.element.parentNode &&
                 snack.landed &&
                 !snack.eating &&
-                !snack.eaten
+                !snack.eaten &&
+                !snack.target
         );
 
 
@@ -6431,23 +6640,15 @@ function processTamaSnacks(){
     }
 
 
-    /*
-       현재 깨어 있는 감자 찾기
-    */
-
     const eaters=
         game.tamaPotatoes.filter(
             obj=>
                 obj &&
                 !obj.sleeping &&
-                !obj.dragging
+                !obj.dragging &&
+                !obj.snackTarget
         );
 
-
-    /*
-       아무도 먹을 수 없으면
-       간식은 그대로 둔다.
-    */
 
     if(
         !eaters.length
@@ -6464,20 +6665,19 @@ function processTamaSnacks(){
 
 
     /*
-       한 번에 너무 많은 감자가
-       같은 간식을 먹지 않도록
-       감자별로 간식을 하나씩 배정한다.
+       감자에게 간식을 직접 이동시키지 않는다.
+       간식 위치를 감자의 목표로 지정한다.
     */
 
     eaters.forEach(
         (
             eater,
-            eaterIndex
+            index
         )=>{
 
             const snack=
                 availableSnacks[
-                    eaterIndex
+                    index
                 ];
 
 
@@ -6490,23 +6690,33 @@ function processTamaSnacks(){
             }
 
 
-            eatTamaSnack(
-                snack,
-                eater
-            );
+            snack.target=
+                eater;
+
+
+            eater.snackTarget=
+                snack;
+
+
+            eater.targetX=
+                snack.x;
+
+
+            eater.targetY=
+                snack.y;
 
         }
     );
 
 
     /*
-       아직 남은 간식이 있으면
-       다음 감자가 이어서 먹도록 한다.
+       감자들이 실제로 이동하는 것은
+       updateTamaMovement에서 처리한다.
     */
 
     setTimeout(
         processTamaSnacks,
-        1200
+        1000
     );
 
 }
@@ -6547,7 +6757,11 @@ function eatTamaSnack(
 
     snackData.eating=true;
 
-    snackData.target=eater;
+
+    eater.snackTarget=null;
+
+
+    snackData.target=null;
 
 
     const snack=
@@ -6555,18 +6769,17 @@ function eatTamaSnack(
 
 
     /*
-       감자에게 이동
+       감자가 간식 위치까지 도착했으므로
+       간식은 더 이상 이동하지 않는다.
     */
 
     snack.style.left=
-        eater.x+
+        snackData.x+
         "%";
 
 
     snack.style.top=
-        (
-            eater.y-2
-        )+
+        snackData.y+
         "%";
 
 
@@ -6575,91 +6788,37 @@ function eatTamaSnack(
     );
 
 
+    showTamaEmotion(
+        eater,
+        "😋"
+    );
+
+
+    showTamaSpeech(
+        eater,
+        randomDialogue(
+            eater.data.tama.snack,
+            eater
+        )
+    );
+
+
     setTimeout(
         ()=>{
 
-            /*
-               이동 도중 감자가 잠들었으면
-               간식을 삭제하지 않는다.
-               다시 바닥으로 돌려놓고 재시도한다.
-            */
-
             if(
-                eater.sleeping||
-                eater.dragging||
                 !snack.parentNode
             ){
-
-                if(
-                    snack.parentNode
-                ){
-
-                    snackData.eating=false;
-
-                    snackData.target=null;
-
-                    snackData.x=
-                        eater.x;
-
-                    snackData.y=
-                        eater.y;
-
-
-                    snack.style.left=
-                        snackData.x+
-                        "%";
-
-
-                    snack.style.top=
-                        snackData.y+
-                        "%";
-
-
-                    snack.classList.remove(
-                        "eating"
-                    );
-
-                }
-
-
-                setTimeout(
-                    processTamaSnacks,
-                    500
-                );
-
 
                 return;
 
             }
 
 
-            /*
-               여기서 실제로 먹은 것으로 처리
-            */
-
             snackData.eaten=true;
 
             snackData.eating=false;
 
-
-            showTamaEmotion(
-                eater,
-                "😋"
-            );
-
-
-            showTamaSpeech(
-                eater,
-                randomDialogue(
-                    eater.data.tama.snack,
-                    eater
-                )
-            );
-
-
-            /*
-               실제 먹는 순간 간식 삭제
-            */
 
             snack.remove();
 
@@ -6682,9 +6841,22 @@ function eatTamaSnack(
             }
 
 
-            /*
-               남은 간식 계속 처리
-            */
+            eater.targetX=null;
+
+            eater.targetY=null;
+
+
+            if(
+                !eater.sleeping &&
+                !eater.dragging
+            ){
+
+                chooseTarget(
+                    eater
+                );
+
+            }
+
 
             setTimeout(
                 processTamaSnacks,
@@ -6692,7 +6864,7 @@ function eatTamaSnack(
             );
 
         },
-        850
+        500
     );
 
 }
@@ -6751,6 +6923,8 @@ function tamaSleep(){
 
             obj.vy=0;
 
+            obj.snackTarget=null;
+
 
             showTamaSpeech(
                 obj,
@@ -6759,6 +6933,27 @@ function tamaSleep(){
                     obj
                 )
             );
+
+        }
+    );
+
+
+    /*
+       잠든 동안 간식은 바닥에 그대로 둔다.
+    */
+
+    game.tamaSnacks.forEach(
+        snack=>{
+
+            if(
+                snack.target
+            ){
+
+                snack.target.snackTarget=null;
+
+                snack.target=null;
+
+            }
 
         }
     );
@@ -6794,11 +6989,6 @@ function tamaSleep(){
 
             game.sleeping=false;
 
-
-            /*
-               잠에서 깨어난 뒤
-               남아 있는 간식이 있으면 다시 먹는다.
-            */
 
             if(
                 game.tamaSnacks.length
@@ -7081,10 +7271,6 @@ let boriInteractionTimeout=null;
 let boriInteractionBusy=false;
 
 
-/*
-   보리 DOM
-*/
-
 function getBori(){
 
     return document.getElementById(
@@ -7093,10 +7279,6 @@ function getBori(){
 
 }
 
-
-/*
-   보리 좌표
-*/
 
 function getBoriPosition(){
 
@@ -7131,10 +7313,6 @@ function getBoriPosition(){
 
 }
 
-
-/*
-   감자를 보리 위치로 이동
-*/
 
 function movePotatoToBori(
     obj,
@@ -7171,10 +7349,6 @@ function movePotatoToBori(
 
 }
 
-
-/*
-   꾼감자가 보리를 쓰다듬는다
-*/
 
 function boriPetInteraction(){
 
@@ -7374,11 +7548,6 @@ function boriPetInteraction(){
 
 }
 
-
-/*
-   두 감자가 보리를 사이에 두고
-   귀엽다고 이야기한다.
-*/
 
 function boriCuteConversation(){
 
@@ -7609,11 +7778,6 @@ function boriCuteConversation(){
 
 }
 
-
-/*
-   감자가 보리를 머리 위에 들고
-   도망가는 장난 이벤트
-*/
 
 function boriCarryRun(){
 
@@ -8021,10 +8185,6 @@ function boriCarryRun(){
 }
 
 
-/*
-   🪶 장난감으로 보리와 놀기
-*/
-
 function boriToyInteraction(){
 
     if(
@@ -8275,10 +8435,6 @@ function boriToyInteraction(){
 }
 
 
-/*
-   보리 상호작용 랜덤 실행
-*/
-
 function tryBoriInteraction(){
 
     if(
@@ -8374,10 +8530,6 @@ function startTamaLoop(){
     }
 
 
-    /*
-       보리 상호작용 시간 초기화
-    */
-
     if(
         !game.nextBoriInteraction
     ){
@@ -8434,7 +8586,13 @@ function startTamaLoop(){
         game.tamaPotatoes.forEach(
             obj=>{
 
+                /*
+                   간식을 찾아가는 중에는
+                   일반 랜덤 이동 목표를 덮어쓰지 않는다.
+                */
+
                 if(
+                    !obj.snackTarget &&
                     now>
                     obj.nextDecision
                 ){
@@ -8564,10 +8722,6 @@ function startTamaLoop(){
         }
 
 
-        /*
-           보리 랜덤 상호작용
-        */
-
         if(
             getBori() &&
             !boriInteractionBusy &&
@@ -8588,13 +8742,15 @@ function startTamaLoop(){
 
 
         /*
-           혹시 남은 간식이 있는데
-           감자가 깨어 있으면 계속 먹도록 확인.
+           바닥에 남은 간식이 있으면
+           감자에게 이동시키지 않고
+           감자가 찾아가도록 한다.
         */
 
         if(
             game.tamaSnacks.length &&
-            !game.sleeping
+            !game.sleeping &&
+            !game.dialogueLock
         ){
 
             const hasAwake=
@@ -8609,15 +8765,18 @@ function startTamaLoop(){
                 hasAwake
             ){
 
-                const hasEating=
+                const hasUnassignedSnack=
                     game.tamaSnacks.some(
                         snack=>
-                            snack.eating
+                            snack.landed &&
+                            !snack.eaten &&
+                            !snack.eating &&
+                            !snack.target
                     );
 
 
                 if(
-                    !hasEating
+                    hasUnassignedSnack
                 ){
 
                     processTamaSnacks();
