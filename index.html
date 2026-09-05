@@ -6598,121 +6598,103 @@ function tamaSnack(){
 
 
 /* ==================================================
-   간식 먹기 처리
+   간식
 ================================================== */
 
-function processTamaSnacks(){
+function tamaSnack(){
 
     if(
-        !game.tamaSnacks.length
-    ){
-
+        game.tamaPotatoes.length===0
+    )
         return;
 
-    }
-
-
-    const availableSnacks=
-        game.tamaSnacks.filter(
-            snack=>
-                snack &&
-                snack.element &&
-                snack.element.parentNode &&
-                snack.landed &&
-                !snack.eating &&
-                !snack.eaten &&
-                !snack.target
+    const tama=
+        document.getElementById(
+            "tama"
         );
 
+    const emojis=[
+        "🍬",
+        "🍪",
+        "🍭",
+        "🍫",
+        "🍩"
+    ];
 
-    if(
-        !availableSnacks.length
+    for(
+        let i=0;
+        i<8;
+        i++
     ){
 
-        return;
+        const el=
+            document.createElement(
+                "div"
+            );
 
-    }
+        el.className=
+            "snack";
 
+        el.textContent=
+            random(emojis);
 
-    const eaters=
-        game.tamaPotatoes.filter(
-            obj=>
-                obj &&
-                !obj.sleeping &&
-                !obj.dragging &&
-                !obj.snackTarget
+        const snack={
+
+            element:el,
+
+            x:
+                10+
+                Math.random()*80,
+
+            y:-5,
+
+            speed:
+                25+
+                Math.random()*15,
+
+            landed:false,
+
+            created:
+                performance.now()
+        };
+
+        el.style.left=
+            snack.x+"%";
+
+        el.style.top=
+            snack.y+"%";
+
+        tama.appendChild(
+            el
         );
 
-
-    if(
-        !eaters.length
-    ){
-
-        setTimeout(
-            processTamaSnacks,
-            1000
+        game.tamaSnacks.push(
+            snack
         );
-
-        return;
-
     }
 
-
-    /*
-       감자에게 간식을 직접 이동시키지 않는다.
-       간식 위치를 감자의 목표로 지정한다.
-    */
-
-    eaters.forEach(
-        (
-            eater,
-            index
-        )=>{
-
-            const snack=
-                availableSnacks[
-                    index
-                ];
-
+    game.tamaPotatoes.forEach(
+        obj=>{
 
             if(
-                !snack
-            ){
-
+                obj.sleeping
+            )
                 return;
 
-            }
+            showTamaSpeech(
+                obj,
+                randomDialogue(
+                    obj.data.tama.snack,
+                    obj
+                )
+            );
 
-
-            snack.target=
-                eater;
-
-
-            eater.snackTarget=
-                snack;
-
-
-            eater.targetX=
-                snack.x;
-
-
-            eater.targetY=
-                snack.y;
-
+            showTamaEmotion(
+                obj,
+                "🍬"
+            );
         }
     );
-
-
-    /*
-       감자들이 실제로 이동하는 것은
-       updateTamaMovement에서 처리한다.
-    */
-
-    setTimeout(
-        processTamaSnacks,
-        1000
-    );
-
 }
 
 
